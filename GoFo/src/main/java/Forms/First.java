@@ -31,7 +31,7 @@ public class First extends javax.swing.JFrame {
         initComponents();
         //loginPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("Photos/login.jpg"))); // NOI18N
 
-        //System.out.println(getClass().getResource("/Photos/login.jpg"));
+        System.out.println(getClass().getResource("/Photos/login.jpg"));
         //loginPhoto.setIcon(new ImageIcon()); // NOI18N
 
     }
