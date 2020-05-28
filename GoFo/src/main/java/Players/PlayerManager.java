@@ -5,10 +5,11 @@
  */
 package Players;
 
+import Utilits.Booking;
 import java.awt.List;
 import java.sql.Date;
 import java.util.ArrayList;
-import Utilits.Playground;
+import Utilits.PlayGround;
 /**
  *
  * @author Lenovo
@@ -17,19 +18,19 @@ public class PlayerManager {
     public Team createTeam(String name){
         return null;
     }
-    public Booking bookPlayground(Playground P){
-        Booking booking;
-        return booking;
+    public Booking bookPlayground(PlayGround P){
+        
+        return null;
     }
     public Boolean cancelBooking(Booking booking){
         
         return true; 
     }
-    public ArrayList<Playground> viewPlaygrounds(){
-        ArrayList<Playground> Playgrounds = null;
+    public ArrayList<PlayGround> viewPlaygrounds(){
+        ArrayList<PlayGround> Playgrounds = null;
         return Playgrounds;
     }
-    public ArrayList<Date> viewPlaygroundHours(Playground P){
+    public ArrayList<Date> viewPlaygroundHours(PlayGround P){
         ArrayList<Date> availableDates = null;
         return availableDates;
     }

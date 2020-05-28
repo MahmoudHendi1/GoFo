@@ -6,6 +6,7 @@
 package Utilits;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,4 +18,5 @@ public class PlayGround {
     private String description;
     private double defaultPriceHour;
     private BufferedImage image;
+    private static ArrayList<Booking> bookdesTimes;
 }
