@@ -61,11 +61,9 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
- 
+   
 
+        
         @Override
 	public String toString() {
 		return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
