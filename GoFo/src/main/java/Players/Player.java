@@ -5,11 +5,13 @@
  */
 package Players;
 
+import Users.User;
+
 /**
  *
  * @author Lenovo
  */
-public class Player {
+public class Player extends User{
    public Boolean hasTeam(){
        return true;
    } 

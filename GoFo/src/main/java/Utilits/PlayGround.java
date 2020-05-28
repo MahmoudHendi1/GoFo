@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  *
  * @author ShawkyDev
  */
-public class PlayGround {
+public class Playground {
     private String name;
     private String addres;
     private String description;
