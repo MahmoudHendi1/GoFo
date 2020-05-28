@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Forms;
-import Classes.User;
+import Users.User;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
