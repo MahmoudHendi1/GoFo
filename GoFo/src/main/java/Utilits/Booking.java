@@ -5,16 +5,20 @@
  */
 package Utilits;
 
-import java.awt.image.BufferedImage;
+import Players.Player;
+import java.util.Date;
 
 /**
  *
  * @author ShawkyDev
  */
-public class PlayGround {
-    private String name;
-    private String addres;
-    private String description;
-    private double defaultPriceHour;
-    private BufferedImage image;
+public class Booking {
+    private Date timing;
+    private Player booker;
+    private double DuratoinInHours;
+    public boolean isPlayed(){
+        return false;
+    }
+    
+    
 }
