@@ -66,6 +66,9 @@ public class User {
     }
  
 
-
+        @Override
+	public String toString() {
+		return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
+	}
     
 }
