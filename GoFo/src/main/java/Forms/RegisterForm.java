@@ -4,7 +4,19 @@
  * and open the template in the editor.
  */
 package Forms;
+import Classes.User;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.*;
 
@@ -14,13 +26,38 @@ import org.apache.commons.validator.routines.*;
  */
 public class RegisterForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegisterForm
-     */
+     public FileOutputStream f;
+     public ObjectOutputStream out ;     
     public RegisterForm() {
+         try {
+             this.f = new FileOutputStream("myObjects.txt", true);
+             this.out = new ObjectOutputStream(f);
+             
+         } catch (IOException ex) {
+             Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+         }
+      
         initComponents();
     }
-    
+/**
+     * Creates new form RegisterForm
+     */
+        public boolean WriteToFile(User user){
+        try {
+	
+        
+        out.writeObject(user);
+        
+        return true;
+            
+        }catch(IOException ex){
+            System.out.println("Erro in writing to file - Registered Form"
+                    + "err:"+ex.getMessage());
+          
+            return false;
+                 
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,6 +179,7 @@ public class RegisterForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
@@ -157,6 +195,28 @@ public class RegisterForm extends javax.swing.JFrame {
         }else{
             phoneLabel.setForeground(Color.GREEN);
         }
+        
+        User x ,y;
+        try {
+            //(int id, String name, String password, String email, String phoneNumber, String address) {
+            FileInputStream f = new FileInputStream("myObjects.txt");
+            ObjectInputStream in = new ObjectInputStream(f);
+            System.out.println("ahlan :");
+            x = ((User)in.readObject());
+            System.out.println(x.toString());
+            y = ((User)in.readObject());
+            System.out.println("sec:");
+            System.out.println(y.toString());
+               in.close();
+               f.close();
+        } catch (Exception ex) {
+            System.out.println("err:" + ex.getMessage());
+            //Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         User user = new User(69,usernameField.getText(),"pass",emailField.getText(),phoneField.getText(),addressField.getText());
+        //WriteToFile(user);
+         
 
     }//GEN-LAST:event_registerActionPerformed
 

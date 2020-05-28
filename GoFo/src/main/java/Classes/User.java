@@ -5,17 +5,35 @@
  */
 package Classes;
 //import org.apache.commons.validator.routines.EmailValidator;
+
+import java.io.Serializable;
+
 /**
  *
  * @author Lenovo
  */
-public class User {
+public class User implements  Serializable{
     int id;
+    //no idea what it does but never touch it
+   private static final long serialVersionUID = 1L;
     String name,
            password,
            email,
            phoneNumber,
            address;
+
+    public User() {
+        System.out.println("created !");
+    }
+
+    public User(int id, String name, String password, String email, String phoneNumber, String address) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -68,7 +86,13 @@ public class User {
 
         @Override
 	public String toString() {
-		return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
+		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
+                return "id:"+id +"\nname:" +name + "\npassword:" + password + "\nemail:"+email + "\nphneNumber:"
+                        +phoneNumber+"\naddress:"+address+"\n";
+                        
+                        
+                        
+                       
 	}
     
 }
