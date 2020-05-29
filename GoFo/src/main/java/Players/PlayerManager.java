@@ -9,7 +9,7 @@ import Utilits.Booking;
 import java.awt.List;
 import java.sql.Date;
 import java.util.ArrayList;
-import Utilits.PlayGround;
+import Utilits.Playground;
 /**
  *
  * @author Lenovo
@@ -18,7 +18,7 @@ public class PlayerManager {
     public Team createTeam(String name){
         return null;
     }
-    public Booking bookPlayground(PlayGround P){
+    public Booking bookPlayground(Playground P){
         
         return null;
     }
@@ -26,11 +26,11 @@ public class PlayerManager {
         
         return true; 
     }
-    public ArrayList<PlayGround> viewPlaygrounds(){
-        ArrayList<PlayGround> Playgrounds = null;
+    public ArrayList<Playground> viewPlaygrounds(){
+        ArrayList<Playground> Playgrounds = null;
         return Playgrounds;
     }
-    public ArrayList<Date> viewPlaygroundHours(PlayGround P){
+    public ArrayList<Date> viewPlaygroundHours(Playground P){
         ArrayList<Date> availableDates = null;
         return availableDates;
     }
