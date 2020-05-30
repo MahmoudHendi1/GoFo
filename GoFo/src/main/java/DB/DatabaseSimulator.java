@@ -16,6 +16,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -115,6 +116,25 @@ public class DatabaseSimulator {
         }
         usersList.add(user);
         
+    }
+    ///used mainly for  testing
+    public static void printArrayLists(int popUp ){
+        if(usersList!=null)
+            if(popUp==0)
+                System.out.println("Users :" + usersList.toString());
+            else
+                JOptionPane.showMessageDialog(null, usersList.toString(), "Data", JOptionPane.INFORMATION_MESSAGE);
+        else 
+            System.out.println("userslist is null");
+        if(playGroundsList!=null)
+            if(popUp==0)
+                System.out.println("Users :" + usersList.toString());
+            else
+                JOptionPane.showMessageDialog(null, playGroundsList.toString(), "Data", JOptionPane.INFORMATION_MESSAGE);
+        else
+            System.out.println("playGroundsList is null");
+            
+          
     }
             
             

@@ -5,6 +5,7 @@
  */
 package Users;
 
+import DB.DatabaseSimulator;
 import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Image;
@@ -271,6 +272,8 @@ public class UserMainForm extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
+        DatabaseSimulator.init();
+        DatabaseSimulator.printArrayLists(1);
         boolean isAllRight = true;
             emailLabel.setForeground(Color.GREEN);
             passwordLabel1.setForeground(Color.GREEN);
@@ -295,11 +298,11 @@ public class UserMainForm extends javax.swing.JFrame {
         //User( String name, String password, String email, String phoneNumber, String address)
            User tmpUser = new User(usernameField.getText(),passwordField.getText(),
                    emailField.getText(),phoneField.getText(),addressField.getText());
-           if(UserManger.registerUser(tmpUser)){
-               JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+           if(isAllRight && UserManger.registerUser(tmpUser)){
+               //JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
            }
            else {
-               JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
+               //JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
            }
                
            
@@ -350,8 +353,9 @@ public class UserMainForm extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         ShutDownTask shutDownTask = new ShutDownTask();
-	// add shutdown hook
+	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
+        
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
