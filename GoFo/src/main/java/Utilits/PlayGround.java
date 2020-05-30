@@ -6,6 +6,7 @@
 package Utilits;
 
 import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class Playground {
     private String description;
     private double defaultPriceHour;
     private BufferedImage image;
+    private URL locationOnMap;
 
     private static ArrayList<Booking> bookdesTimes;
 
@@ -58,6 +60,14 @@ public class Playground {
     @Override
     public String toString() {
         return name; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public URL getLocationOnMap() {
+        return locationOnMap;
+    }
+
+    public void setLocationOnMap(URL locationOnMap) {
+        this.locationOnMap = locationOnMap;
     }
     
 
