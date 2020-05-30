@@ -273,7 +273,7 @@ public class UserMainForm extends javax.swing.JFrame {
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
         DatabaseSimulator.init();
-        DatabaseSimulator.printArrayLists(1);
+       // DatabaseSimulator.printArrayLists(1);
         boolean isAllRight = true;
             emailLabel.setForeground(Color.GREEN);
             passwordLabel1.setForeground(Color.GREEN);
@@ -299,10 +299,10 @@ public class UserMainForm extends javax.swing.JFrame {
            User tmpUser = new User(usernameField.getText(),passwordField.getText(),
                    emailField.getText(),phoneField.getText(),addressField.getText());
            if(isAllRight && UserManger.registerUser(tmpUser)){
-               //JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
            }
            else {
-               //JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
            }
                
            

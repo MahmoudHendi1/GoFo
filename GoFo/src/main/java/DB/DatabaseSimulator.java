@@ -70,7 +70,7 @@ public class DatabaseSimulator {
             out.writeObject(list);
             return true;
         } catch (Exception ex) {
-            Logger.getLogger(DatabaseSimulator.class.getName()).log(Level.SEVERE, null, ex);
+            
             System.out.println("err in writeListRoFile in DB sim "+ ex.getMessage());
             return false;
         }
@@ -110,8 +110,10 @@ public class DatabaseSimulator {
     }
     
     public static void addUserToDB(User user){
-        if(usersList==null&&!isInit){
+        if(!isInit){
             init();
+        }
+        if(usersList==null){
             usersList = new ArrayList<User>();
         }
         usersList.add(user);
