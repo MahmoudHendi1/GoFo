@@ -19,4 +19,19 @@ public class Playground {
     private double defaultPriceHour;
     private BufferedImage image;
     private static ArrayList<Booking> bookdesTimes;
+
+    public Playground(String name, String addres, String description, double defaultPriceHour) {
+        this.name = name;
+        this.addres = addres;
+        this.description = description;
+        this.defaultPriceHour = defaultPriceHour;
+    }
+
+    @Override
+    public String toString() {
+        return name +"\nAddress: " + addres; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
+    
 }
