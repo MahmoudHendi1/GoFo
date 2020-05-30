@@ -312,7 +312,11 @@ public class UserMainForm extends javax.swing.JFrame {
 	public void run() {
 		System.out.println("Performing shutdown");
                 System.out.println("Saving...");
-                DB.DatabaseSimulator.save();
+                if(DB.DatabaseSimulator.save())
+                    System.out.println("Done saving");
+                else 
+                    System.out.println("couldn't save!");
+                
 	}
  
    }
