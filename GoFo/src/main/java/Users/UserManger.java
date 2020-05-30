@@ -5,6 +5,7 @@
  */
 package Users;
 
+import DB.DatabaseSimulator;
 import jdk.jshell.spi.ExecutionControl;
 
 /**
@@ -12,15 +13,19 @@ import jdk.jshell.spi.ExecutionControl;
  * @author ShawkyDev
  */
 public class UserManger {
-    public static boolean loginUser(){
-    return false;
+    public static User loginUser(String username , String password){
+        return DatabaseSimulator.getUser(username, password);
     }
     public static boolean registerUser(User user){
-        return false;
+        if(DatabaseSimulator.checkUserbyUserName(user.getUserName())
+                ||
+            DatabaseSimulator.checkUserbyEmail(user.getEmail()))
+            return false;
+         DatabaseSimulator.addUserToDB(user);
+         return true;
+                
     }
-    public static User login(String username , String pass){
-        return null;
-    }
+   
     public static User getUserbyEmail(String email){
         return null;
     }

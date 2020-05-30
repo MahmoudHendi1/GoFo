@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,5 +25,6 @@ import java.util.logging.Logger;
  */
 public class tst {
     public static void main(String[] args) {
+        JOptionPane.showMessageDialog(null, "Reistered", "InfoBox: " + "bar", JOptionPane.INFORMATION_MESSAGE);
     }
 }

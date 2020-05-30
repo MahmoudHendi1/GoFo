@@ -116,10 +116,13 @@ public class UserMainForm extends javax.swing.JFrame {
                     .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(userPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addComponent(usernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                 .addGap(13, 13, 13))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +135,9 @@ public class UserMainForm extends javax.swing.JFrame {
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
-                .addGap(27, 27, 27)
+                .addGap(37, 37, 37)
                 .addComponent(loginButton)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Login", loginPanel);
@@ -174,10 +177,10 @@ public class UserMainForm extends javax.swing.JFrame {
                     .addComponent(usernameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                     .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(63, 63, 63))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +205,9 @@ public class UserMainForm extends javax.swing.JFrame {
                 .addComponent(addressLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(register)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Register", RegisterPanel);
@@ -224,7 +227,7 @@ public class UserMainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-            
+
         /*        String userName = usernameTextField.getText();
         String password = userPasswordField.getText();
       Connection connection;
@@ -251,11 +254,11 @@ public class UserMainForm extends javax.swing.JFrame {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(UserMainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+         */
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-       
+
     }//GEN-LAST:event_formComponentResized
 
     private void formAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorResized
@@ -263,47 +266,56 @@ public class UserMainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formAncestorResized
 
     private void loginButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonKeyPressed
-      
+
     }//GEN-LAST:event_loginButtonKeyPressed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
-        EmailValidator emailValidator = EmailValidator.getInstance();
-        if(!emailValidator.isValid(emailField.getText())){
-            emailLabel.setForeground(Color.red);
-        }else{
+        boolean isAllRight = true;
             emailLabel.setForeground(Color.GREEN);
-        }
-        LongValidator phoneValidator =LongValidator.getInstance();
-        if(!phoneValidator.isValid(phoneField.getText()) && phoneField.getText().length()==11){
-            phoneLabel.setForeground(Color.red);
-        }else{
+            passwordLabel1.setForeground(Color.GREEN);
             phoneLabel.setForeground(Color.GREEN);
+            
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        if (!emailValidator.isValid(emailField.getText())) {
+            emailLabel.setForeground(Color.red);
+            isAllRight = false;
         }
-
-        User x ,y;
+        if(passwordField.getText().length()<8){
+            isAllRight = false;
+            passwordLabel1.setForeground(Color.red);
+        }
         try {
-            //(int id, String name, String password, String email, String phoneNumber, String address) {
-                FileInputStream f = new FileInputStream("myObjects.txt");
-                ObjectInputStream in = new ObjectInputStream(f);
-                System.out.println("ahlan :");
-                x = ((User)in.readObject());
-                System.out.println(x.toString());
-                y = ((User)in.readObject());
-                System.out.println("sec:");
-                System.out.println(y.toString());
-                in.close();
-                f.close();
-            } catch (Exception ex) {
-                System.out.println("err:" + ex.getMessage());
-                //Logger.getLogger(UserRegisterForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            User user = new User(69,usernameField.getText(),"pass",emailField.getText(),phoneField.getText(),addressField.getText());
-            //WriteToFile(user);
+            Double.parseDouble(phoneField.getText());
+            isAllRight= isAllRight&&phoneField.getText().charAt(0)=='0'&&phoneField.getText().length()==11;
+        } catch (NumberFormatException e) {
+            isAllRight= false;
+            phoneLabel.setForeground(Color.RED);
+        }
+        //User( String name, String password, String email, String phoneNumber, String address)
+           User tmpUser = new User(usernameField.getText(),passwordField.getText(),
+                   emailField.getText(),phoneField.getText(),addressField.getText());
+           if(UserManger.registerUser(tmpUser)){
+               JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+           }
+           else {
+               JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
+           }
+               
+           
+           
 
     }//GEN-LAST:event_registerActionPerformed
-
+    private static class ShutDownTask extends Thread {
+ 
+	@Override
+	public void run() {
+		System.out.println("Performing shutdown");
+                System.out.println("Saving...");
+                DB.DatabaseSimulator.save();
+	}
+ 
+   }
     /**
      * @param args the command line arguments
      */
@@ -333,7 +345,10 @@ public class UserMainForm extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        ShutDownTask shutDownTask = new ShutDownTask();
+	// add shutdown hook
+	Runtime.getRuntime().addShutdownHook(shutDownTask);
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

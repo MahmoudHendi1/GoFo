@@ -14,9 +14,11 @@ import java.io.Serializable;
  */
 public class User implements  Serializable{
     int id;
+    static int ID_COUNTER =1;
     //no idea what it does but never touch it
    private static final long serialVersionUID = 1L;
-    String name,
+    private String name,
+           userName,
            password,
            email,
            phoneNumber,
@@ -26,14 +28,15 @@ public class User implements  Serializable{
         System.out.println("created !");
     }
 
-    public User(int id, String name, String password, String email, String phoneNumber, String address) {
-        this.id = id;
-        this.name = name;
+    public User( String username, String password, String email, String phoneNumber, String address) {
+        this.id = ID_COUNTER++;
+        this.userName = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+     
 
     public int getId() {
         return id;
@@ -59,9 +62,7 @@ public class User implements  Serializable{
         return address;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   
 
     public void setName(String name) {
         this.name = name;
@@ -81,6 +82,14 @@ public class User implements  Serializable{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
  
 

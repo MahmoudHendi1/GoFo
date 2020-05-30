@@ -26,7 +26,13 @@ public class DatabaseSimulator {
     private static FileInputStream fIn;
     private static ArrayList<User> usersList ;
     private static ArrayList<Playground> playGroundsList;
+    private static boolean isInit = false;
     //private static ArrayList<PlayGround>;
+
+    public static boolean save() {
+        return writeListToFile(usersList, "Users.txt");
+                
+    }
 
     public DatabaseSimulator() {
         
@@ -45,15 +51,16 @@ public class DatabaseSimulator {
             FileInputStream fin = new FileInputStream("Users.txt");
             ObjectInputStream oin = new ObjectInputStream(fin) ;
             list = (ArrayList<T>) oin.readObject();
-            System.out.println("a:"+list);
+            //System.out.println("a:"+list);
             return list;
         } catch (Exception ex) {
-            Logger.getLogger(DatabaseSimulator.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("err in fullUserList() in DBsim :"+ex.getMessage());
-                    
-            return null;
+           
+            System.out.println("err in filllUserList() in DBsim :"+ex.getMessage());
+            return new ArrayList<T>();
+            
             
         }
+        
     }
     public static boolean writeListToFile(ArrayList<?> list , String fileName){
         try {
@@ -71,9 +78,44 @@ public class DatabaseSimulator {
     public static boolean init(){
         usersList = fillListFromFile(usersList, "Users.txt");
         playGroundsList = fillListFromFile(playGroundsList, "Playgrounds.txt");
-        return usersList!=null && playGroundsList !=null ;
+        isInit = true;
+        return usersList!=null || playGroundsList !=null ;
+    }
+    public static User getUser(String username , String password){
+        if(!isInit) init();
+        if(usersList==null) return null;
+        for(User user : usersList)
+            if(user.getUserName().compareTo(username)==0&&user.getPassword().compareTo(password)==0)
+                return user;
+        return null;
+        
+    }
+    public static boolean checkUserbyUserName(String username){
+        if(!isInit) init();
+        if(usersList==null) return false;
+        for(User user : usersList)
+            if(user.getUserName().compareTo(username)==0)
+                return true;
+        return false;
     }
     
+    public static boolean checkUserbyEmail(String email){
+        if(!isInit) init();
+        if(usersList==null) return false;
+        for(User user : usersList)
+            if(user.getEmail().compareTo(email)==0)
+                return true;
+        return false;
+    }
+    
+    public static void addUserToDB(User user){
+        if(usersList==null&&!isInit){
+            init();
+            usersList = new ArrayList<User>();
+        }
+        usersList.add(user);
+        
+    }
             
             
 }
