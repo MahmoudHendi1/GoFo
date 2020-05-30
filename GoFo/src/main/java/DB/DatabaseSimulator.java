@@ -31,7 +31,7 @@ public class DatabaseSimulator {
     //private static ArrayList<PlayGround>;
 
     public static boolean save() {
-        return writeListToFile(usersList, "Users.txt");
+        return writeListToFile(usersList, "Users.txt") && writeListToFile(playGroundsList, "Playgrounds.txt");
                 
     }
 
@@ -49,14 +49,14 @@ public class DatabaseSimulator {
  
     public static<T> ArrayList<T> fillListFromFile(ArrayList<T> list,String fileName ){
         try {
-            FileInputStream fin = new FileInputStream("Users.txt");
+            FileInputStream fin = new FileInputStream(fileName);
             ObjectInputStream oin = new ObjectInputStream(fin) ;
             list = (ArrayList<T>) oin.readObject();
             //System.out.println("a:"+list);
             return list;
         } catch (Exception ex) {
            
-            System.out.println("err in filllUserList() in DBsim :"+ex.getMessage());
+            System.out.println("err in filllUserList() in DBsim :"+ex.toString());
             return new ArrayList<T>();
             
             
@@ -121,18 +121,19 @@ public class DatabaseSimulator {
     }
     ///used mainly for  testing
     public static void printArrayLists(int popUp ){
+        System.out.println("called!");
         if(usersList!=null)
             if(popUp==0)
                 System.out.println("Users :" + usersList.toString());
             else
-                JOptionPane.showMessageDialog(null, usersList.toString(), "Data", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, usersList.toString(), "Users Data", JOptionPane.INFORMATION_MESSAGE);
         else 
             System.out.println("userslist is null");
         if(playGroundsList!=null)
             if(popUp==0)
-                System.out.println("Users :" + usersList.toString());
+                System.out.println("Users :" + playGroundsList.toString());
             else
-                JOptionPane.showMessageDialog(null, playGroundsList.toString(), "Data", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, playGroundsList.toString(), "PlayGround Data", JOptionPane.INFORMATION_MESSAGE);
         else
             System.out.println("playGroundsList is null");
             

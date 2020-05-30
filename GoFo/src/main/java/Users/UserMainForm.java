@@ -272,8 +272,7 @@ public class UserMainForm extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
-        DatabaseSimulator.init();
-       // DatabaseSimulator.printArrayLists(1);
+       
         boolean isAllRight = true;
             emailLabel.setForeground(Color.GREEN);
             passwordLabel1.setForeground(Color.GREEN);
@@ -355,7 +354,8 @@ public class UserMainForm extends javax.swing.JFrame {
         ShutDownTask shutDownTask = new ShutDownTask();
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
-        
+         DatabaseSimulator.init();
+       DatabaseSimulator.printArrayLists(1);
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
