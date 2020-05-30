@@ -23,14 +23,22 @@ public class Playground {
 
     private static ArrayList<Booking> bookdesTimes;
 
-    public Playground(String name, String addres, String description, double defaultPriceHour) {
+    public Playground(String name, String addres, String description, double defaultPriceHour, URL url) {
         this.name = name;
         this.addres = addres;
         this.description = description;
         this.defaultPriceHour = defaultPriceHour;
+        this.locationOnMap = url;
 
         //this.image=ImageIO.read(new File(name+".jpg"));
 
+    }
+
+    public Playground(String name, String addres, String description, double defaultPricePerHour) {
+        this.name = name;
+        this.addres = addres;
+        this.description = description;
+        this.defaultPriceHour = defaultPricePerHour;
     }
 
     public BufferedImage getImage() {
