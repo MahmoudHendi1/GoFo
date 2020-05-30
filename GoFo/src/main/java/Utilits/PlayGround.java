@@ -18,6 +18,7 @@ public class Playground {
     private String description;
     private double defaultPriceHour;
     private BufferedImage image;
+
     private static ArrayList<Booking> bookdesTimes;
 
     public Playground(String name, String addres, String description, double defaultPriceHour) {
@@ -25,11 +26,38 @@ public class Playground {
         this.addres = addres;
         this.description = description;
         this.defaultPriceHour = defaultPriceHour;
+
+        //this.image=ImageIO.read(new File(name+".jpg"));
+
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public String getAddres() {
+        return addres;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getDefaultPriceHour() {
+        return defaultPriceHour;
+    }
+
+    public static ArrayList<Booking> getBookdesTimes() {
+        return bookdesTimes;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return name +"\nAddress: " + addres; //To change body of generated methods, choose Tools | Templates.
+        return name; //To change body of generated methods, choose Tools | Templates.
     }
     
 
