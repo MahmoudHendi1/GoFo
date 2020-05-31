@@ -17,7 +17,7 @@ public class Playground {
     private String name;
     private String addres;
     private String description;
-    private double defaultPriceHour;
+    private double defaultPricePerHour;
     private BufferedImage image;
     private URL locationOnMap;
 
@@ -27,7 +27,7 @@ public class Playground {
         this.name = name;
         this.addres = addres;
         this.description = description;
-        this.defaultPriceHour = defaultPriceHour;
+        this.defaultPricePerHour = defaultPriceHour;
         this.locationOnMap = url;
 
         //this.image=ImageIO.read(new File(name+".jpg"));
@@ -38,7 +38,7 @@ public class Playground {
         this.name = name;
         this.addres = addres;
         this.description = description;
-        this.defaultPriceHour = defaultPricePerHour;
+        this.defaultPricePerHour = defaultPricePerHour;
     }
 
     public BufferedImage getImage() {
@@ -53,8 +53,8 @@ public class Playground {
         return description;
     }
 
-    public double getDefaultPriceHour() {
-        return defaultPriceHour;
+    public double getDefaultPricePerHour() {
+        return defaultPricePerHour;
     }
 
     public static ArrayList<Booking> getBookdesTimes() {

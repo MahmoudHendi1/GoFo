@@ -29,7 +29,7 @@ public class Booking {
         //comparing current dat to booking date+duration [end date].
         Date end_date  = new Date(date.getTime());
         end_date.setHours(end_date.getHours()+DuratoinInHours);
-        return new Date().after(date);
+        return new Date().after(end_date);
         
         
     }
