@@ -28,13 +28,14 @@ public class User implements  Serializable{
         System.out.println("created !");
     }
 
-    public User( String username, String password, String email, String phoneNumber, String address) {
+    public User( String name, String username, String password, String email, String phoneNumber, String address) {
         this.id = ID_COUNTER++;
         this.userName = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.name = name;
     }
      
 
@@ -96,7 +97,7 @@ public class User implements  Serializable{
         @Override
 	public String toString() {
 		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
-                return "id:"+id +"\nname:" +name + "\npassword:" + password + "\nemail:"+email + "\nphneNumber:"
+                return "id:"+id +"\nname:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphneNumber:"
                         +phoneNumber+"\naddress:"+address+"\n";
                         
                         

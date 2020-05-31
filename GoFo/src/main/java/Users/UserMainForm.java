@@ -69,6 +69,8 @@ public class UserMainForm extends javax.swing.JFrame {
         phoneLabel = new javax.swing.JLabel();
         addressLabel1 = new javax.swing.JLabel();
         register = new javax.swing.JButton();
+        nameLabel = new javax.swing.JLabel();
+        nameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -138,10 +140,16 @@ public class UserMainForm extends javax.swing.JFrame {
                     .addComponent(passwordLabel))
                 .addGap(37, 37, 37)
                 .addComponent(loginButton)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Login", loginPanel);
+
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
 
         usernameLabel1.setText("Username *");
 
@@ -160,6 +168,14 @@ public class UserMainForm extends javax.swing.JFrame {
             }
         });
 
+        nameLabel.setText("name *");
+
+        nameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
         RegisterPanel.setLayout(RegisterPanelLayout);
         RegisterPanelLayout.setHorizontalGroup(
@@ -175,21 +191,27 @@ public class UserMainForm extends javax.swing.JFrame {
                     .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(phoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(passwordLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(usernameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(usernameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(63, 63, 63))
             .addGroup(RegisterPanelLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(12, 12, 12)
                 .addComponent(usernameLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
                 .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nameLabel)
+                .addGap(4, 4, 4)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,7 +230,7 @@ public class UserMainForm extends javax.swing.JFrame {
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(register)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Register", RegisterPanel);
@@ -277,12 +299,28 @@ public class UserMainForm extends javax.swing.JFrame {
             emailLabel.setForeground(Color.GREEN);
             passwordLabel1.setForeground(Color.GREEN);
             phoneLabel.setForeground(Color.GREEN);
+            nameLabel.setForeground(Color.GREEN);
             
         EmailValidator emailValidator = EmailValidator.getInstance();
         if (!emailValidator.isValid(emailField.getText())) {
             emailLabel.setForeground(Color.red);
             isAllRight = false;
         }
+        if(nameField.getText().isBlank()){
+            isAllRight = false;
+            nameLabel.setForeground(Color.red);
+        }
+        else {
+            for (int i = 0 ; i < nameField.getText().length();++i)
+                if( !Character.isLetter(nameField.getText().charAt(i)))
+                {
+                    
+                    isAllRight = false;
+                    nameLabel.setForeground(Color.red);
+                    break;
+                }
+        }
+        
         if(passwordField.getText().length()<8){
             isAllRight = false;
             passwordLabel1.setForeground(Color.red);
@@ -295,19 +333,28 @@ public class UserMainForm extends javax.swing.JFrame {
             phoneLabel.setForeground(Color.RED);
         }
         //User( String name, String password, String email, String phoneNumber, String address)
-           User tmpUser = new User(usernameField.getText(),passwordField.getText(),
+           User tmpUser = new User(nameField.getText(), usernameField.getText(),passwordField.getText(),
                    emailField.getText(),phoneField.getText(),addressField.getText());
            if(isAllRight && UserManger.registerUser(tmpUser)){
                JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
            }
            else {
                JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
+               System.out.println("bec"+isAllRight);
            }
                
            
            
 
     }//GEN-LAST:event_registerActionPerformed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameFieldActionPerformed
     private static class ShutDownTask extends Thread {
  
 	@Override
@@ -355,7 +402,6 @@ public class UserMainForm extends javax.swing.JFrame {
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.init();
-      // DatabaseSimulator.printArrayLists(1);
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -374,6 +420,8 @@ public class UserMainForm extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JTextField nameField;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLabel1;
