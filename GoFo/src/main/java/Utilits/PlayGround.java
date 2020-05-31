@@ -15,7 +15,8 @@ import java.util.ArrayList;
  */
 public class Playground {
     private String name;
-    private String addres;
+    private Boolean approved;
+    private String address;
     private String description;
     private double defaultPricePerHour;
     private BufferedImage image;
@@ -25,7 +26,7 @@ public class Playground {
 
     public Playground(String name, String addres, String description, double defaultPriceHour, URL url) {
         this.name = name;
-        this.addres = addres;
+        this.address = addres;
         this.description = description;
         this.defaultPricePerHour = defaultPriceHour;
         this.locationOnMap = url;
@@ -36,7 +37,7 @@ public class Playground {
 
     public Playground(String name, String addres, String description, double defaultPricePerHour) {
         this.name = name;
-        this.addres = addres;
+        this.address = addres;
         this.description = description;
         this.defaultPricePerHour = defaultPricePerHour;
     }
@@ -45,8 +46,16 @@ public class Playground {
         return image;
     }
 
-    public String getAddres() {
-        return addres;
+    public Boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+    
+    public String getAddress() {
+        return address;
     }
 
     public String getDescription() {

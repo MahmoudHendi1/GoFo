@@ -179,7 +179,7 @@ public class BookingPage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1)
         );
 
         pack();
@@ -193,7 +193,7 @@ public class BookingPage extends javax.swing.JFrame {
             playgroundImage.setIcon(new ImageIcon(newimg) );
             
             playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
-            playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddres());
+            playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
             playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
             
             
