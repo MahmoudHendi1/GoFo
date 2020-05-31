@@ -312,7 +312,7 @@ public class UserMainForm extends javax.swing.JFrame {
         }
         else {
             for (int i = 0 ; i < nameField.getText().length();++i)
-                if( !Character.isLetter(nameField.getText().charAt(i)))
+                if( !Character.isLetter(nameField.getText().charAt(i))&&nameField.getText().charAt(i)!=' ')
                 {
                     
                     isAllRight = false;
