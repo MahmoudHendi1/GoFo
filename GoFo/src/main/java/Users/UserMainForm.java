@@ -312,7 +312,7 @@ public class UserMainForm extends javax.swing.JFrame {
         }
         else {
             for (int i = 0 ; i < nameField.getText().length();++i)
-                if( !Character.isLetter(nameField.getText().charAt(i))&& nameField.getText().charAt(i)!=' ')
+                if( !Character.isLetter(nameField.getText().charAt(i)))
                 {
                     
                     isAllRight = false;
@@ -402,8 +402,6 @@ public class UserMainForm extends javax.swing.JFrame {
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.init();
-         DatabaseSimulator.reset();
-         DatabaseSimulator.printArrayLists(1);
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
