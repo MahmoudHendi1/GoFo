@@ -74,9 +74,12 @@ public class Playground {
         return name;
     }
 
+    @Override
     public String toString() {
-        return name; //To change body of generated methods, choose Tools | Templates.
+        return "Playground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
     }
+
+    
 
     public URL getLocationOnMap() {
         return locationOnMap;

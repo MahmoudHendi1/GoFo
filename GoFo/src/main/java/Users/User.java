@@ -13,8 +13,7 @@ import java.io.Serializable;
  * @author Lenovo
  */
 public class User implements  Serializable{
-    int id;
-    static int ID_COUNTER =1;
+    
     //no idea what it does but never touch it
    private static final long serialVersionUID = 1L;
     private String name,
@@ -30,7 +29,6 @@ public class User implements  Serializable{
     }
 
     public User( String name, String username, String password, String email, String phoneNumber, String address) {
-        this.id = ID_COUNTER++;
         this.userName = username;
         this.password = password;
         this.email = email;
@@ -40,9 +38,7 @@ public class User implements  Serializable{
     }
      
 
-    public int getId() {
-        return id;
-    }
+   
 
     public String getPhotoLink() {
         return photoLink;
@@ -106,7 +102,7 @@ public class User implements  Serializable{
         @Override
 	public String toString() {
 		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
-                return "id:"+id +"\nname:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphneNumber:"
+                return "name:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphoneNumber:"
                         +phoneNumber+"\naddress:"+address+"\n";
                         
                         

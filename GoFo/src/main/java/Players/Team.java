@@ -5,34 +5,30 @@
  */
 package Players;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Lenovo
  */
 public class Team {
     String name;
-    int id;
+    ArrayList<String> playersUsernames;
     
-    public Team(String name, int id) {
+    public Team(String name) {
         this.name = name;
-        this.id = id;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
- 
-
+    
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String tosString(){
+        return "name:"+name + "\nPLayer:" + playersUsernames.toString(); 
     }
     
 }

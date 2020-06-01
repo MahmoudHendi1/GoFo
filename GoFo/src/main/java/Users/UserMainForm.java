@@ -6,6 +6,8 @@
 package Users;
 
 import DB.DatabaseSimulator;
+import Players.Player;
+import PlaygroundOwner.PlaygroundOwner;
 import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Image;
@@ -71,6 +73,7 @@ public class UserMainForm extends javax.swing.JFrame {
         register = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
+        UserType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
@@ -176,30 +179,33 @@ public class UserMainForm extends javax.swing.JFrame {
             }
         });
 
+        UserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Player", "Playground Owner", " " }));
+
         javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
         RegisterPanel.setLayout(RegisterPanelLayout);
         RegisterPanelLayout.setHorizontalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addressLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(usernameField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(phoneField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addressField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(phoneLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(passwordLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(usernameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(63, 63, 63))
-            .addGroup(RegisterPanelLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(UserType, 0, 155, Short.MAX_VALUE)
+                    .addComponent(addressLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordField)
+                    .addComponent(usernameField)
+                    .addComponent(phoneField)
+                    .addComponent(addressField)
+                    .addComponent(emailLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(phoneLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usernameLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(emailField)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameField))
+                .addGap(63, 63, 63))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,9 +234,11 @@ public class UserMainForm extends javax.swing.JFrame {
                 .addComponent(addressLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(UserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(register)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("Register", RegisterPanel);
@@ -330,8 +338,13 @@ public class UserMainForm extends javax.swing.JFrame {
             phoneLabel.setForeground(Color.RED);
         }
         //User( String name, String password, String email, String phoneNumber, String address)
-           User tmpUser = new User(nameField.getText(), usernameField.getText(),passwordField.getText(),
-                   emailField.getText(),phoneField.getText(),addressField.getText());
+        User tmpUser;
+        if(UserType.getSelectedIndex()==0)
+           tmpUser = new Player(nameField.getText(), usernameField.getText(),passwordField.getText(),
+            emailField.getText(),phoneField.getText(),addressField.getText());
+        else
+            tmpUser = new PlaygroundOwner(nameField.getText(), usernameField.getText(),passwordField.getText(),
+                    emailField.getText(),phoneField.getText(),addressField.getText());
            if(isAllRight && UserManger.registerUser(tmpUser)){
                JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
            }
@@ -399,6 +412,8 @@ public class UserMainForm extends javax.swing.JFrame {
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.init();
+         //DatabaseSimulator.printArrayLists(1);
+         
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -410,6 +425,7 @@ public class UserMainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel RegisterPanel;
+    private javax.swing.JComboBox<String> UserType;
     private javax.swing.JTextField addressField;
     private javax.swing.JLabel addressLabel1;
     private javax.swing.JTextField emailField;

@@ -33,6 +33,11 @@ public class Booking {
         
         
     }
+
+    @Override
+    public String toString() {
+        return "Booking{" + "date=" + date + ", booker=" + booker + ", DuratoinInHours=" + DuratoinInHours + '}';
+    }
     
     
 }

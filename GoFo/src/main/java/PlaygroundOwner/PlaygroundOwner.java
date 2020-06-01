@@ -5,6 +5,7 @@
  */
 package PlaygroundOwner;
 
+import Players.BookingPage;
 import Users.User;
 import Utilits.Playground;
 import java.util.ArrayList;
@@ -17,6 +18,18 @@ import java.util.ArrayList;
  */
 public class PlaygroundOwner extends User{
     private ArrayList<Playground> playgroundsList ;
+
+    public PlaygroundOwner() {
+    }
+
+    public PlaygroundOwner(String name, String username, String password, String email, String phoneNumber, String address) {
+        super(name, username, password, email, phoneNumber, address);
+    }
+    @Override
+    public String toString(){
+        playgroundsList = new ArrayList<Playground>();
+        return "\nPlayer:\n"+super.toString()+"\nPlaygrounds:"+playgroundsList.toString();
+    }
     
     
 }
