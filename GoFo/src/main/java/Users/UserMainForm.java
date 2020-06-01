@@ -7,6 +7,7 @@ package Users;
 
 import DB.DatabaseSimulator;
 import Players.Player;
+import Players.PlayerProfile;
 import PlaygroundOwner.PlaygroundOwner;
 import Utilits.Playground;
 import java.awt.Color;
@@ -268,6 +269,9 @@ public class UserMainForm extends javax.swing.JFrame {
             user=UserManger.loginUser(loginUsernameField.getText(), loginPasswordField.getText());
         if(user!=null){
              JOptionPane.showMessageDialog(null, "Logged In!", "Success", JOptionPane.INFORMATION_MESSAGE);
+             this.setVisible(false);
+             PlayerProfile playerProfile = new PlayerProfile();
+             playerProfile.setVisible(true);
         }else{
             if(UserManger.getUserbyUsername(loginUsernameField.getText())!=null){
                 JOptionPane.showMessageDialog(null, "password is incrorect", "fail", JOptionPane.INFORMATION_MESSAGE);
@@ -413,6 +417,7 @@ public class UserMainForm extends javax.swing.JFrame {
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.init();
          //DatabaseSimulator.printArrayLists(1);
+        
          
         
         /* Create and display the form */

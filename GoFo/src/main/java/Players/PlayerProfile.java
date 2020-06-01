@@ -28,31 +28,38 @@ public class PlayerProfile extends javax.swing.JFrame {
     /**
      * Creates new form PlayerProfile
      */
+    Player player;
     private ImageIcon scale(String path){
         Image image = new ImageIcon(path).getImage();
         Image newimg = image.getScaledInstance(playerProfile.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
     public void selectPhoto(Path originalPath) throws IOException{
-        Path copied = Paths.get("playerPhotos/"+user.getUserName() +".jpg");
+        Path copied = Paths.get("playerPhotos/"+player.getUserName() +".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playerProfile.setIcon(scale(copied.toString()));
 
     } 
     
     public void setInfo(){
-        playerNameField.setText(user.getName());
-        playerEmailField.setText(user.getEmail());
-        playerPhoneNumField.setText(user.getPhoneNumber());
-        playerAddressField.setText(user.getAddress());
-        playerProfile.setIcon(scale(user.getPhotoLink()));
-
+        player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
+        playerNameField.setText(player.getName());
+        playerEmailField.setText(player.getEmail());
+        playerPhoneNumField.setText(player.getPhoneNumber());
+        playerAddressField.setText(player.getAddress());
+        playerProfile.setIcon(scale(player.getPhotoLink()));
     }
     
     
     public PlayerProfile(){
         initComponents();
         setInfo();
+        
+    }
+    public PlayerProfile(Player player){
+        initComponents();
+        setInfo();
+        this.player = player;
         
     }
 
@@ -259,7 +266,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         });
     }
     
-    private User user = new User("mahmoud", "ahmed", "123456789", "ahmed@gmail.com", "01158289200", "");
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton choosePhotoButton;

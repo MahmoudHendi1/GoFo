@@ -103,7 +103,7 @@ public class User implements  Serializable{
 	public String toString() {
 		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
                 return "name:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphoneNumber:"
-                        +phoneNumber+"\naddress:"+address+"\n";
+                        +phoneNumber+"\naddress:"+address+"\n"+  "photoPath"+ photoLink;
                         
                         
                         
