@@ -22,7 +22,8 @@ public class User implements  Serializable{
            password,
            email,
            phoneNumber,
-           address;
+           address,
+           photoLink="playerPhotos/default.jpg";
 
     public User() {
         System.out.println("created !");
@@ -43,6 +44,14 @@ public class User implements  Serializable{
         return id;
     }
 
+    public String getPhotoLink() {
+        return photoLink;
+    }
+
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+    
     public String getName() {
         return name;
     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Playground {
     private String name;
-    private Boolean approved;
+    private Boolean approved=false;
     private String address;
     private String description;
     private double defaultPricePerHour;
