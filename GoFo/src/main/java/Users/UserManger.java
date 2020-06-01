@@ -29,5 +29,7 @@ public class UserManger {
     public static User getUserbyEmail(String email){
         return null;
     }
-    
+     public static User getUserbyUsername(String username){
+        return DatabaseSimulator.getUserbyUsername(username);
+    }
 }

@@ -59,19 +59,19 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="usernameLabel" min="-2" pref="66" max="-2" attributes="0"/>
-                          <Component id="passwordLabel" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="loginUsernameLabel" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="loginPasswordLabel" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="userPasswordField" pref="153" max="32767" attributes="0"/>
-                          <Component id="usernameTextField" pref="153" max="32767" attributes="0"/>
+                          <Component id="loginPasswordField" pref="153" max="32767" attributes="0"/>
+                          <Component id="loginUsernameField" pref="153" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="loginButton" min="-2" pref="205" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="loginButton" pref="205" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -81,13 +81,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="usernameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginUsernameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginUsernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="userPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="loginPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="loginButton" min="-2" max="-2" attributes="0"/>
@@ -97,22 +97,22 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JFormattedTextField" name="usernameTextField">
+            <Component class="javax.swing.JFormattedTextField" name="loginUsernameField">
             </Component>
-            <Component class="javax.swing.JPasswordField" name="userPasswordField">
+            <Component class="javax.swing.JPasswordField" name="loginPasswordField">
             </Component>
-            <Component class="javax.swing.JLabel" name="passwordLabel">
+            <Component class="javax.swing.JLabel" name="loginPasswordLabel">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="userPasswordField"/>
+                  <ComponentRef name="loginPasswordField"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="usernameLabel">
+            <Component class="javax.swing.JLabel" name="loginUsernameLabel">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="usernameTextField"/>
+                  <ComponentRef name="loginUsernameField"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Username"/>
               </Properties>

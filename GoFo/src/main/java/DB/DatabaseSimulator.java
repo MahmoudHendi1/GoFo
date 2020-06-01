@@ -193,5 +193,32 @@ public class DatabaseSimulator {
         playgroundsList.clear();
 
     }
+    public static User getUserbyUsername(String username){
+        if (!isInit) {
+            init();
+        }
+        if (usersList == null) {
+            return null;
+        }
+        for(User user : usersList)
+            if(user.getUserName().compareTo(username)==0)
+                return user;
+        return null;
+        
+    }
+    public static boolean checkUserbyUsername(String username) {
+        if (!isInit) {
+            init();
+        }
+        if (usersList == null) {
+            return false;
+        }
+        for (User user : usersList) {
+            if (user.getUserName().compareTo(username) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
