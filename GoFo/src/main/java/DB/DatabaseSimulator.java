@@ -178,7 +178,16 @@ public class DatabaseSimulator {
         return false;
 
     }
-
+    public static boolean addplaygroundToDB(Playground playground){
+         if (!isInit) {
+            init();
+        }
+        if (playgroundsList == null) {
+            return false;
+        }
+        playgroundsList.add(playground);
+        return true;
+    }
     public static void reset() {
         usersList.clear();
         playgroundsList.clear();
