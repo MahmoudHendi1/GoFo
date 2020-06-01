@@ -205,7 +205,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(PlayerProfile.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        }
     }//GEN-LAST:event_choosePhotoButtonActionPerformed
 
     private void playerEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailFieldActionPerformed
