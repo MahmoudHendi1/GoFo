@@ -6,7 +6,10 @@
 package Players;
 
 import Users.User;
+import Users.UserMainForm;
+import Users.UserManger;
 import Utilits.Playground;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  *
@@ -28,41 +33,45 @@ public class PlayerProfile extends javax.swing.JFrame {
     /**
      * Creates new form PlayerProfile
      */
-    Player player;
-    private ImageIcon scale(String path){
+    private Player player;
+    private boolean editMode = false;
+
+    private ImageIcon scale(String path) {
         Image image = new ImageIcon(path).getImage();
-        Image newimg = image.getScaledInstance(playerProfile.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
+        Image newimg = image.getScaledInstance(playerProfile.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
-    public void selectPhoto(Path originalPath) throws IOException{
-        Path copied = Paths.get("playerPhotos/"+player.getUserName() +".jpg");
+
+    public void selectPhoto(Path originalPath) throws IOException {
+        Path copied = Paths.get("playerPhotos/" + player.getUserName() + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playerProfile.setIcon(scale(copied.toString()));
         player.setPhotoLink(copied.toString());
 
-    } 
-    
-    public void setInfo(){
-        
+    }
+
+    public void setInfo() {
+
         playerNameField.setText(player.getName());
         playerEmailField.setText(player.getEmail());
         playerPhoneNumField.setText(player.getPhoneNumber());
         playerAddressField.setText(player.getAddress());
         playerProfile.setIcon(scale(player.getPhotoLink()));
+        choosePhotoButton.setVisible(false);
     }
-    
-    
-    public PlayerProfile(){
+
+    public PlayerProfile() {
         initComponents();
         player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
         setInfo();
-        
+
     }
-    public PlayerProfile(Player player){
+
+    public PlayerProfile(Player player) {
         initComponents();
         this.player = player;
         setInfo();
-        
+
     }
 
     /**
@@ -85,6 +94,9 @@ public class PlayerProfile extends javax.swing.JFrame {
         playerEmailField = new javax.swing.JTextField();
         playerEmailLabel = new javax.swing.JLabel();
         choosePhotoButton = new javax.swing.JButton();
+        EditButton = new javax.swing.JButton();
+        browsePlagroundButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +148,27 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         });
 
+        EditButton.setText("Edit");
+        EditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditButtonActionPerformed(evt);
+            }
+        });
+
+        browsePlagroundButton.setText("Browse playgrounds");
+        browsePlagroundButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browsePlagroundButtonActionPerformed(evt);
+            }
+        });
+
+        logoutButton.setText("Log out");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout profilePaneLayout = new javax.swing.GroupLayout(profilePane);
         profilePane.setLayout(profilePaneLayout);
         profilePaneLayout.setHorizontalGroup(
@@ -145,22 +178,24 @@ public class PlayerProfile extends javax.swing.JFrame {
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(choosePhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addComponent(playerProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerNameLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playerNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playerAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playerPhoneNumLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(playerPhoneNumField)
+                    .addComponent(playerNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playerEmailField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playerAddressField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(browsePlagroundButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(profilePaneLayout.createSequentialGroup()
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(playerAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerPhoneNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(playerAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                    .addComponent(playerNameField)
-                    .addComponent(playerEmailField)
-                    .addComponent(playerPhoneNumField))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         profilePaneLayout.setVerticalGroup(
             profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,19 +220,27 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(playerPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(playerProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(choosePhotoButton)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(choosePhotoButton)
+                    .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(browsePlagroundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profilePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(profilePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profilePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(profilePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -233,6 +276,99 @@ public class PlayerProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_playerNameFieldActionPerformed
 
+    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
+        //flip the flag 
+        editMode = !editMode;
+        if (editMode) {
+            playerAddressField.setEditable(true);
+            playerEmailField.setEditable(true);
+            playerNameField.setEditable(true);
+            playerPhoneNumField.setEditable(true);
+            choosePhotoButton.setVisible(true);
+            EditButton.setText("Save");
+        } else {
+            boolean isAllValid = true;
+            playerAddressLabel.setForeground(Color.GREEN);
+            playerEmailLabel.setForeground(Color.GREEN);
+            playerNameLabel.setForeground(Color.GREEN);
+            playerPhoneNumLabel.setForeground(Color.GREEN);
+
+            EmailValidator emailValidator = EmailValidator.getInstance();
+            if (!emailValidator.isValid(playerEmailField.getText())) {
+                playerEmailLabel.setForeground(Color.red);
+                isAllValid = false;
+            }
+            if (playerNameField.getText().isBlank()) {
+                isAllValid = false;
+                playerNameLabel.setForeground(Color.red);
+            } else {
+                for (int i = 0; i < playerNameField.getText().length(); ++i) {
+                    if (!Character.isLetter(playerNameField.getText().charAt(i)) && playerNameField.getText().charAt(i) != ' ') {
+
+                        isAllValid = false;
+                        playerNameLabel.setForeground(Color.red);
+                        break;
+                    }
+                }
+            }
+            if (playerAddressField.getText().isBlank()) {
+                isAllValid = false;
+                playerAddressLabel.setForeground(Color.red);
+            }
+            try {
+                Double.parseDouble(playerPhoneNumField.getText());
+                isAllValid = isAllValid && playerPhoneNumField.getText().charAt(0) == '0' && playerPhoneNumField.getText().length() == 11;
+            } catch (NumberFormatException e) {
+                isAllValid = false;
+                playerPhoneNumLabel.setForeground(Color.RED);
+            }
+            if (isAllValid) {
+                //checking the uniquness of the  phoneNumber , Email 
+                if (UserManger.getUserbyEmail(playerEmailField.getText()) != player &&  UserManger.getUserbyEmail(playerEmailField.getText()) != null) {
+                    JOptionPane.showMessageDialog(null, "This email is already in use", "Fail", JOptionPane.INFORMATION_MESSAGE);
+                    playerEmailLabel.setForeground(Color.RED);
+                } else if (UserManger.getUserByPhone(playerPhoneNumField.getText()) != player && UserManger.getUserByPhone(playerPhoneNumField.getText()) != null) {
+                    JOptionPane.showMessageDialog(null, "This Phone number is already in use", "Fail", JOptionPane.INFORMATION_MESSAGE);
+                    playerPhoneNumLabel.setForeground(Color.RED);
+                } else {
+                    /// allvalid and the data is unique :
+                    //update
+                    player.setAddress(playerAddressField.getText());
+                    player.setName(playerNameField.getText());
+                    player.setPhoneNumber(playerPhoneNumField.getText());
+                    player.setEmail(playerEmailField.getText());
+                    playerAddressField.setEditable(false);
+                    playerEmailField.setEditable(false);
+                    playerNameField.setEditable(false);
+                    playerPhoneNumField.setEditable(false);
+                    choosePhotoButton.setVisible(false);
+                    EditButton.setText("Edit");
+                    editMode=false;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "All data must be Valid", "Fail", JOptionPane.INFORMATION_MESSAGE);
+                editMode = true;
+                
+            }
+
+            
+
+        }
+    }//GEN-LAST:event_EditButtonActionPerformed
+
+    private void browsePlagroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePlagroundButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browsePlagroundButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+        UserMainForm loginFrom = new UserMainForm();
+        loginFrom.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,11 +403,13 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         });
     }
-    
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditButton;
+    private javax.swing.JButton browsePlagroundButton;
     private javax.swing.JButton choosePhotoButton;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JTextField playerAddressField;
     private javax.swing.JLabel playerAddressLabel;
     private javax.swing.JTextField playerEmailField;

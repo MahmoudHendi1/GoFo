@@ -32,4 +32,7 @@ public class UserManger {
      public static User getUserbyUsername(String username){
         return DatabaseSimulator.getUserbyUsername(username);
     }
+     public static User getUserByPhone(String phone){
+         return DatabaseSimulator.getUserbyPhone(phone);
+     }
 }

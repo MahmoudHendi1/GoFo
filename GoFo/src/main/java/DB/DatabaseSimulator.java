@@ -35,6 +35,19 @@ public class DatabaseSimulator {
 
     }
 
+    public static User getUserbyPhone(String phone) {
+        if (!isInit) {
+            init();
+        }
+        if (usersList == null) {
+            return null;
+        }
+        for(User user : usersList)
+            if(user.getPhoneNumber().compareTo(phone)==0)
+                return user;
+        return null;
+    }
+
     public DatabaseSimulator() {
 
         /*try {

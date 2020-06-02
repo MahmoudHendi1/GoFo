@@ -268,7 +268,7 @@ public class UserMainForm extends javax.swing.JFrame {
         }else{
             user=UserManger.loginUser(loginUsernameField.getText(), loginPasswordField.getText());
         if(user!=null){
-             JOptionPane.showMessageDialog(null, "Logged In!", "Success", JOptionPane.INFORMATION_MESSAGE);
+             //JOptionPane.showMessageDialog(null, "Logged In!", "Success", JOptionPane.INFORMATION_MESSAGE);
              this.setVisible(false);
              PlayerProfile playerProfile ;
              if(user instanceof Player)
@@ -276,6 +276,7 @@ public class UserMainForm extends javax.swing.JFrame {
              else
                  return ;
              playerProfile.setVisible(true);
+             this.dispose();
         }else{
             if(UserManger.getUserbyUsername(loginUsernameField.getText())!=null){
                 JOptionPane.showMessageDialog(null, "password is incrorect", "fail", JOptionPane.INFORMATION_MESSAGE);
