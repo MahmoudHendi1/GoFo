@@ -28,7 +28,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="profilePane" alignment="1" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="profilePane" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -57,11 +61,11 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="playerEmailField" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                      <Component id="playerNameField" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                      <Component id="playerAddressField" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="playerPhoneNumField" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="playerAddressField" pref="174" max="32767" attributes="0"/>
+                      <Component id="playerEmailField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="playerNameField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="playerPhoneNumField" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
@@ -97,7 +101,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="choosePhotoButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="271" max="32767" attributes="0"/>
+                  <EmptySpace pref="115" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -175,7 +179,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="choosePhotoButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
+            <Property name="text" type="java.lang.String" value="choose photo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="choosePhotoButtonActionPerformed"/>

@@ -38,11 +38,12 @@ public class PlayerProfile extends javax.swing.JFrame {
         Path copied = Paths.get("playerPhotos/"+player.getUserName() +".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playerProfile.setIcon(scale(copied.toString()));
+        player.setPhotoLink(copied.toString());
 
     } 
     
     public void setInfo(){
-        player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
+       
         playerNameField.setText(player.getName());
         playerEmailField.setText(player.getEmail());
         playerPhoneNumField.setText(player.getPhoneNumber());
@@ -53,13 +54,14 @@ public class PlayerProfile extends javax.swing.JFrame {
     
     public PlayerProfile(){
         initComponents();
+         player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
         setInfo();
         
     }
     public PlayerProfile(Player player){
         initComponents();
-        setInfo();
         this.player = player;
+        setInfo();
         
     }
 
@@ -127,7 +129,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playerEmailLabel.setLabelFor(playerNameField);
         playerEmailLabel.setText("Email");
 
-        choosePhotoButton.setText("jButton1");
+        choosePhotoButton.setText("choose photo");
         choosePhotoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choosePhotoButtonActionPerformed(evt);
@@ -153,11 +155,11 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 28, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(playerAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(playerEmailField)
+                    .addComponent(playerNameField)
+                    .addComponent(playerPhoneNumField))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         profilePaneLayout.setVerticalGroup(
@@ -184,7 +186,7 @@ public class PlayerProfile extends javax.swing.JFrame {
                     .addComponent(playerProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(choosePhotoButton)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +197,10 @@ public class PlayerProfile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profilePane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(profilePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
 
         pack();
@@ -209,6 +214,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 selectPhoto(Paths.get(selectedFile.getAbsolutePath()));
+                player.setPhotoLink(selectedFile.getAbsolutePath());
             } catch (IOException ex) {
                 Logger.getLogger(PlayerProfile.class.getName()).log(Level.SEVERE, null, ex);
             }
