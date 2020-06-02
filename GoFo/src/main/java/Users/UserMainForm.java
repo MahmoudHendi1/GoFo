@@ -270,7 +270,11 @@ public class UserMainForm extends javax.swing.JFrame {
         if(user!=null){
              JOptionPane.showMessageDialog(null, "Logged In!", "Success", JOptionPane.INFORMATION_MESSAGE);
              this.setVisible(false);
-             PlayerProfile playerProfile = new PlayerProfile();
+             PlayerProfile playerProfile ;
+             if(user instanceof Player)
+                playerProfile = new PlayerProfile((Player)user);
+             else
+                 return ;
              playerProfile.setVisible(true);
         }else{
             if(UserManger.getUserbyUsername(loginUsernameField.getText())!=null){
@@ -416,6 +420,8 @@ public class UserMainForm extends javax.swing.JFrame {
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.init();
+         //DatabaseSimulator.reset();
+         
          //DatabaseSimulator.printArrayLists(1);
         
          
