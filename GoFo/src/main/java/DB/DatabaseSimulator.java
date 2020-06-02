@@ -74,10 +74,6 @@ public class DatabaseSimulator {
 
     }
 
-    public static ArrayList<Playground> getPlaygroundsList() {
-        return playgroundsList;
-    }
-
     public static boolean writeListToFile(ArrayList<?> list, String fileName) {
         try {
             FileOutputStream fout = new FileOutputStream(fileName);
