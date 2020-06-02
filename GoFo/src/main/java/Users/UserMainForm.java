@@ -356,6 +356,9 @@ public class UserMainForm extends javax.swing.JFrame {
                     emailField.getText(),phoneField.getText(),addressField.getText());
            if(isAllRight && UserManger.registerUser(tmpUser)){
                JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+               PlayerProfile playerProfile = new PlayerProfile((Player)UserManger.loginUser(tmpUser.getUserName(), tmpUser.getPassword()));
+               this.dispose();
+               playerProfile.setVisible(true);
            }
            else {
                JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
