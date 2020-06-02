@@ -36,16 +36,20 @@ public class PlayerProfile extends javax.swing.JFrame {
     private Player player;
     private boolean editMode = false;
 
+    public PlayerProfile(String text, String text0, String text1, String text2, String text3, String text4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private ImageIcon scale(String path) {
         Image image = new ImageIcon(path).getImage();
-        Image newimg = image.getScaledInstance(playerProfile.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
+        Image newimg = image.getScaledInstance(playerPhoto.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
 
     public void selectPhoto(Path originalPath) throws IOException {
         Path copied = Paths.get("playerPhotos/" + player.getUserName() + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-        playerProfile.setIcon(scale(copied.toString()));
+        playerPhoto.setIcon(scale(copied.toString()));
         player.setPhotoLink(copied.toString());
 
     }
@@ -56,7 +60,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playerEmailField.setText(player.getEmail());
         playerPhoneNumField.setText(player.getPhoneNumber());
         playerAddressField.setText(player.getAddress());
-        playerProfile.setIcon(scale(player.getPhotoLink()));
+        playerPhoto.setIcon(scale(player.getPhotoLink()));
         choosePhotoButton.setVisible(false);
     }
 
@@ -84,7 +88,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private void initComponents() {
 
         profilePane = new javax.swing.JPanel();
-        playerProfile = new javax.swing.JLabel();
+        playerPhoto = new javax.swing.JLabel();
         playerNameLabel = new javax.swing.JLabel();
         playerAddressLabel = new javax.swing.JLabel();
         playerPhoneNumLabel = new javax.swing.JLabel();
@@ -100,7 +104,7 @@ public class PlayerProfile extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        playerProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        playerPhoto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         playerNameLabel.setLabelFor(playerNameField);
         playerNameLabel.setText("Name: ");
@@ -177,7 +181,7 @@ public class PlayerProfile extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(choosePhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(playerProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(playerPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +222,7 @@ public class PlayerProfile extends javax.swing.JFrame {
                         .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(playerPhoneNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(playerPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(playerProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(playerPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(choosePhotoButton)
@@ -418,7 +422,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JTextField playerPhoneNumField;
     private javax.swing.JLabel playerPhoneNumLabel;
-    private javax.swing.JLabel playerProfile;
+    private javax.swing.JLabel playerPhoto;
     private javax.swing.JPanel profilePane;
     // End of variables declaration//GEN-END:variables
 }

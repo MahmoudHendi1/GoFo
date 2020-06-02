@@ -20,6 +20,7 @@ public class Playground {
     private String description;
     private double defaultPricePerHour;
     private BufferedImage image;
+    private String imageLink;
     private URL locationOnMap;
 
     private static ArrayList<Booking> bookdesTimes;
@@ -33,6 +34,14 @@ public class Playground {
 
         //this.image=ImageIO.read(new File(name+".jpg"));
 
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     public Playground(String name, String addres, String description, double defaultPricePerHour) {

@@ -9,6 +9,7 @@ import DB.DatabaseSimulator;
 import Players.Player;
 import Players.PlayerProfile;
 import PlaygroundOwner.PlaygroundOwner;
+import PlaygroundOwner.PlaygroundOwnerProfile;
 import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Image;
@@ -181,6 +182,11 @@ public class UserMainForm extends javax.swing.JFrame {
         });
 
         UserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Player", "Playground Owner", " " }));
+        UserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
         RegisterPanel.setLayout(RegisterPanelLayout);
@@ -271,11 +277,14 @@ public class UserMainForm extends javax.swing.JFrame {
              //JOptionPane.showMessageDialog(null, "Logged In!", "Success", JOptionPane.INFORMATION_MESSAGE);
              this.setVisible(false);
              PlayerProfile playerProfile ;
-             if(user instanceof Player)
+             PlaygroundOwnerProfile playgroundOwnerProfile ;
+             if(user instanceof Player){
                 playerProfile = new PlayerProfile((Player)user);
-             else
-                 return ;
-             playerProfile.setVisible(true);
+                playerProfile.setVisible(true);
+             }else{
+                 playgroundOwnerProfile =new PlaygroundOwnerProfile((PlaygroundOwner)user);
+                 playgroundOwnerProfile.setVisible(true);
+             }
              this.dispose();
         }else{
             if(UserManger.getUserbyUsername(loginUsernameField.getText())!=null){
@@ -348,17 +357,24 @@ public class UserMainForm extends javax.swing.JFrame {
         }
         //User( String name, String password, String email, String phoneNumber, String address)
         User tmpUser;
-        if(UserType.getSelectedIndex()==0)
-           tmpUser = new Player(nameField.getText(), usernameField.getText(),passwordField.getText(),
+         if(UserType.getSelectedIndex()==0){
+            tmpUser = new Player(nameField.getText(), usernameField.getText(),passwordField.getText(),
+            emailField.getText(),phoneField.getText(),addressField.getText());   
+         }else{
+             tmpUser =  new PlaygroundOwner(nameField.getText(), usernameField.getText(),passwordField.getText(),
             emailField.getText(),phoneField.getText(),addressField.getText());
-        else
-            tmpUser = new PlaygroundOwner(nameField.getText(), usernameField.getText(),passwordField.getText(),
-                    emailField.getText(),phoneField.getText(),addressField.getText());
+         }
            if(isAllRight && UserManger.registerUser(tmpUser)){
                JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
-               PlayerProfile playerProfile = new PlayerProfile((Player)UserManger.loginUser(tmpUser.getUserName(), tmpUser.getPassword()));
+               tmpUser = UserManger.loginUser(tmpUser.getUserName(), tmpUser.getPassword());
+                if(UserType.getSelectedIndex()==0){
+                   PlayerProfile playerProfile = new PlayerProfile((Player)tmpUser); 
+                    playerProfile.setVisible(true);
+                }else{
+                   PlaygroundOwnerProfile playgroundOwnerProfile = new PlaygroundOwnerProfile((PlaygroundOwner)tmpUser); 
+                   playgroundOwnerProfile.setVisible(true);
+                }
                this.dispose();
-               playerProfile.setVisible(true);
            }
            else {
                JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
@@ -377,6 +393,10 @@ public class UserMainForm extends javax.swing.JFrame {
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
+
+    private void UserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserTypeActionPerformed
     private static class ShutDownTask extends Thread {
  
 	@Override
