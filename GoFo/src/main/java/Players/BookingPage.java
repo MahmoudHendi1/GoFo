@@ -5,6 +5,7 @@
  */
 package Players;
 
+import Users.User;
 import Utilits.Playground;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
@@ -31,19 +32,24 @@ public class BookingPage extends javax.swing.JFrame {
     /**
      * Creates new form BookingPage
      */
-    public BookingPage() {
+    public BookingPage(User user) {
         initComponents();
         jScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
-
-        Playground p = new Playground("Dummy", "garbage1", "garbage1", DEFAULT_CURSOR);
+        init();
+       
+    }
+    public void init(){
+        
+        /*Playground p = new Playground("Dummy", "garbage1", "garbage1", DEFAULT_CURSOR);
         Playground p1 = new Playground("Dummy", "garbage2", "garbage2", DEFAULT_CURSOR);
         Playground p2 = new Playground("Dummy", "garbage3", "garbage3", DEFAULT_CURSOR);
         Playground p3 = new Playground("Dummy", "garbage4", "garbage4", DEFAULT_CURSOR);
         playGroundModel.add(0, p);
         playGroundModel.add(1, p1);
         playGroundModel.add(2, p2);
-        playGroundModel.add(3, p3);
+        playGroundModel.add(3, p3);*/
+        
     }
 
      public class PlaygroundListRenderer extends DefaultListCellRenderer {
@@ -208,37 +214,7 @@ public class BookingPage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BookingPage().setVisible(true);
-            }
-        });
-    }
+    
 
     DefaultListModel playGroundModel= new DefaultListModel();
 
