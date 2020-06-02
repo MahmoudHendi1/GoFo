@@ -32,6 +32,7 @@ public class BookingPage extends javax.swing.JFrame {
      * Creates new form BookingPage
      */
     public BookingPage() {
+        /*
         initComponents();
         jScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
@@ -44,6 +45,7 @@ public class BookingPage extends javax.swing.JFrame {
         playGroundModel.add(1, p1);
         playGroundModel.add(2, p2);
         playGroundModel.add(3, p3);
+        */
     }
 
      public class PlaygroundListRenderer extends DefaultListCellRenderer {

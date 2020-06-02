@@ -19,16 +19,21 @@ import java.util.ArrayList;
 public class PlaygroundOwner extends User{
     private ArrayList<Playground> playgroundsList ;
 
+    public ArrayList<Playground> getPlaygroundsList() {
+        return playgroundsList;
+    }
+    
     public PlaygroundOwner() {
     }
 
     public PlaygroundOwner(String name, String username, String password, String email, String phoneNumber, String address) {
         super(name, username, password, email, phoneNumber, address);
+         playgroundsList = new ArrayList<Playground>();
     }
     @Override
     public String toString(){
         playgroundsList = new ArrayList<Playground>();
-        return "\nPlayer:\n"+super.toString()+"\nPlaygrounds:"+playgroundsList.toString();
+        return "\nPlaygroundOwner:\n"+super.toString()+"\nPlaygrounds:"+playgroundsList.toString();
     }
     
     
