@@ -7,6 +7,7 @@ package DB;
 
 import Users.User;
 import Utilits.Playground;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -191,6 +192,13 @@ public class DatabaseSimulator {
     public static void reset() {
         usersList.clear();
         playgroundsList.clear();
+        File folder = new File("playerPhotos");
+        for(File file : folder.listFiles()){
+            System.out.println("file :"+file.getName());
+            if(!file.getName().contains("default"))
+                file.delete();
+        }
+        
 
     }
     public static User getUserbyUsername(String username){

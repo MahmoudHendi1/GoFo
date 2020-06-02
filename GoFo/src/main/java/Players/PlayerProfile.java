@@ -38,11 +38,12 @@ public class PlayerProfile extends javax.swing.JFrame {
         Path copied = Paths.get("playerPhotos/"+player.getUserName() +".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playerProfile.setIcon(scale(copied.toString()));
+        player.setPhotoLink(copied.toString());
 
     } 
     
     public void setInfo(){
-        player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
+        
         playerNameField.setText(player.getName());
         playerEmailField.setText(player.getEmail());
         playerPhoneNumField.setText(player.getPhoneNumber());
@@ -53,13 +54,14 @@ public class PlayerProfile extends javax.swing.JFrame {
     
     public PlayerProfile(){
         initComponents();
+        player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
         setInfo();
         
     }
     public PlayerProfile(Player player){
         initComponents();
-        setInfo();
         this.player = player;
+        setInfo();
         
     }
 
@@ -127,7 +129,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playerEmailLabel.setLabelFor(playerNameField);
         playerEmailLabel.setText("Email");
 
-        choosePhotoButton.setText("jButton1");
+        choosePhotoButton.setText("choose photo");
         choosePhotoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choosePhotoButtonActionPerformed(evt);
@@ -153,11 +155,11 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 28, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(playerAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(playerNameField)
+                    .addComponent(playerEmailField)
+                    .addComponent(playerPhoneNumField))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         profilePaneLayout.setVerticalGroup(
