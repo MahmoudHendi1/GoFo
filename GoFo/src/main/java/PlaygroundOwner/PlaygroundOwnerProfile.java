@@ -120,7 +120,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                 label.setBackground(Color.GREEN);
             else
                  label.setBackground(Color.RED);
-            
+
             return label;
         }
     }
