@@ -24,6 +24,11 @@ public class PlaygroundOwnerManger {
            return DatabaseSimulator.addplaygroundToDB(playground);
         
     }
+    public static boolean deletePlayground(Playground playground){
+        var isRemoved = DatabaseSimulator.deletePlayground(playground);
+        var owner = playground.getOwner().getPlaygroundsList().remove(playground);
+        return isRemoved;
+    }
     
     
 }

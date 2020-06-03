@@ -20,6 +20,8 @@ public class PlaygroundOwner extends User{
     private ArrayList<Playground> playgroundsList ;
 
     public ArrayList<Playground> getPlaygroundsList() {
+        //if(playgroundsList==null)
+       // playgroundsList = new ArrayList<Playground>();
         return playgroundsList;
     }
     

@@ -71,6 +71,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     /**
      * Creates new form PlaygroundOwnerProfile
      */
+    //not used 
     public PlaygroundOwnerProfile() {
         initComponents();
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -94,8 +95,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
         this.playgroundOwner= playgroundOwner;
-        Playground p= new Playground("dummy", "dummy", "dummy", DEFAULT_CURSOR);
-        playgroundOwner.getPlaygroundsList().add(p);
         for(int i=0;i<playgroundOwner.getPlaygroundsList().size();i++){
             playGroundModel.add(i,playgroundOwner.getPlaygroundsList().get(i));
         }
