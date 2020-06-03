@@ -5,7 +5,9 @@
  */
 package Utilits;
 
+import PlaygroundOwner.PlaygroundOwner;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -13,7 +15,9 @@ import java.util.ArrayList;
  *
  * @author ShawkyDev
  */
-public class Playground {
+public class Playground implements Serializable{
+    private static final long serialVersionUID = 3L;
+    private PlaygroundOwner owner;
     private String name;
     private Boolean approved=false;
     private String address;
@@ -67,6 +71,14 @@ public class Playground {
         return address;
     }
 
+    public PlaygroundOwner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(PlaygroundOwner owner) {
+        this.owner = owner;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -83,9 +95,10 @@ public class Playground {
         return name;
     }
 
+ 
     @Override
     public String toString() {
-        return "Playground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
+        return "\nPlayground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
     }
 
     

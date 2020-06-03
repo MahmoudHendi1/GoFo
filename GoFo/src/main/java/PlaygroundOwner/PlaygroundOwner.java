@@ -32,6 +32,7 @@ public class PlaygroundOwner extends User{
     }
     @Override
     public String toString(){
+        if(playgroundsList==null)
         playgroundsList = new ArrayList<Playground>();
         return "\nPlaygroundOwner:\n"+super.toString()+"\nPlaygrounds:"+playgroundsList.toString();
     }

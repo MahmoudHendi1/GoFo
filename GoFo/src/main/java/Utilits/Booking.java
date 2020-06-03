@@ -6,6 +6,7 @@
 package Utilits;
 
 import Players.Player;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,8 @@ import java.util.Date;
  *
  * @author ShawkyDev
  */
-public class Booking {
+public class Booking implements Serializable{
+    private static final long serialVersionUID = 2L;
     private Date date;
     private Player booker;
     private int DuratoinInHours;

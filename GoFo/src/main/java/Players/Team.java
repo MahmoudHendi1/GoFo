@@ -5,13 +5,15 @@
  */
 package Players;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Lenovo
  */
-public class Team {
+public class Team implements Serializable{
+    private static final long serialVersionUID = 5L;
     String name;
     ArrayList<String> playersUsernames;
     

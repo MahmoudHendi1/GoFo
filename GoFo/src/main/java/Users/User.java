@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 public class User implements  Serializable{
     
-    //no idea what it does but never touch it
+    //assigning uinque ID for each serlaized class
    private static final long serialVersionUID = 1L;
     private String name,
            userName,

@@ -7,13 +7,20 @@ package PlaygroundOwner;
 
 import DB.DatabaseSimulator;
 import Utilits.Playground;
+import java.util.ArrayList;
 
 /**
  *
  * @author ShawkyDev
  */
 public class PlaygroundOwnerManger {
-    public static boolean addPlayground(Playground playground){
+    public static boolean addPlayground(Playground playground,PlaygroundOwner owner){
+            playground.setOwner(owner);
+           var list = owner.getPlaygroundsList();
+           if(list==null)
+               list = new ArrayList<Playground>();
+           list.add(playground);
+           System.out.println("added this : " + owner.getPlaygroundsList().toString());
            return DatabaseSimulator.addplaygroundToDB(playground);
         
     }
