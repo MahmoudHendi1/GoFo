@@ -46,14 +46,14 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     }
 
     public void selectPlayerPhoto(Path originalPath) throws IOException {
-        Path copied = Paths.get("playerPhotos/" + playgroundOwner.getUserName() + ".jpg");
+        Path copied = Paths.get("playerPhotos/" + playgroundOwner.getName() + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playgroundOwnerProfilePhoto.setIcon(scale(copied.toString(),playgroundOwnerProfilePhoto));
         playgroundOwner.setPhotoLink(copied.toString());
 
     }
     public void selectPlaygroundPhoto(Path originalPath,String name) throws IOException {
-        Path copied = Paths.get("playgroundPhotos/" + name + ".jpg");
+        Path copied = Paths.get("playgroundPhotos/" + "dummy" + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         playgroundPhoto.setIcon(scale(copied.toString(),playgroundPhoto));
 
@@ -79,14 +79,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         
   
         //testing
-        Playground p= new Playground("dummy", "dummy", "dummy", DEFAULT_CURSOR);
-        Playground p1= new Playground("dummy1", "dummy", "dummy", DEFAULT_CURSOR);
-        playgroundOwner = new PlaygroundOwner("dummy", "dummy", "dummy", "dummy", "dummy", "dummy");
-        playgroundOwner.getPlaygroundsList().add(p);
-        playgroundOwner.getPlaygroundsList().add(p1);
-        for(int i=0;i<playgroundOwner.getPlaygroundsList().size();i++){
-            playGroundModel.add(i,playgroundOwner.getPlaygroundsList().get(i));
-        }
+        
         setInfo();
 
     }
@@ -675,7 +668,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
             if(tmpPlayground.getName().equals(playgroundName)){
                 nameLabel1.setForeground(Color.red);
-                System.out.println("PlaygroundOwner.PlaygroundOwnerProfile.addButton1ActionPerformed()");
                 return;
             }
         }
@@ -684,8 +676,17 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             playgroundOwner.getPlaygroundsList().add(
                     new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), DEFAULT_CURSOR));
             if(playgroundPhoto.getIcon()!=null){
-             playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink(pathPhoto);
-             pathPhoto="";
+             playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
+             Path source=Paths.get("playerPhotos/" +"dummy" + ".jpg");
+
+                try {
+                Files.copy(source, Paths.get("playerPhotos/" +nameField.getText() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+ 
             }
             playGroundModel.addElement(playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1));
             
