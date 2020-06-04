@@ -15,9 +15,20 @@ import Utilits.Playground;
  * @author Lenovo
  */
 public class PlayerManager {
-    public Team createTeam(String name){
-        return null;
+    public Team createTeam(Player player,String name){
+        var teamsList = player.getTeams() ;
+        if(teamsList==null)
+           teamsList = new ArrayList<Team>();
+        Team team = new Team(name);
+        team.addMember(player);
+        teamsList.add(team);
+        return team;
+       
+        
+        
     }
+
+    
     public Booking bookPlayground(Playground P){
         
         return null;

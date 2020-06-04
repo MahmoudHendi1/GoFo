@@ -21,6 +21,10 @@ public class Player extends User{
     public Player(String name, String username, String password, String email, String phoneNumber, String address) {
         super(name, username, password, email, phoneNumber, address);
     }
+
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
    
    @Override
    public String toString(){

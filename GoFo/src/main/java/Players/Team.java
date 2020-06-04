@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Team implements Serializable{
     private static final long serialVersionUID = 5L;
     String name;
-    ArrayList<String> playersUsernames;
+    ArrayList<Player> members;
     
     public Team(String name) {
         this.name = name;
@@ -30,7 +30,12 @@ public class Team implements Serializable{
     }
     
     public String tosString(){
-        return "name:"+name + "\nPLayer:" + playersUsernames.toString(); 
+        return "name:"+name + "\nPLayer:" + members.toString(); 
+    }
+    public void addMember(Player member){
+        if(this.members==null)
+            members = new ArrayList<Player>();
+        this.members.add(member);
     }
     
 }

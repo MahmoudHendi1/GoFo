@@ -48,6 +48,10 @@ public class DatabaseSimulator {
         return null;
     }
 
+    public static boolean deletePlayground(Playground playground) {
+        return playgroundsList.remove(playground);
+    }
+
     public DatabaseSimulator() {
 
         /*try {
