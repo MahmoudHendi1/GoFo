@@ -19,7 +19,7 @@ public class Playground implements Serializable{
     private static final long serialVersionUID = 3L;
     private PlaygroundOwner owner;
     private String name;
-    private Boolean approved;
+    private boolean approved;
     private String address;
     private String description;
     private double defaultPricePerHour;
@@ -66,11 +66,11 @@ public class Playground implements Serializable{
         return approved;
     }
 
-    public void setApproved(Boolean approved) {
+    public void setApproved(boolean approved) {
         this.approved = approved;
     }
 
-    public Boolean getApproved() {
+    public boolean getApproved() {
         return approved;
     }
     
@@ -113,9 +113,7 @@ public class Playground implements Serializable{
     public URL getLocationOnMap() {
         return locationOnMap;
     }
-    public void setApproved(boolean approve){
-        this.approved = approve;
-    }
+   
 
     public void setLocationOnMap(URL locationOnMap) {
         this.locationOnMap = locationOnMap;
