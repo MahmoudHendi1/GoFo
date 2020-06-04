@@ -137,6 +137,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         AddressField = new javax.swing.JTextField();
         choosePhotoButton1 = new javax.swing.JButton();
         descriptionArea = new javax.swing.JTextArea();
+        priceField = new javax.swing.JTextField();
+        PriceLabel = new javax.swing.JLabel();
         MainPane = new javax.swing.JTabbedPane();
         profilePane = new javax.swing.JPanel();
         playgroundOwnerProfilePhoto = new javax.swing.JLabel();
@@ -165,6 +167,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         addressLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
+        priceLabelField = new javax.swing.JLabel();
+        playgroindPriceLabel = new javax.swing.JLabel();
 
         addPlaygroundDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addPlaygroundDialog.setMinimumSize(new java.awt.Dimension(560, 370));
@@ -206,6 +210,14 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         descriptionArea.setColumns(20);
         descriptionArea.setRows(5);
 
+        priceField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceFieldActionPerformed(evt);
+            }
+        });
+
+        PriceLabel.setText("Price:");
+
         javax.swing.GroupLayout addPlaygroundPaneLayout = new javax.swing.GroupLayout(addPlaygroundPane);
         addPlaygroundPane.setLayout(addPlaygroundPaneLayout);
         addPlaygroundPaneLayout.setHorizontalGroup(
@@ -224,11 +236,13 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                     .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addressLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                            .addComponent(AddressField))))
+                            .addComponent(AddressField)
+                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addPlaygroundPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,6 +262,10 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,6 +455,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             }
         });
 
+        playgroindPriceLabel.setText("Price:");
+
         javax.swing.GroupLayout RightPaneLayout = new javax.swing.GroupLayout(RightPane);
         RightPane.setLayout(RightPaneLayout);
         RightPaneLayout.setHorizontalGroup(
@@ -454,11 +474,13 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                             .addGroup(RightPaneLayout.createSequentialGroup()
                                 .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(addressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(playgroindPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(playgroundNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(RightPaneLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -478,11 +500,15 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playgroindPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(descriptionLabel)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -653,7 +679,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         Image image = new ImageIcon("playgroundPhotos\\" +((Playground)playgroundList.getSelectedValue()).getName()+".jpg").getImage();
             Image newimg = image.getScaledInstance(playgroundImage.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
             playgroundImage.setIcon(new ImageIcon(newimg) );
-
+            priceLabelField.setText(Double.toString(playgroundList.getSelectedValue().getDefaultPricePerHour()));
             playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
             playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
             playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
@@ -679,9 +705,18 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             }
         }
         
-        if(!AddressField.getText().equals("") && !descriptionArea.getText().equals("")){
-            playgroundOwner.getPlaygroundsList().add(
-                    new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), DEFAULT_CURSOR));
+        double price;
+        try {
+             price = Double.parseDouble(priceField.getText());
+            
+        } catch (NumberFormatException e) {
+            price = -1;
+        }
+            
+        
+        if(!AddressField.getText().equals("") && !descriptionArea.getText().equals("")&& price >= 0){
+            Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
+            PlaygroundOwnerManger.addPlayground(newPlayground, playgroundOwner);
             if(playgroundPhoto.getIcon()!=null){
              playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
              Path source=Paths.get("playerPhotos/" +"dummy" + ".jpg");
@@ -722,6 +757,10 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private void browsePlagroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePlagroundButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_browsePlagroundButtonActionPerformed
+
+    private void priceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -767,6 +806,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JScrollPane LeftPane;
     private javax.swing.JTabbedPane MainPane;
     private javax.swing.JPanel PlaygroudsPane;
+    private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel RightPane;
     private javax.swing.JButton addButton;
     private javax.swing.JButton addButton1;
@@ -785,6 +825,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel1;
+    private javax.swing.JLabel playgroindPriceLabel;
     private javax.swing.JTextArea playgrounDescriptionTextArea;
     private javax.swing.JLabel playgroundAddressLabel;
     private javax.swing.JLabel playgroundImage;
@@ -800,6 +841,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JLabel playgroundOwnerPhoneNumLabel;
     private javax.swing.JLabel playgroundOwnerProfilePhoto;
     private javax.swing.JLabel playgroundPhoto;
+    private javax.swing.JTextField priceField;
+    private javax.swing.JLabel priceLabelField;
     private javax.swing.JPanel profilePane;
     // End of variables declaration//GEN-END:variables
 }

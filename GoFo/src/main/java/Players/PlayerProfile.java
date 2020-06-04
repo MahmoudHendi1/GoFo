@@ -363,6 +363,9 @@ public class PlayerProfile extends javax.swing.JFrame {
 
     private void browsePlagroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePlagroundButtonActionPerformed
         // TODO add your handling code here:
+        BookingPage bookingPage = new BookingPage(player);
+        this.dispose();
+        bookingPage.setVisible(true);
     }//GEN-LAST:event_browsePlagroundButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

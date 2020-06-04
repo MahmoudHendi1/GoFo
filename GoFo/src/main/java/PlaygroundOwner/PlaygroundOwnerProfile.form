@@ -51,11 +51,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="addressLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
                                   <Component id="nameLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="PriceLabel" min="-2" pref="86" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="nameField" pref="189" max="32767" attributes="0"/>
                                   <Component id="AddressField" max="32767" attributes="0"/>
+                                  <Component id="priceField" pref="189" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -82,6 +84,11 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="nameLabel1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                   <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="priceField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="PriceLabel" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -164,6 +171,16 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="priceField">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceFieldActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="PriceLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Price:"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -489,11 +506,13 @@
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="addressLabel" alignment="0" max="32767" attributes="0"/>
                                               <Component id="nameLabel" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="playgroindPriceLabel" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="playgroundNameLabel" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                                               <Component id="playgroundAddressLabel" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                                              <Component id="priceLabelField" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -523,13 +542,18 @@
                                       <Component id="playgroundAddressLabel" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="addressLabel" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="priceLabelField" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="playgroindPriceLabel" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                   <Component id="descriptionLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="72" max="32767" attributes="0"/>
+                          <EmptySpace pref="44" max="32767" attributes="0"/>
                           <Component id="addButton" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -589,6 +613,13 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="priceLabelField">
+                </Component>
+                <Component class="javax.swing.JLabel" name="playgroindPriceLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Price:"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

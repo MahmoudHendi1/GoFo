@@ -28,6 +28,8 @@ import javax.swing.ListModel;
  */
 public class BookingPage extends javax.swing.JFrame {
 
+    private Player player;
+
     /**
      * Creates new form BookingPage
      */
@@ -46,6 +48,10 @@ public class BookingPage extends javax.swing.JFrame {
         playGroundModel.add(2, p2);
         playGroundModel.add(3, p3);
         */
+    }
+
+    BookingPage(Player player) {
+        this.player = player;
     }
 
      public class PlaygroundListRenderer extends DefaultListCellRenderer {
