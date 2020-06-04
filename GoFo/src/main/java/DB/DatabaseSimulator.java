@@ -255,4 +255,9 @@ public class DatabaseSimulator {
         return players;
     }
 
+    public static ArrayList<Playground> getPlaygroundsList() {
+        return playgroundsList;
+    }
+    
+
 }

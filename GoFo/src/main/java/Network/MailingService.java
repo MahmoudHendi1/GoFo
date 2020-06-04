@@ -9,10 +9,14 @@ package Network;
  *
  * @author ShawkyDev
  */
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 public class MailingService {
-    public static boolean sendMail(String Email , String content){
-        return false;
-    }
     
+
 }
+    
+
