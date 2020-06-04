@@ -5,6 +5,7 @@
  */
 package DB;
 
+import Players.Player;
 import Users.User;
 import Utilits.Playground;
 import java.io.File;
@@ -244,6 +245,14 @@ public class DatabaseSimulator {
             }
         }
         return false;
+    }
+
+    public static ArrayList<Player> getPlayers() {
+        ArrayList<Player> players = new  ArrayList<Player>();
+        for( User user : usersList)
+            if(user instanceof Player)
+                players.add((Player)user);
+        return players;
     }
 
 }

@@ -10,13 +10,20 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.20</version>
-        </dependency>
+        </dependency> 
+        
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>1.6</version>
         </dependency>
     </dependencies>
+    <repositories>
+   <repository>
+      <id>java.net repository</id>
+      <url>http://download.java.net/maven/2</url>
+   </repository>
+</repositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>

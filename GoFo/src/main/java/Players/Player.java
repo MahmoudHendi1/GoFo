@@ -23,7 +23,7 @@ public class Player extends User{
     }
 
     public ArrayList<Team> getTeams() {
-        return teams;
+        return teams;      
     }
    
    @Override

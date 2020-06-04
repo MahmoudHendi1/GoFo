@@ -9,9 +9,9 @@ package Network;
  *
  * @author ShawkyDev
  */
+
 public class MailingService {
     public static boolean sendMail(String Email , String content){
-        
         return false;
     }
     
