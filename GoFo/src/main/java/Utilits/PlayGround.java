@@ -19,7 +19,7 @@ public class Playground implements Serializable{
     private static final long serialVersionUID = 3L;
     private PlaygroundOwner owner;
     private String name;
-    private Boolean approved=false;
+    private Boolean approved;
     private String address;
     private String description;
     private double defaultPricePerHour;
@@ -35,6 +35,7 @@ public class Playground implements Serializable{
         this.description = description;
         this.defaultPricePerHour = defaultPriceHour;
         this.locationOnMap = url;
+        this.approved = false;
 
         //this.image=ImageIO.read(new File(name+".jpg"));
 
@@ -59,12 +60,18 @@ public class Playground implements Serializable{
         return image;
     }
 
+    
+
     public boolean isApproved() {
         return approved;
     }
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public Boolean getApproved() {
+        return approved;
     }
     
     public String getAddress() {
@@ -105,6 +112,9 @@ public class Playground implements Serializable{
 
     public URL getLocationOnMap() {
         return locationOnMap;
+    }
+    public void setApproved(boolean approve){
+        this.approved = approve;
     }
 
     public void setLocationOnMap(URL locationOnMap) {
