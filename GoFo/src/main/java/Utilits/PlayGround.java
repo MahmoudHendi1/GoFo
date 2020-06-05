@@ -60,6 +60,10 @@ public class Playground implements Serializable{
         return image;
     }
 
+    public void setDefaultPricePerHour(double defaultPricePerHour) {
+        this.defaultPricePerHour = defaultPricePerHour;
+    }
+
     
 
     public boolean isApproved() {
@@ -94,7 +98,7 @@ public class Playground implements Serializable{
         return defaultPricePerHour;
     }
 
-    public static ArrayList<Booking> getBookdesTimes() {
+    public  ArrayList<Booking> getBookdeTimes() {
         return bookdesTimes;
     }
 

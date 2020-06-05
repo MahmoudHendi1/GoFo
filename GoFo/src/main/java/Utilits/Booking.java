@@ -20,11 +20,16 @@ public class Booking implements Serializable{
     private Date date;
     private Player booker;
     private int DuratoinInHours;
+    Playground playground;
 
     public Booking(Date timing, Player booker, int DuratoinInHours) {
         this.date = timing;
         this.booker = booker;
         this.DuratoinInHours = DuratoinInHours;
+    }
+
+    public Booking(Playground playground, Date bookingDate, int duration) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public boolean isPlayed(){
@@ -35,6 +40,45 @@ public class Booking implements Serializable{
         
         
     }
+
+    public Date getDate() {
+        return date;
+    }
+    
+    public Date getEndDate(){
+        Date end_date  = new Date(date.getTime());
+        end_date.setHours(end_date.getHours()+DuratoinInHours);
+        return end_date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getDuratoinInHours() {
+        return DuratoinInHours;
+    }
+
+    public void setDuratoinInHours(int DuratoinInHours) {
+        this.DuratoinInHours = DuratoinInHours;
+    }
+
+    public Playground getPlayground() {
+        return playground;
+    }
+
+    public void setPlayground(Playground playground) {
+        this.playground = playground;
+    }
+
+    public Player getBooker() {
+        return booker;
+    }
+
+    public void setBooker(Player booker) {
+        this.booker = booker;
+    }
+    
 
     @Override
     public String toString() {

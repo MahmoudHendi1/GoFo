@@ -6,6 +6,7 @@
 package Players;
 
 import Users.User;
+import Utilits.Booking;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Player extends User{
     private ArrayList<Team> teams;
+    private ArrayList<Booking> bookings;
    public Boolean hasTeam(){
        return true;
    }
@@ -25,6 +27,15 @@ public class Player extends User{
     public ArrayList<Team> getTeams() {
         return teams;      
     }
+
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
+    }
+    
    
    @Override
    public String toString(){
