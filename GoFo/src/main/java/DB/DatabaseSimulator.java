@@ -258,6 +258,20 @@ public class DatabaseSimulator {
     public static ArrayList<Playground> getPlaygroundsList() {
         return playgroundsList;
     }
+    public static ArrayList<Playground> getApprovedPlaygrounds(){
+        if (!isInit) {
+            init();
+        }
+        if (playgroundsList == null) {
+            return null;
+        }
+        ArrayList<Playground> approvedPlaygrounds = new ArrayList<Playground>();
+        for(var playground : playgroundsList)
+            if(playground.isApproved())
+                approvedPlaygrounds.add(playground);
+        return approvedPlaygrounds;
+        
+    }
     
 
 }

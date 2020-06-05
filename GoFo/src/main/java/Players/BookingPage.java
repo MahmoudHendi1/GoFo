@@ -5,6 +5,7 @@
  */
 package Players;
 
+import DB.DatabaseSimulator;
 import Utilits.Playground;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
@@ -52,6 +53,15 @@ public class BookingPage extends javax.swing.JFrame {
 
     BookingPage(Player player) {
         this.player = player;
+        initComponents();
+        jScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        playgroundList.setCellRenderer(new PlaygroundListRenderer());
+
+        var playgroundlist = DatabaseSimulator.getPlaygroundsList();
+        for(var playground : playgroundlist)
+            playGroundModel.addElement(playground);
+        
+        
     }
 
      public class PlaygroundListRenderer extends DefaultListCellRenderer {
