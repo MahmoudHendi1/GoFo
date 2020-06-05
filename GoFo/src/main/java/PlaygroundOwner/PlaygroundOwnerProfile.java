@@ -88,9 +88,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
         this.playgroundOwner= playgroundOwner;
+        
         for(int i=0;i<playgroundOwner.getPlaygroundsList().size();i++){
             playGroundModel.add(i,playgroundOwner.getPlaygroundsList().get(i));
         }
+        
        setInfo();
  
     }
@@ -688,7 +690,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         addPlaygroundDialog.setVisible(true);
-        System.out.println("addbutoon 00");
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -713,16 +714,29 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             price = -1;
         }
             
-        
-        if(!AddressField.getText().equals("") && !descriptionArea.getText().equals("")&& price >= 0){
+        Boolean isAllright=true;
+        if(AddressField.getText().equals("")){
+            isAllright=false;
+            addressLabel.setForeground(Color.red);
+        }
+        if(descriptionArea.getText().equals("")){
+            isAllright=false;
+            descriptionLabel1.setForeground(Color.red);
+        }
+        if(price <0){
+            isAllright=false;
+            PriceLabel.setForeground(Color.red);
+        }
+        if(isAllright){
             Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
             PlaygroundOwnerManger.addPlayground(newPlayground, playgroundOwner);
             if(playgroundPhoto.getIcon()!=null){
              playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
-             Path source=Paths.get("playerPhotos/" +"dummy" + ".jpg");
+             Path source=Paths.get("playgroundPhotos/" +"dummy" + ".jpg");
+
 
                 try {
-                Files.copy(source, Paths.get("playerPhotos/" +nameField.getText() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(source, Paths.get("playgroundPhotos/" +nameField.getText() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ex) {
                     Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -732,8 +746,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             }
             playGroundModel.addElement(playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1));
             
-        }else{
-            System.out.println("PlaygroundOwner.PlaygroundOwnerProfile.addButton1ActionPerformed()");
         }
     }//GEN-LAST:event_addButton1ActionPerformed
 
