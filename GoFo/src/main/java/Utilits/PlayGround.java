@@ -26,6 +26,8 @@ public class Playground implements Serializable{
     private BufferedImage image;
     private String imageLink;
     private URL locationOnMap;
+    private int openingHour;
+    private int closingHour;
 
     private static ArrayList<Booking> bookdesTimes;
 
@@ -44,6 +46,23 @@ public class Playground implements Serializable{
     public String getImageLink() {
         return imageLink;
     }
+
+    public int getOpeningHour() {
+        return openingHour;
+    }
+
+    public void setOpeningHour(int openingHour) {
+        this.openingHour = openingHour;
+    }
+
+    public int getClosingHour() {
+        return closingHour;
+    }
+
+    public void setClosingHour(int closingHour) {
+        this.closingHour = closingHour;
+    }
+    
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;

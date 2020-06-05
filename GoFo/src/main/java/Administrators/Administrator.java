@@ -15,19 +15,7 @@ import java.util.ArrayList;
  * @author Lenovo
  */
 public class Administrator extends Users.User{
-    public static ArrayList<Playground> getNonApprovedPlaygrounds(){
-        var prlaygrounds = DatabaseSimulator.getPlaygroundsList();
-        ArrayList<Playground> nonApprovedPlaygrounds = new ArrayList<Playground>();
-        for(Playground playground : nonApprovedPlaygrounds)
-            if(!playground.isApproved())
-                nonApprovedPlaygrounds.add(playground);
-        return nonApprovedPlaygrounds;
-        
-    }
-    public static void approvePlayground(Playground playground){
-        playground.setApproved(true);
-        
-    }
+    
     
     
 }

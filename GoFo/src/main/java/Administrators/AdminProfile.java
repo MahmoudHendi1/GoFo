@@ -36,7 +36,7 @@ import org.apache.commons.validator.routines.EmailValidator;
  *
  * @author Lenovo
  */
-public class PlayerProfile extends javax.swing.JFrame {
+public class AdminProfile extends javax.swing.JFrame {
 
     /**
      * Creates new form PlayerProfile
@@ -44,9 +44,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private Player player;
     private boolean editMode = false;
 
-    public PlayerProfile(String text, String text0, String text1, String text2, String text3, String text4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     private ImageIcon scale(String path) {
         Image image = new ImageIcon(path).getImage();
@@ -72,7 +70,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         choosePhotoButton.setVisible(false);
     }
 
-    public PlayerProfile() {
+    public AdminProfile() {
         initComponents();
         player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
         setInfo();
@@ -98,7 +96,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             return label;
         }
     }
-    public PlayerProfile(Player player) {
+    public AdminProfile(Player player) {
         initComponents();
         this.player = player;
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
