@@ -210,6 +210,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         });
 
         descriptionArea.setColumns(20);
+        descriptionArea.setLineWrap(true);
         descriptionArea.setRows(5);
 
         priceField.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +235,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                     .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
                         .addComponent(descriptionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(descriptionArea, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                        .addComponent(descriptionArea))
                     .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addressLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
