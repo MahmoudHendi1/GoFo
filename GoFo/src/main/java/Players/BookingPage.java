@@ -76,6 +76,7 @@ public class BookingPage extends javax.swing.JFrame {
             Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             label.setIcon(new ImageIcon(newimg));
             label.setHorizontalTextPosition(JLabel.RIGHT);
+            setText(((Playground)value).getName());
             return label;
         }
     }

@@ -36,6 +36,7 @@ public class Team implements Serializable{
         if(this.members==null)
             members = new ArrayList<Player>();
         this.members.add(member);
+        member.getTeams().add(this);
     }
     
 }

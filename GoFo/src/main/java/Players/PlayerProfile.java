@@ -19,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
@@ -140,6 +142,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         LeftPane = new javax.swing.JScrollPane();
         playersList = new javax.swing.JList<>();
         addPlayerButton = new javax.swing.JButton();
+        creatTeamButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -312,30 +315,38 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         });
 
+        creatTeamButton.setText("creat Team");
+        creatTeamButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creatTeamButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout teamPaneLayout = new javax.swing.GroupLayout(teamPane);
         teamPane.setLayout(teamPaneLayout);
         teamPaneLayout.setHorizontalGroup(
             teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(playerEmailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(playerEmailField1)
+                            .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(creatTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40)
                         .addComponent(inviteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(teamPaneLayout.createSequentialGroup()
-                                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(playerEmailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(playerEmailField1)
-                                    .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))))
+                    .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
         );
         teamPaneLayout.setVerticalGroup(
             teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,10 +365,12 @@ public class PlayerProfile extends javax.swing.JFrame {
                         .addComponent(addPlayerButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                        .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(inviteButton)
-                .addContainerGap())
+                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inviteButton)
+                    .addComponent(creatTeamButton))
+                .addGap(40, 40, 40))
         );
 
         mainPane.addTab("Team", teamPane);
@@ -370,7 +383,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+            .addComponent(mainPane)
         );
 
         pack();
@@ -502,21 +515,6 @@ public class PlayerProfile extends javax.swing.JFrame {
         
     }//GEN-LAST:event_logoutButtonActionPerformed
 
-    private void playerEmailField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailField1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_playerEmailField1ActionPerformed
-
-    private void teamNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_teamNameFieldActionPerformed
-
-    private void playersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playersListValueChanged
-
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_playersListValueChanged
-
     private void addPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerButtonActionPerformed
         // TODO add your handling code here:
         String email= playerEmailField1.getText();
@@ -531,6 +529,28 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_addPlayerButtonActionPerformed
+
+    private void playersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playersListValueChanged
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_playersListValueChanged
+
+    private void teamNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teamNameFieldActionPerformed
+
+    private void playerEmailField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_playerEmailField1ActionPerformed
+
+    private void creatTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatTeamButtonActionPerformed
+        // TODO add your handling code here:
+   
+        Team team = new Team(teamNameField.getText());
+        
+        for(var obj : playersModel.toArray())
+            team.addMember((Player)obj);
+    }//GEN-LAST:event_creatTeamButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -575,6 +595,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private javax.swing.JButton addPlayerButton;
     private javax.swing.JButton browsePlagroundButton;
     private javax.swing.JButton choosePhotoButton;
+    private javax.swing.JButton creatTeamButton;
     private javax.swing.JButton inviteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutButton;
