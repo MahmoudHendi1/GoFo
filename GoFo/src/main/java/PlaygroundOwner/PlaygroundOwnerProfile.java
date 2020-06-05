@@ -114,7 +114,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                 label.setBackground(Color.GREEN);
             else
                  label.setBackground(Color.RED);
-
+            setText(((Playground)value).getName());
             return label;
         }
     }
