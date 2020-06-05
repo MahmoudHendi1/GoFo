@@ -19,7 +19,9 @@ public class UserManger {
     public static boolean registerUser(User user){
         if(DatabaseSimulator.checkUserbyUserName(user.getUserName())
                 ||
-            DatabaseSimulator.checkUserbyEmail(user.getEmail()))
+            DatabaseSimulator.checkUserbyEmail(user.getEmail())
+                ||
+            DatabaseSimulator.getUserbyPhone(user.getPhoneNumber())==null)
             return false;
          DatabaseSimulator.addUserToDB(user);
          return true;
