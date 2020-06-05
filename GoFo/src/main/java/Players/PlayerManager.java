@@ -7,7 +7,7 @@ package Players;
 
 import Utilits.Booking;
 import java.awt.List;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import Utilits.Playground;
 /**
@@ -22,20 +22,33 @@ public class PlayerManager {
         Team team = new Team(name);
         team.addMember(player);
         teamsList.add(team);
-        return team;
-       
-        
-        
+        return team;     
     }
-
     
-    public Booking bookPlayground(Playground P){
-        
-        return null;
+    public Booking bookPlayground(Playground playground , Date bookingDate , int duration , Player player){
+        if(playground==null||!playground.isApproved()||bookingDate==null||duration<1)
+            return null;
+        Date now = new Date();
+         Date end_date  = new Date(bookingDate.getTime());
+         end_date.setHours(end_date.getHours()+duration);
+        if(bookingDate.before(now))
+            return null;
+             
+        for(var booking : playground.getBookdeTimes()){
+            if(booking.isPlayed()||booking.getEndDate().before(bookingDate)||booking.getDate().after(end_date))
+                continue;
+            return null;  
+        }
+        Booking booking = new Booking(bookingDate, player, duration);
+        playground.getBookdeTimes().add(booking);
+        player.getBookings().add(booking);
+        return booking;
     }
-    public Boolean cancelBooking(Booking booking){
-        
-        return true; 
+    public boolean cancelBooking(Booking booking){
+        if(booking.isPlayed())
+        return false;
+        var playground = booking.getPlayground();
+        return playground.getBookdeTimes().remove(booking) && booking.getBooker().getBookings().remove(booking);
     }
     public ArrayList<Playground> viewPlaygrounds(){
         ArrayList<Playground> Playgrounds = null;
