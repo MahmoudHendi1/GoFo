@@ -656,6 +656,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                     choosePhotoButton.setVisible(false);
                     EditButton.setText("Edit");
                     editMode=false;
+                    //comment
                 }
 
             } else {
