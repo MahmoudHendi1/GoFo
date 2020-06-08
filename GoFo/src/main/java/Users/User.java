@@ -7,6 +7,7 @@ package Users;
 //import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -16,6 +17,7 @@ public class User implements  Serializable{
     
     //assigning uinque ID for each serlaized class
    private static final long serialVersionUID = 1L;
+   private Date expirtyOfRigisteration;
     private String name,
            userName,
            password,
@@ -35,6 +37,8 @@ public class User implements  Serializable{
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.name = name;
+        this.expirtyOfRigisteration = new Date(new Date().getTime()+365 * 24 * 60 * 60 * 1000); ///one year
+        
     }
      
 
@@ -101,9 +105,11 @@ public class User implements  Serializable{
 
         @Override
 	public String toString() {
+            
+              //  this.expirtyOfRigisteration = new Date(new Date().getTime()+365l * 24 * 60 * 60 * 1000); ///one year after now
 		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
                 return "name:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphoneNumber:"
-                        +phoneNumber+"\naddress:"+address+"\n"+  "photoPath"+ photoLink;
+                        +phoneNumber+"\naddress:"+address+"\n"+  "photoPath"+ photoLink+"\nDate" + expirtyOfRigisteration.toString()+"\n";
                         
                         
                         
