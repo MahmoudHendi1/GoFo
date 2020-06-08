@@ -20,10 +20,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailingService {
-    public static void main(String[] args) {
-
-        // Recipient's email ID needs to be mentioned.
-        String to = "youssef20khaled@gmail.com";
+    public static void sendEmailTo(String Email, String title , String msg){
+        
 
         // Sender's email ID needs to be mentioned
         String from = "gofomailservice@gmail.com";
@@ -62,13 +60,13 @@ public class MailingService {
             message.setFrom(new InternetAddress(from));
 
             // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(Email));
 
             // Set Subject: header field
-            message.setSubject("GoFo Mailing service!");
+            message.setSubject("GoFo "+title);
 
             // Now set the actual message
-            message.setText("Hendi  Invited you to a Team");
+            message.setText(msg);
 
             System.out.println("sending...");
             // Send message
@@ -78,7 +76,11 @@ public class MailingService {
             mex.printStackTrace();
         }
 
+
     }
+    public static void main(String[] args) {
+
+            }
 
 
 }
