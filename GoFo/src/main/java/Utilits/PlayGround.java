@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -140,6 +141,22 @@ public class Playground implements Serializable{
 
     public void setLocationOnMap(URL locationOnMap) {
         this.locationOnMap = locationOnMap;
+    }
+
+    public boolean isAvailable(Date available , int duratoin) {
+        ///sets time to end time (time in mellisecond = hours * 60 * 60 * 1000
+        Date end_date = new Date(available.getTime() + duratoin * 60 * 60 * 1000);
+        
+        if(bookdesTimes ==null) return true;
+        for(var booking : bookdesTimes){
+            if(booking.getDate().after(end_date)||booking.getEndDate().before(available)){
+                /// okay no conflict;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
     }
     
 
