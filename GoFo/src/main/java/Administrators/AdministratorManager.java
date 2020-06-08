@@ -23,6 +23,10 @@ public class AdministratorManager {
         return nonApprovedPlaygrounds;
         
     }
+   public static  ArrayList<Playground> getAllPlaygrounds(){
+       return DatabaseSimulator.getPlaygroundsList();
+   }
+   
     public static void approvePlayground(Playground playground){
         playground.setApproved(true);
         

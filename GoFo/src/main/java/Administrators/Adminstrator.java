@@ -10,7 +10,7 @@ package Administrators;
  * @author Feras
  */
 public class Adminstrator {
-        String Username;
+    String Username;
     String password;
 
     public Adminstrator(String Username, String password) {
