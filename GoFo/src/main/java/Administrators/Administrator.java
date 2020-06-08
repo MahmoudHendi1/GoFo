@@ -5,16 +5,13 @@
  */
 package Administrators;
 
-import DB.DatabaseSimulator;
-import Utilits.Playground;
-import java.sql.Array;
-import java.util.ArrayList;
+
 
 /**
  *
  * @author Lenovo
  */
-public class Administrator extends Users.User{
+public class Administrator {
     
     
     
