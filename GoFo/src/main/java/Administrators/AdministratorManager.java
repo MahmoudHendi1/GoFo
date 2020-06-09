@@ -24,12 +24,17 @@ public class AdministratorManager {
         
     }
    public static  ArrayList<Playground> getAllPlaygrounds(){
+       //System.out.println(DatabaseSimulator.getPlaygroundsList().toString());
        return DatabaseSimulator.getPlaygroundsList();
    }
    
     public static void approvePlayground(Playground playground){
         playground.setApproved(true);
         
+    }
+    public static boolean isAdmin(String username , String password){
+        // assuming there is only one admin and it's fixed :
+        return username.equals("admin") && password.equals("admin12345");
     }
     
 }

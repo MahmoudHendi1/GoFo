@@ -124,7 +124,6 @@ public class AdminProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPane = new javax.swing.JTabbedPane();
         playgroundsPanel = new javax.swing.JPanel();
         PlaygroudsPane = new javax.swing.JPanel();
         LeftPane = new javax.swing.JScrollPane();
@@ -156,6 +155,8 @@ public class AdminProfile extends javax.swing.JFrame {
         LeftPane.setViewportView(playgroundList);
 
         playgroundImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        playgroundNameLabel.setAutoscrolls(true);
 
         playgrounDescriptionTextArea.setEditable(false);
         playgrounDescriptionTextArea.setColumns(20);
@@ -198,10 +199,10 @@ public class AdminProfile extends javax.swing.JFrame {
                                             .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(playgroindPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                            .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))))
                             .addGroup(RightPaneLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -241,8 +242,8 @@ public class AdminProfile extends javax.swing.JFrame {
             .addGap(0, 718, Short.MAX_VALUE)
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PlaygroudsPaneLayout.createSequentialGroup()
-                    .addComponent(LeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 536, Short.MAX_VALUE)))
+                    .addComponent(LeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 521, Short.MAX_VALUE)))
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlaygroudsPaneLayout.createSequentialGroup()
                     .addGap(0, 216, Short.MAX_VALUE)
@@ -250,7 +251,7 @@ public class AdminProfile extends javax.swing.JFrame {
         );
         PlaygroudsPaneLayout.setVerticalGroup(
             PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
+            .addGap(0, 330, Short.MAX_VALUE)
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(LeftPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +271,7 @@ public class AdminProfile extends javax.swing.JFrame {
         );
         playgroundsPanelLayout.setVerticalGroup(
             playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
             .addGroup(playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(playgroundsPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -278,17 +279,21 @@ public class AdminProfile extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        mainPane.addTab("tab1", playgroundsPanel);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPane)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(playgroundsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPane)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(playgroundsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -359,7 +364,6 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton approveButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane mainPane;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel playgroindPriceLabel;
     private javax.swing.JTextArea playgrounDescriptionTextArea;

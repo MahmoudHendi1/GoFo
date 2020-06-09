@@ -5,6 +5,8 @@
  */
 package Users;
 
+import Administrators.AdminProfile;
+import Administrators.AdministratorManager;
 import DB.DatabaseSimulator;
 import Players.Player;
 import Players.PlayerProfile;
@@ -287,7 +289,14 @@ public class UserMainForm extends javax.swing.JFrame {
                  playgroundOwnerProfile.setVisible(true);
              }
              this.dispose();
+             return ;
         }else{
+            if(AdministratorManager.isAdmin(loginUsernameField.getText(), loginPasswordField.getText())){
+                AdminProfile adminProfile  = new AdminProfile();
+                adminProfile.setVisible(true);
+                this.dispose();
+                return ;
+            }
             if(UserManger.getUserbyUsername(loginUsernameField.getText())!=null){
                 JOptionPane.showMessageDialog(null, "password is incrorect", "fail", JOptionPane.INFORMATION_MESSAGE);
                 loginPasswordLabel.setForeground(Color.red);
