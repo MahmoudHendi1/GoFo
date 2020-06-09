@@ -164,7 +164,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         playgroundOwnerEmailLabel = new javax.swing.JLabel();
         choosePhotoButton = new javax.swing.JButton();
         EditButton = new javax.swing.JButton();
-        browsePlagroundButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         PlaygroudsPane = new javax.swing.JPanel();
         LeftPane = new javax.swing.JScrollPane();
@@ -399,13 +398,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             }
         });
 
-        browsePlagroundButton.setText("Browse playgrounds");
-        browsePlagroundButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browsePlagroundButtonActionPerformed(evt);
-            }
-        });
-
         logoutButton.setText("Log out");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,7 +425,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                     .addComponent(playgroundOwnerNameField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playgroundOwnerEmailField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playgroundOwnerAddressField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(browsePlagroundButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(profilePaneLayout.createSequentialGroup()
                         .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -468,9 +459,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(browsePlagroundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(97, Short.MAX_VALUE))
+                        .addContainerGap(141, Short.MAX_VALUE))
                     .addGroup(profilePaneLayout.createSequentialGroup()
                         .addComponent(choosePhotoButton)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -821,6 +810,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
  
             }
             playGroundModel.addElement(playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1));
+            addPlaygroundDialog.dispose();
+            
             
         }
     }//GEN-LAST:event_addButton1ActionPerformed
@@ -841,10 +832,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_choosePhotoButton1ActionPerformed
-
-    private void browsePlagroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePlagroundButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browsePlagroundButtonActionPerformed
 
     private void priceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldActionPerformed
         // TODO add your handling code here:
@@ -909,7 +896,6 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JPanel addPlaygroundPane;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressLabel1;
-    private javax.swing.JButton browsePlagroundButton;
     private javax.swing.JButton choosePhotoButton;
     private javax.swing.JButton choosePhotoButton1;
     private javax.swing.JTextArea descriptionArea;
