@@ -11,7 +11,7 @@ import DB.DatabaseSimulator;
 import Players.Player;
 import Players.PlayerProfile;
 import PlaygroundOwner.PlaygroundOwner;
-import PlaygroundOwner.PlaygroundOwnerManger;
+import PlaygroundOwner.PlaygroundOwnerManager;
 import PlaygroundOwner.PlaygroundOwnerProfile;
 import Utilits.Playground;
 import java.awt.Color;

@@ -13,6 +13,8 @@ import Utilits.Playground;
 /**
  *
  * @author Lenovo
+ * @version 1.0
+ * @since 9/6/2020
  */
 public class PlayerManager {
     public Team createTeam(Player player,String name){

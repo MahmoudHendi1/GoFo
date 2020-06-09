@@ -10,10 +10,15 @@ import Utilits.Playground;
 import java.util.ArrayList;
 
 /**
- *
+ *The AdministratorManager controls all the functionalities an administrator
+ * can perform such as approving or suspending a playground
  * @author Lenovo
  */
 public class AdministratorManager {
+    /**
+     * Thus functions returns a list of nonApproved playgrounds
+     * @return Arraylist of playgrounds
+     */
    public static ArrayList<Playground> getNonApprovedPlaygrounds(){
         var prlaygrounds = DatabaseSimulator.getPlaygroundsList();
         ArrayList<Playground> nonApprovedPlaygrounds = new ArrayList<Playground>();

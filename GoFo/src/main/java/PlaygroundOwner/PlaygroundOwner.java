@@ -13,8 +13,11 @@ import java.util.ArrayList;
 
 
 /**
- *
+ *Playground owner is a user extended entity that describes when the user
+ * is a playground owner
  * @author ShawkyDev
+ * @version 1.0
+ * @since 9/6/2020
  */
 public class PlaygroundOwner extends User{
     private ArrayList<Playground> playgroundsList ;

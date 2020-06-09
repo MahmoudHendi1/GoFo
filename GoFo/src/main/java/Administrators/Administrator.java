@@ -6,8 +6,11 @@
 package Administrators;
 
 /**
- *
+ *The administrator entity represents the administrator with all its
+ * needed information such as username and password.
  * @author Feras
+ * @version 1.0
+ * @since 7/6/2020
  */
 public class Administrator {
     String Username;

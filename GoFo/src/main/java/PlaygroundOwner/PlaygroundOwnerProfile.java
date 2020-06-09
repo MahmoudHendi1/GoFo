@@ -731,7 +731,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         }
         if(isAllright){
             Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
-            PlaygroundOwnerManger.addPlayground(newPlayground, playgroundOwner);
+            PlaygroundOwnerManager.addPlayground(newPlayground, playgroundOwner);
             if(playgroundPhoto.getIcon()!=null){
              playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
              Path source=Paths.get("playgroundPhotos/" +"dummy" + ".jpg");
