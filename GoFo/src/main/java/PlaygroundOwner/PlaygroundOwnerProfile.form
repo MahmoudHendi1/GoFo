@@ -77,6 +77,7 @@
                                                   <Component id="toLabel" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <Component id="addPlaygroundButton" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -86,7 +87,7 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="backButton" min="-2" pref="87" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="addButton2" min="-2" pref="181" max="-2" attributes="0"/>
+                              <Component id="myPlaygroundsButton" min="-2" pref="181" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -143,9 +144,11 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="addPlaygroundButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="addButton2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="myPlaygroundsButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="backButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -272,12 +275,20 @@
                 <Property name="text" type="java.lang.String" value="To"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="addButton2">
+            <Component class="javax.swing.JButton" name="myPlaygroundsButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="My playgrounds"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="myPlaygroundsButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="addPlaygroundButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPlaygroundButtonActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

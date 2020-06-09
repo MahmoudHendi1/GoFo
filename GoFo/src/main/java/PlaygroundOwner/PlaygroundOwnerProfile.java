@@ -13,6 +13,8 @@ import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dialog.ModalityType;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -39,10 +42,11 @@ import org.apache.commons.validator.routines.EmailValidator;
 public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     
     
-    private ImageIcon scale(String path, JLabel Photo) {
+    private ImageIcon scale(String path, JLabel Photo) throws IOException {
         Image image = new ImageIcon(path).getImage();
         System.out.println(playgroundPhoto.getWidth());
         Image newimg = image.getScaledInstance(Photo.getWidth(),-1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
+
         return new ImageIcon(newimg);
     }
 
@@ -56,11 +60,12 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     public void selectPlaygroundPhoto(Path originalPath,String name) throws IOException {
         Path copied = Paths.get("playgroundPhotos/" + "dummy" + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+
         playgroundPhoto.setIcon(scale(copied.toString(),playgroundPhoto));
 
     }
 
-    public void setInfo() {
+    public void setInfo() throws IOException {
 
         playgroundOwnerNameField.setText(playgroundOwner.getName());
         playgroundOwnerEmailField.setText(playgroundOwner.getEmail());
@@ -73,7 +78,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
      * Creates new form PlaygroundOwnerProfile
      */
     //not used 
-    public PlaygroundOwnerProfile() {
+    public PlaygroundOwnerProfile() throws IOException {
         initComponents();
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
@@ -84,7 +89,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         setInfo();
 
     }
-    public PlaygroundOwnerProfile(PlaygroundOwner playgroundOwner) {
+    public PlaygroundOwnerProfile(PlaygroundOwner playgroundOwner) throws IOException {
         initComponents();
         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
@@ -151,7 +156,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         timeLabel = new javax.swing.JLabel();
         fromLabel = new javax.swing.JLabel();
         toLabel = new javax.swing.JLabel();
-        addButton2 = new javax.swing.JButton();
+        myPlaygroundsButton = new javax.swing.JButton();
+        addPlaygroundButton = new javax.swing.JButton();
         MainPane = new javax.swing.JTabbedPane();
         profilePane = new javax.swing.JPanel();
         playgroundOwnerProfilePhoto = new javax.swing.JLabel();
@@ -248,10 +254,17 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         toLabel.setLabelFor(toComboBox);
         toLabel.setText("To");
 
-        addButton2.setText("My playgrounds");
-        addButton2.addActionListener(new java.awt.event.ActionListener() {
+        myPlaygroundsButton.setText("My playgrounds");
+        myPlaygroundsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButton2ActionPerformed(evt);
+                myPlaygroundsButtonActionPerformed(evt);
+            }
+        });
+
+        addPlaygroundButton.setText("Add");
+        addPlaygroundButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPlaygroundButtonActionPerformed(evt);
             }
         });
 
@@ -293,13 +306,14 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(toComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(toLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                            .addComponent(toLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(addPlaygroundButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(44, 44, 44))
                     .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(myPlaygroundsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35))))
         );
         addPlaygroundPaneLayout.setVerticalGroup(
@@ -340,9 +354,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(addPlaygroundButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(myPlaygroundsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -752,9 +768,15 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_nameFieldActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        PlaygroundOwnerProfile ownerProfile = new PlaygroundOwnerProfile(this.playgroundOwner);
-        ownerProfile.setVisible(true);
+        PlaygroundOwnerProfile ownerProfile;
+        try {
+            ownerProfile = new PlaygroundOwnerProfile(this.playgroundOwner);
+            ownerProfile.setVisible(true);
         this.dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void choosePhotoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePhotoButton1ActionPerformed
@@ -782,9 +804,89 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fromComboBoxActionPerformed
 
-    private void addButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton2ActionPerformed
+    private void myPlaygroundsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myPlaygroundsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addButton2ActionPerformed
+    }//GEN-LAST:event_myPlaygroundsButtonActionPerformed
+
+    private void addPlaygroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlaygroundButtonActionPerformed
+        // TODO add your handling code here:
+        
+                Boolean isAllright=true;
+
+        String playgroundName =nameField.getText();
+        for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
+            if(tmpPlayground.getName().equals(playgroundName)||playgroundName.equals("")){
+                nameLabel1.setForeground(Color.red);
+                isAllright=false;
+            }else{
+                nameLabel1.setForeground(Color.green);
+
+            }
+        }
+        
+        double price;
+        try {
+             price = Double.parseDouble(priceField.getText());
+            
+        } catch (NumberFormatException e) {
+            price = -1;
+        }
+            
+        if(AddressField.getText().equals("")){
+            isAllright=false;
+            addressLabel1.setForeground(Color.red);
+        }else{
+            addressLabel1.setForeground(Color.green);
+
+        }
+        if(descriptionArea.getText().equals("")){
+            isAllright=false;
+            descriptionLabel1.setForeground(Color.red);
+        }else{
+            descriptionLabel1.setForeground(Color.green);
+
+        }
+        if(price <0){
+            isAllright=false;
+            PriceLabel.setForeground(Color.red);
+        }else{
+            timeLabel.setForeground(Color.green);
+
+        }
+        if(fromComboBox.getSelectedIndex() == -1 ||toComboBox.getSelectedIndex() == -1){
+            isAllright=false;
+            timeLabel.setForeground(Color.red);
+        }else{
+            timeLabel.setForeground(Color.green);
+
+        }
+        if(isAllright){
+            Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
+            newPlayground.setOpeningHour((int) toComboBox.getSelectedItem());
+            newPlayground.setOpeningHour((int) fromComboBox.getSelectedItem());
+     
+            PlaygroundOwnerManager.addPlayground(newPlayground, playgroundOwner);
+            
+            if(playgroundPhoto.getIcon()!=null){
+             playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
+             Path source=Paths.get("playgroundPhotos/" +"dummy" + ".jpg");
+
+
+                try {
+                Files.copy(source, Paths.get("playgroundPhotos/" +nameField.getText() + ".jpg"), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException ex) {
+                    Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+ 
+            }
+            playGroundModel.addElement(playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1));
+            addPlaygroundDialog.dispose();
+            
+            
+        }
+    }//GEN-LAST:event_addPlaygroundButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -816,7 +918,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlaygroundOwnerProfile().setVisible(true);
+                try {
+                    new PlaygroundOwnerProfile().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -836,7 +942,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel RightPane;
     private javax.swing.JButton addButton;
-    private javax.swing.JButton addButton2;
+    private javax.swing.JButton addPlaygroundButton;
     private javax.swing.JDialog addPlaygroundDialog;
     private javax.swing.JPanel addPlaygroundPane;
     private javax.swing.JLabel addressLabel;
@@ -851,6 +957,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JLabel fromLabel;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton myPlaygroundsButton;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameLabel1;
