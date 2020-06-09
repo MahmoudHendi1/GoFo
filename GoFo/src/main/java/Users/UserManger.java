@@ -21,7 +21,7 @@ public class UserManger {
                 ||
             DatabaseSimulator.checkUserbyEmail(user.getEmail())
                 ||
-            DatabaseSimulator.getUserbyPhone(user.getPhoneNumber())==null)
+            DatabaseSimulator.getUserbyPhone(user.getPhoneNumber())!=null)
             return false;
          DatabaseSimulator.addUserToDB(user);
          return true;

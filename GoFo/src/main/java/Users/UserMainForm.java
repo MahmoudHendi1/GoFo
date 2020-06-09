@@ -454,7 +454,7 @@ public class UserMainForm extends javax.swing.JFrame {
 	// add shutdown hook - to save the data [Write it to File]
 	Runtime.getRuntime().addShutdownHook(shutDownTask);
          DatabaseSimulator.initializeDatabase();
-         //DatabaseSimulator.reset();
+        // DatabaseSimulator.reset();
          
          
          DatabaseSimulator.printArrayLists(1);
