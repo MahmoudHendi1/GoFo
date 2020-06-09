@@ -9,11 +9,11 @@ package Administrators;
  *
  * @author Feras
  */
-public class Adminstrator {
+public class Administrator {
     String Username;
     String password;
 
-    public Adminstrator(String Username, String password) {
+    public Administrator(String Username, String password) {
         this.Username = Username;
         this.password = password;
     }

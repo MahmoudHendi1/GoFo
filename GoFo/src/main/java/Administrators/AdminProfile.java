@@ -5,7 +5,7 @@
  */
 package Administrators;
 
-import Administrators.Adminstrator;
+import Administrators.Administrator;
 import DB.DatabaseSimulator;
 import PlaygroundOwner.PlaygroundOwner;
 import PlaygroundOwner.PlaygroundOwnerProfile;
@@ -84,7 +84,7 @@ public class AdminProfile extends javax.swing.JFrame {
 
     }
   
-    public AdminProfile(Adminstrator admin) {
+    public AdminProfile(Administrator admin) {
          initComponents();
          LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
          playgroundList.setCellRenderer(new PlaygroundListRenderer());

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Users;
 //import org.apache.commons.validator.routines.EmailValidator;
 
@@ -10,8 +5,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
+ *User is the main entity that describes player and playground owner 
+ * and will be used throughout the program
  * @author Lenovo
+ * @version 1.0
+ * @since 9/6/20120
  */
 public class User implements  Serializable{
     
@@ -106,8 +104,8 @@ public class User implements  Serializable{
         @Override
 	public String toString() {
             
-              //  this.expirtyOfRigisteration = new Date(new Date().getTime()+365l * 24 * 60 * 60 * 1000); ///one year after now
-		//return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;
+              /** this.expirtyOfRigisteration = new Date(new Date().getTime()+365l * 24 * 60 * 60 * 1000); one year after now
+		return id+',' + name +',' + password +',' + email+','+phoneNumber+','+address;*/
                 return "name:" +name +"\nuserName:"+userName+ "\npassword:" + password + "\nemail:"+email + "\nphoneNumber:"
                         +phoneNumber+"\naddress:"+address+"\n"+  "photoPath"+ photoLink+"\nDate" + expirtyOfRigisteration.toString()+"\n";
                         
