@@ -115,7 +115,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             label.setIcon(new ImageIcon(newimg));
             label.setHorizontalTextPosition(JLabel.RIGHT);
-            if(value!=null&&((Playground)value).isApproved())
+            if(((Playground)value).isApproved())
                 label.setBackground(Color.GREEN);
             else
                  label.setBackground(Color.RED);

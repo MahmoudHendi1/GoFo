@@ -378,10 +378,8 @@ public class BookingPage extends javax.swing.JFrame {
         if(fromComboBox.getSelectedIndex()==-1){
             toComboBox.setEnabled(false);
         }else{
-            toComboBox.setEnabled(true);
-        }
             if(OpenHours.getSize()>1){
-            int OpeningHour= ((Integer)fromComboBox.getSelectedItem()).intValue() ;
+            int OpeningHour= (int) fromComboBox.getSelectedItem();
             int ClosingHour= playgroundList.getSelectedValue().getClosingHour();
             closeHours.removeAllElements();
 
@@ -389,6 +387,9 @@ public class BookingPage extends javax.swing.JFrame {
             closeHours.addElement((Integer)(i+1));
             }
             }
+            toComboBox.setEnabled(true);
+        }
+            
 
     }//GEN-LAST:event_fromComboBoxActionPerformed
 
