@@ -1,16 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Users;
 
 import DB.DatabaseSimulator;
 import jdk.jshell.spi.ExecutionControl;
 
 /**
- *
+ *User manager is a controller that performs all the required operations
+ * to login and register an entity user
+ * 
+ * 
  * @author ShawkyDev
+ * @version 1.0
+ * @since 9/6/2020
  */
 public class UserManger {
     public static User loginUser(String username , String password){
