@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Players;
+package Administrators;
 
+import Administrators.Adminstrator;
+import DB.DatabaseSimulator;
+import PlaygroundOwner.PlaygroundOwner;
+import PlaygroundOwner.PlaygroundOwnerProfile;
 import Users.User;
 import Users.UserMainForm;
 import Users.UserManger;
@@ -41,11 +45,9 @@ public class AdminProfile extends javax.swing.JFrame {
     /**
      * Creates new form PlayerProfile
      */
-    private Player player;
-    private boolean editMode = false;
-
+  
     
-
+    /*
     private ImageIcon scale(String path) {
         Image image = new ImageIcon(path).getImage();
         Image newimg = image.getScaledInstance(playerPhoto.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
@@ -69,14 +71,29 @@ public class AdminProfile extends javax.swing.JFrame {
         playerPhoto.setIcon(scale(player.getPhotoLink()));
         choosePhotoButton.setVisible(false);
     }
+    */
 
     public AdminProfile() {
         initComponents();
-        player = new Player("Shawky", "ShawkyDev", "password_gamed", "youssef@gmail.com", "01157572128", "zayed , Giza");
-        setInfo();
+         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+         playgroundList.setCellRenderer(new PlaygroundListRenderer());
+        for(int i=0;i<AdministratorManager.getAllPlaygrounds().size();i++){
+            playGroundModel.add(i,AdministratorManager.getAllPlaygrounds().get(i));
+        }
+        //setInfo();
 
     }
-     public class playersListRenderer extends DefaultListCellRenderer {
+  
+    public AdminProfile(Adminstrator admin) {
+         initComponents();
+         LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+         playgroundList.setCellRenderer(new PlaygroundListRenderer());
+        for(int i=0;i<AdministratorManager.getAllPlaygrounds().size();i++){
+            playGroundModel.add(i,AdministratorManager.getAllPlaygrounds().get(i));
+        }
+      
+    }
+    public class PlaygroundListRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -84,26 +101,17 @@ public class AdminProfile extends javax.swing.JFrame {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(
                     list, value, index, isSelected, cellHasFocus);
-            Image image = new ImageIcon(((Player)value).getPhotoLink()).getImage();
+            Image image = new ImageIcon("playgroundPhotos\\" +((Playground)value).getName()+".jpg").getImage();
             Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             label.setIcon(new ImageIcon(newimg));
             label.setHorizontalTextPosition(JLabel.RIGHT);
-            if(!((Player)value).hasTeam())
+            if(value!=null&&((Playground)value).isApproved())
                 label.setBackground(Color.GREEN);
             else
                  label.setBackground(Color.RED);
-            setText(((Player)value).getUserName());
+            setText(((Playground)value).getName());
             return label;
         }
-    }
-    public AdminProfile(Player player) {
-        initComponents();
-        this.player = player;
-        LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        playersList.setCellRenderer(new playersListRenderer());
-
-        setInfo();
-
     }
     
     
@@ -117,261 +125,160 @@ public class AdminProfile extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPane = new javax.swing.JTabbedPane();
-        profilePane = new javax.swing.JPanel();
-        playerPhoto = new javax.swing.JLabel();
-        playerNameLabel = new javax.swing.JLabel();
-        playerAddressLabel = new javax.swing.JLabel();
-        playerPhoneNumLabel = new javax.swing.JLabel();
-        playerNameField = new javax.swing.JTextField();
-        playerPhoneNumField = new javax.swing.JTextField();
-        playerAddressField = new javax.swing.JTextField();
-        playerEmailField = new javax.swing.JTextField();
-        playerEmailLabel = new javax.swing.JLabel();
-        choosePhotoButton = new javax.swing.JButton();
-        EditButton = new javax.swing.JButton();
-        browsePlagroundButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
-        teamPane = new javax.swing.JPanel();
-        playerEmailField1 = new javax.swing.JTextField();
-        playerEmailLabel1 = new javax.swing.JLabel();
-        inviteButton = new javax.swing.JButton();
-        teamNameField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        playgroundsPanel = new javax.swing.JPanel();
+        PlaygroudsPane = new javax.swing.JPanel();
         LeftPane = new javax.swing.JScrollPane();
-        playersList = new javax.swing.JList<>();
-        addPlayerButton = new javax.swing.JButton();
-        creatTeamButton = new javax.swing.JButton();
+        playgroundList = new javax.swing.JList<>();
+        RightPane = new javax.swing.JPanel();
+        playgroundImage = new javax.swing.JLabel();
+        playgroundNameLabel = new javax.swing.JLabel();
+        playgroundAddressLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        playgrounDescriptionTextArea = new javax.swing.JTextArea();
+        descriptionLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        addressLabel = new javax.swing.JLabel();
+        approveButton = new javax.swing.JButton();
+        priceLabelField = new javax.swing.JLabel();
+        playgroindPriceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        playerPhoto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-
-        playerNameLabel.setLabelFor(playerNameField);
-        playerNameLabel.setText("Name: ");
-
-        playerAddressLabel.setLabelFor(playerAddressField);
-        playerAddressLabel.setText("Address:");
-
-        playerPhoneNumLabel.setText("Phone Number:");
-
-        playerNameField.setEditable(false);
-        playerNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerNameFieldActionPerformed(evt);
-            }
-        });
-
-        playerPhoneNumField.setEditable(false);
-        playerPhoneNumField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerPhoneNumFieldActionPerformed(evt);
-            }
-        });
-
-        playerAddressField.setEditable(false);
-        playerAddressField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerAddressFieldActionPerformed(evt);
-            }
-        });
-
-        playerEmailField.setEditable(false);
-        playerEmailField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerEmailFieldActionPerformed(evt);
-            }
-        });
-
-        playerEmailLabel.setLabelFor(playerNameField);
-        playerEmailLabel.setText("Email");
-
-        choosePhotoButton.setText("choose photo");
-        choosePhotoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choosePhotoButtonActionPerformed(evt);
-            }
-        });
-
-        EditButton.setText("Edit");
-        EditButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditButtonActionPerformed(evt);
-            }
-        });
-
-        browsePlagroundButton.setText("Browse playgrounds");
-        browsePlagroundButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browsePlagroundButtonActionPerformed(evt);
-            }
-        });
-
-        logoutButton.setText("Log out");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout profilePaneLayout = new javax.swing.GroupLayout(profilePane);
-        profilePane.setLayout(profilePaneLayout);
-        profilePaneLayout.setHorizontalGroup(
-            profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePaneLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(choosePhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(playerPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerPhoneNumLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(playerPhoneNumField)
-                    .addComponent(playerNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerEmailField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerAddressField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(browsePlagroundButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(profilePaneLayout.createSequentialGroup()
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        profilePaneLayout.setVerticalGroup(
-            profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profilePaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(profilePaneLayout.createSequentialGroup()
-                        .addComponent(playerPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(choosePhotoButton))
-                    .addGroup(profilePaneLayout.createSequentialGroup()
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerNameLabel)
-                            .addComponent(playerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerEmailLabel)
-                            .addComponent(playerEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerAddressLabel)
-                            .addComponent(playerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerPhoneNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerPhoneNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(browsePlagroundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        mainPane.addTab("Profile", profilePane);
-
-        playerEmailField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerEmailField1ActionPerformed(evt);
-            }
-        });
-
-        playerEmailLabel1.setText("Usename");
-
-        inviteButton.setText("Send Email");
-
-        teamNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teamNameFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Team Name");
-
-        playersList.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        playersList.setModel(playersModel);
-        playersList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        playersList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        playersList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        playgroundList.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        playgroundList.setModel(playGroundModel);
+        playgroundList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        playgroundList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        playgroundList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                playersListValueChanged(evt);
+                playgroundListValueChanged(evt);
             }
         });
-        LeftPane.setViewportView(playersList);
+        LeftPane.setViewportView(playgroundList);
 
-        addPlayerButton.setText("Add");
-        addPlayerButton.addActionListener(new java.awt.event.ActionListener() {
+        playgroundImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        playgrounDescriptionTextArea.setEditable(false);
+        playgrounDescriptionTextArea.setColumns(20);
+        playgrounDescriptionTextArea.setLineWrap(true);
+        playgrounDescriptionTextArea.setRows(5);
+        jScrollPane2.setViewportView(playgrounDescriptionTextArea);
+
+        descriptionLabel.setText("Description");
+
+        nameLabel.setText("Name: ");
+
+        addressLabel.setText("Address: ");
+
+        approveButton.setText("Approve");
+        approveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addPlayerButtonActionPerformed(evt);
+                approveButtonActionPerformed(evt);
             }
         });
 
-        creatTeamButton.setText("creat Team");
-        creatTeamButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creatTeamButtonActionPerformed(evt);
-            }
-        });
+        playgroindPriceLabel.setText("Price:");
 
-        javax.swing.GroupLayout teamPaneLayout = new javax.swing.GroupLayout(teamPane);
-        teamPane.setLayout(teamPaneLayout);
-        teamPaneLayout.setHorizontalGroup(
-            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
+        javax.swing.GroupLayout RightPaneLayout = new javax.swing.GroupLayout(RightPane);
+        RightPane.setLayout(RightPaneLayout);
+        RightPaneLayout.setHorizontalGroup(
+            RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RightPaneLayout.createSequentialGroup()
+                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(RightPaneLayout.createSequentialGroup()
+                        .addComponent(playgroundImage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RightPaneLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(RightPaneLayout.createSequentialGroup()
+                                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(addressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(playgroindPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(RightPaneLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        RightPaneLayout.setVerticalGroup(
+            RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RightPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(playerEmailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playgroundImage, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(RightPaneLayout.createSequentialGroup()
+                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(playerEmailField1)
-                            .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(creatTeamButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(priceLabelField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playgroindPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(inviteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
-        );
-        teamPaneLayout.setVerticalGroup(
-            teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerEmailField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerEmailLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addPlayerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addComponent(LeftPane, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inviteButton)
-                    .addComponent(creatTeamButton))
-                .addGap(40, 40, 40))
+                        .addComponent(descriptionLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        mainPane.addTab("Team", teamPane);
+        javax.swing.GroupLayout PlaygroudsPaneLayout = new javax.swing.GroupLayout(PlaygroudsPane);
+        PlaygroudsPane.setLayout(PlaygroudsPaneLayout);
+        PlaygroudsPaneLayout.setHorizontalGroup(
+            PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 718, Short.MAX_VALUE)
+            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PlaygroudsPaneLayout.createSequentialGroup()
+                    .addComponent(LeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 536, Short.MAX_VALUE)))
+            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlaygroudsPaneLayout.createSequentialGroup()
+                    .addGap(0, 216, Short.MAX_VALUE)
+                    .addComponent(RightPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        PlaygroudsPaneLayout.setVerticalGroup(
+            PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 329, Short.MAX_VALUE)
+            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(LeftPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(RightPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout playgroundsPanelLayout = new javax.swing.GroupLayout(playgroundsPanel);
+        playgroundsPanel.setLayout(playgroundsPanelLayout);
+        playgroundsPanelLayout.setHorizontalGroup(
+            playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 718, Short.MAX_VALUE)
+            .addGroup(playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(playgroundsPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PlaygroudsPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        playgroundsPanelLayout.setVerticalGroup(
+            playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+            .addGroup(playgroundsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(playgroundsPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PlaygroudsPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        mainPane.addTab("tab1", playgroundsPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -387,166 +294,24 @@ public class AdminProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void choosePhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePhotoButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                selectPhoto(Paths.get(selectedFile.getAbsolutePath()));
-            } catch (IOException ex) {
-                Logger.getLogger(PlayerProfile.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_choosePhotoButtonActionPerformed
-
-    private void playerEmailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerEmailFieldActionPerformed
-
-    private void playerAddressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerAddressFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerAddressFieldActionPerformed
-
-    private void playerPhoneNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerPhoneNumFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerPhoneNumFieldActionPerformed
-
-    private void playerNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerNameFieldActionPerformed
-
-    private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
-        //flip the flag 
-        editMode = !editMode;
-        if (editMode) {
-            playerAddressField.setEditable(true);
-            playerEmailField.setEditable(true);
-            playerNameField.setEditable(true);
-            playerPhoneNumField.setEditable(true);
-            choosePhotoButton.setVisible(true);
-            EditButton.setText("Save");
-        } else {
-            boolean isAllValid = true;
-            playerAddressLabel.setForeground(Color.GREEN);
-            playerEmailLabel.setForeground(Color.GREEN);
-            playerNameLabel.setForeground(Color.GREEN);
-            playerPhoneNumLabel.setForeground(Color.GREEN);
-
-            EmailValidator emailValidator = EmailValidator.getInstance();
-            if (!emailValidator.isValid(playerEmailField.getText())) {
-                playerEmailLabel.setForeground(Color.red);
-                isAllValid = false;
-            }
-            if (playerNameField.getText().isBlank()) {
-                isAllValid = false;
-                playerNameLabel.setForeground(Color.red);
-            } else {
-                for (int i = 0; i < playerNameField.getText().length(); ++i) {
-                    if (!Character.isLetter(playerNameField.getText().charAt(i)) && playerNameField.getText().charAt(i) != ' ') {
-
-                        isAllValid = false;
-                        playerNameLabel.setForeground(Color.red);
-                        break;
-                    }
-                }
-            }
-            if (playerAddressField.getText().isBlank()) {
-                isAllValid = false;
-                playerAddressLabel.setForeground(Color.red);
-            }
-            try {
-                Double.parseDouble(playerPhoneNumField.getText());
-                isAllValid = isAllValid && playerPhoneNumField.getText().charAt(0) == '0' && playerPhoneNumField.getText().length() == 11;
-            } catch (NumberFormatException e) {
-                isAllValid = false;
-                playerPhoneNumLabel.setForeground(Color.RED);
-            }
-            if (isAllValid) {
-                //checking the uniquness of the  phoneNumber , Email 
-                if (UserManger.getUserbyEmail(playerEmailField.getText()) != player &&  UserManger.getUserbyEmail(playerEmailField.getText()) != null) {
-                    JOptionPane.showMessageDialog(null, "This email is already in use", "Fail", JOptionPane.INFORMATION_MESSAGE);
-                    playerEmailLabel.setForeground(Color.RED);
-                } else if (UserManger.getUserByPhone(playerPhoneNumField.getText()) != player && UserManger.getUserByPhone(playerPhoneNumField.getText()) != null) {
-                    JOptionPane.showMessageDialog(null, "This Phone number is already in use", "Fail", JOptionPane.INFORMATION_MESSAGE);
-                    playerPhoneNumLabel.setForeground(Color.RED);
-                } else {
-                    /// allvalid and the data is unique :
-                    //update
-                    player.setAddress(playerAddressField.getText());
-                    player.setName(playerNameField.getText());
-                    player.setPhoneNumber(playerPhoneNumField.getText());
-                    player.setEmail(playerEmailField.getText());
-                    playerAddressField.setEditable(false);
-                    playerEmailField.setEditable(false);
-                    playerNameField.setEditable(false);
-                    playerPhoneNumField.setEditable(false);
-                    choosePhotoButton.setVisible(false);
-                    EditButton.setText("Edit");
-                    editMode=false;
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "All data must be Valid", "Fail", JOptionPane.INFORMATION_MESSAGE);
-                editMode = true;
-                
-            }
-
-            
-
-        }
-    }//GEN-LAST:event_EditButtonActionPerformed
-
-    private void browsePlagroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsePlagroundButtonActionPerformed
-        // TODO add your handling code here:
-        BookingPage bookingPage = new BookingPage(player);
-        this.dispose();
-        bookingPage.setVisible(true);
-    }//GEN-LAST:event_browsePlagroundButtonActionPerformed
-
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // TODO add your handling code here:
-        UserMainForm loginFrom = new UserMainForm();
-        loginFrom.setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
-    private void addPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerButtonActionPerformed
-        // TODO add your handling code here:
-        String email= playerEmailField1.getText();
-
-        for(Player player : DB.DatabaseSimulator.getPlayers()){
-            if (player.getEmail().equals(email)) {
-                for(int i=0 ;i < playersModel.getSize();i++){
-                    if(player.equals(playersModel.getElementAt(i)))
-                    return;
-                }
-                playersModel.addElement(player);
-            }
-        }
-    }//GEN-LAST:event_addPlayerButtonActionPerformed
-
-    private void playersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playersListValueChanged
+    private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_playersListValueChanged
+        Image image = new ImageIcon("playgroundPhotos\\" +((Playground)playgroundList.getSelectedValue()).getName()+".jpg").getImage();
+            Image newimg = image.getScaledInstance(playgroundImage.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            playgroundImage.setIcon(new ImageIcon(newimg) );
+            priceLabelField.setText(Double.toString(playgroundList.getSelectedValue().getDefaultPricePerHour()));
+            playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
+            playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
+            playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
+    }//GEN-LAST:event_playgroundListValueChanged
 
-    private void teamNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_teamNameFieldActionPerformed
+    private void approveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveButtonActionPerformed
+        System.out.println(playgroundList.getSelectedValue());
+        playgroundList.getSelectedValue().setApproved(true);
+        System.out.println(playgroundList.getSelectedValue());
 
-    private void playerEmailField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_playerEmailField1ActionPerformed
-
-    private void creatTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatTeamButtonActionPerformed
-        // TODO add your handling code here:
-        Team team = new Team(teamNameField.getText());
-        for(var obj : playersModel.toArray())
-            team.addMember((Player)obj);
-    }//GEN-LAST:event_creatTeamButtonActionPerformed
+    }//GEN-LAST:event_approveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,6 +322,7 @@ public class AdminProfile extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        DatabaseSimulator.init();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -565,51 +331,43 @@ public class AdminProfile extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            //java.util.logging.Logger.getLogger(PlayerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerProfile().setVisible(true);
+                new AdminProfile().setVisible(true);
             }
         });
     }
 
-   DefaultListModel playersModel= new DefaultListModel();
 
+    DefaultListModel playGroundModel= new DefaultListModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EditButton;
     private javax.swing.JScrollPane LeftPane;
-    private javax.swing.JButton addPlayerButton;
-    private javax.swing.JButton browsePlagroundButton;
-    private javax.swing.JButton choosePhotoButton;
-    private javax.swing.JButton creatTeamButton;
-    private javax.swing.JButton inviteButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton logoutButton;
+    private javax.swing.JPanel PlaygroudsPane;
+    private javax.swing.JPanel RightPane;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JButton approveButton;
+    private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane mainPane;
-    private javax.swing.JTextField playerAddressField;
-    private javax.swing.JLabel playerAddressLabel;
-    private javax.swing.JTextField playerEmailField;
-    private javax.swing.JTextField playerEmailField1;
-    private javax.swing.JLabel playerEmailLabel;
-    private javax.swing.JLabel playerEmailLabel1;
-    private javax.swing.JTextField playerNameField;
-    private javax.swing.JLabel playerNameLabel;
-    private javax.swing.JTextField playerPhoneNumField;
-    private javax.swing.JLabel playerPhoneNumLabel;
-    private javax.swing.JLabel playerPhoto;
-    private javax.swing.JList<Player> playersList;
-    private javax.swing.JPanel profilePane;
-    private javax.swing.JTextField teamNameField;
-    private javax.swing.JPanel teamPane;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel playgroindPriceLabel;
+    private javax.swing.JTextArea playgrounDescriptionTextArea;
+    private javax.swing.JLabel playgroundAddressLabel;
+    private javax.swing.JLabel playgroundImage;
+    private javax.swing.JList<Playground> playgroundList;
+    private javax.swing.JLabel playgroundNameLabel;
+    private javax.swing.JPanel playgroundsPanel;
+    private javax.swing.JLabel priceLabelField;
     // End of variables declaration//GEN-END:variables
 }
