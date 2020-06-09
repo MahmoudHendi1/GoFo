@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -141,6 +142,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         descriptionArea = new javax.swing.JTextArea();
         priceField = new javax.swing.JTextField();
         PriceLabel = new javax.swing.JLabel();
+        fromComboBox = new javax.swing.JComboBox<>();
+        toComboBox = new javax.swing.JComboBox<>();
+        timeLabel = new javax.swing.JLabel();
+        fromLabel = new javax.swing.JLabel();
+        toLabel = new javax.swing.JLabel();
         MainPane = new javax.swing.JTabbedPane();
         profilePane = new javax.swing.JPanel();
         playgroundOwnerProfilePhoto = new javax.swing.JLabel();
@@ -221,6 +227,18 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
 
         PriceLabel.setText("Price:");
 
+        fromComboBox.setModel(time);
+
+        toComboBox.setModel(time);
+
+        timeLabel.setText("Available Time");
+
+        fromLabel.setLabelFor(fromComboBox);
+        fromLabel.setText("From");
+
+        toLabel.setLabelFor(toComboBox);
+        toLabel.setText("To");
+
         javax.swing.GroupLayout addPlaygroundPaneLayout = new javax.swing.GroupLayout(addPlaygroundPane);
         addPlaygroundPane.setLayout(addPlaygroundPaneLayout);
         addPlaygroundPaneLayout.setHorizontalGroup(
@@ -230,13 +248,9 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                 .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playgroundPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(choosePhotoButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
-                        .addComponent(descriptionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(descriptionArea))
-                    .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addressLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,8 +259,24 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                             .addComponent(AddressField)
-                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                    .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descriptionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(descriptionArea)
+                            .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
+                                .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(fromLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fromComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 85, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(toComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(toLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(44, 44, 44))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addPlaygroundPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,8 +306,21 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descriptionLabel1)
-                            .addComponent(descriptionArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                            .addComponent(descriptionArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addPlaygroundPaneLayout.createSequentialGroup()
+                                .addComponent(timeLabel)
+                                .addGap(10, 10, 10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addPlaygroundPaneLayout.createSequentialGroup()
+                                .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fromLabel)
+                                    .addComponent(toLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(addPlaygroundPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addComponent(addButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -466,7 +509,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightPaneLayout.createSequentialGroup()
                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 418, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightPaneLayout.createSequentialGroup()
                 .addComponent(playgroundImage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,7 +530,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                     .addGroup(RightPaneLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         RightPaneLayout.setVerticalGroup(
             RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,7 +554,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addComponent(descriptionLabel)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -520,23 +563,19 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         PlaygroudsPane.setLayout(PlaygroudsPaneLayout);
         PlaygroudsPaneLayout.setHorizontalGroup(
             PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlaygroudsPaneLayout.createSequentialGroup()
+                .addGap(0, 207, Short.MAX_VALUE)
+                .addComponent(RightPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PlaygroudsPaneLayout.createSequentialGroup()
                     .addComponent(LeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 536, Short.MAX_VALUE)))
-            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlaygroudsPaneLayout.createSequentialGroup()
-                    .addGap(0, 216, Short.MAX_VALUE)
-                    .addComponent(RightPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         PlaygroudsPaneLayout.setVerticalGroup(
             PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 329, Short.MAX_VALUE)
+            .addComponent(RightPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(LeftPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
-            .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(RightPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MainPane.addTab("Playgrounds", PlaygroudsPane);
@@ -699,6 +738,9 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_nameFieldActionPerformed
 
     private void addButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton1ActionPerformed
+        System.out.println(toComboBox.getSelectedItem());
+        System.out.println(fromComboBox.getSelectedItem());
+        
         String playgroundName =nameField.getText();
         System.out.println("addbutoon 11");;
         for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
@@ -814,6 +856,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private boolean editMode = false;
     DefaultListModel playGroundModel= new DefaultListModel();
     private String pathPhoto="";
+    DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressField;
     private javax.swing.JButton EditButton;
@@ -834,6 +877,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JTextArea descriptionArea;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel descriptionLabel1;
+    private javax.swing.JComboBox<Integer> fromComboBox;
+    private javax.swing.JLabel fromLabel;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutButton;
     private javax.swing.JTextField nameField;
@@ -858,5 +903,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private javax.swing.JTextField priceField;
     private javax.swing.JLabel priceLabelField;
     private javax.swing.JPanel profilePane;
+    private javax.swing.JLabel timeLabel;
+    private javax.swing.JComboBox<Integer> toComboBox;
+    private javax.swing.JLabel toLabel;
     // End of variables declaration//GEN-END:variables
 }
