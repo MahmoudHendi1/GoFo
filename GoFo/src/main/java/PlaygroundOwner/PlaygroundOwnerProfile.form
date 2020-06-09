@@ -37,53 +37,59 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="playgroundPhoto" min="-2" pref="196" max="-2" attributes="0"/>
-                          <Component id="choosePhotoButton1" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="addressLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="nameLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="PriceLabel" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="playgroundPhoto" min="-2" pref="196" max="-2" attributes="0"/>
+                                  <Component id="choosePhotoButton1" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nameField" pref="189" max="32767" attributes="0"/>
-                                  <Component id="AddressField" max="32767" attributes="0"/>
-                                  <Component id="priceField" pref="189" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="descriptionLabel1" min="-2" pref="72" max="-2" attributes="0"/>
-                                  <Component id="timeLabel" min="-2" pref="86" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="descriptionArea" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="fromLabel" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="fromComboBox" alignment="0" pref="85" max="32767" attributes="0"/>
-                                      </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="toComboBox" max="32767" attributes="0"/>
-                                          <Component id="toLabel" max="32767" attributes="0"/>
+                                          <Component id="addressLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="nameLabel1" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Component id="PriceLabel" min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="nameField" pref="189" max="32767" attributes="0"/>
+                                          <Component id="AddressField" max="32767" attributes="0"/>
+                                          <Component id="priceField" pref="189" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="descriptionLabel1" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <Component id="timeLabel" min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="descriptionArea" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="fromLabel" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="fromComboBox" alignment="0" pref="85" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="toComboBox" max="32767" attributes="0"/>
+                                                  <Component id="toLabel" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="backButton" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addButton2" min="-2" pref="181" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="addButton1" min="-2" pref="84" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -138,7 +144,10 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="106" max="32767" attributes="0"/>
-                      <Component id="addButton1" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="addButton2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="backButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -179,12 +188,12 @@
                 <Property name="text" type="java.lang.String" value="Address: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="addButton1">
+            <Component class="javax.swing.JButton" name="backButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Add "/>
+                <Property name="text" type="java.lang.String" value="BackButton"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="nameField">
@@ -262,6 +271,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="To"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="addButton2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="My playgrounds"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButton2ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -555,12 +572,8 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="addButton" min="-2" pref="84" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
                           <Component id="playgroundImage" min="-2" pref="196" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -580,9 +593,13 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" min="-2" pref="253" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="addButton" min="-2" pref="84" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="44" max="32767" attributes="0"/>
@@ -616,9 +633,9 @@
                                   <Component id="jScrollPane2" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="46" max="32767" attributes="0"/>
+                          <EmptySpace pref="30" max="32767" attributes="0"/>
                           <Component id="addButton" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

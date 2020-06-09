@@ -140,6 +140,7 @@ public class AdminProfile extends javax.swing.JFrame {
         approveButton = new javax.swing.JButton();
         priceLabelField = new javax.swing.JLabel();
         playgroindPriceLabel = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,13 +180,24 @@ public class AdminProfile extends javax.swing.JFrame {
 
         playgroindPriceLabel.setText("Price:");
 
+        logoutButton.setText("log out");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RightPaneLayout = new javax.swing.GroupLayout(RightPane);
         RightPane.setLayout(RightPaneLayout);
         RightPaneLayout.setHorizontalGroup(
             RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RightPaneLayout.createSequentialGroup()
-                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(RightPaneLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RightPaneLayout.createSequentialGroup()
                         .addComponent(playgroundImage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +243,9 @@ public class AdminProfile extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(RightPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(approveButton)
+                    .addComponent(logoutButton))
                 .addContainerGap())
         );
 
@@ -318,6 +332,12 @@ public class AdminProfile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_approveButtonActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        UserMainForm loginFrom = new UserMainForm();
+        loginFrom.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,6 +384,7 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton approveButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel playgroindPriceLabel;
     private javax.swing.JTextArea playgrounDescriptionTextArea;
