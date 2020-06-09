@@ -171,9 +171,14 @@ public class BookingPage extends javax.swing.JFrame {
 
         fromLabel.setText("From");
 
-        fromComboBox.setModel(time);
+        fromComboBox.setModel(OpenHours);
+        fromComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromComboBoxActionPerformed(evt);
+            }
+        });
 
-        toComboBox.setModel(time);
+        toComboBox.setModel(closeHours);
 
         toLabel.setText("To");
 
@@ -295,7 +300,17 @@ public class BookingPage extends javax.swing.JFrame {
             playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
             playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
             playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
-            
+
+            int OpeningHour=playgroundList.getSelectedValue().getOpeningHour() ;
+            int ClosingHour= playgroundList.getSelectedValue().getClosingHour();
+            OpenHours.removeAllElements();
+            closeHours.removeAllElements();
+      
+            for(int i=OpeningHour;i!=ClosingHour;i=(i+1)%24){
+            OpenHours.addElement((Integer)i);
+            closeHours.addElement((Integer)(i+1));
+            }
+
             
         
 
@@ -325,6 +340,20 @@ public class BookingPage extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void fromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromComboBoxActionPerformed
+        // TODO add your handling code here:
+            if(OpenHours.getSize()>1){
+            int OpeningHour=(int) fromComboBox.getSelectedItem() ;
+            int ClosingHour= playgroundList.getSelectedValue().getClosingHour();
+            closeHours.removeAllElements();
+
+            for(int i=OpeningHour;i!=ClosingHour;i=(i+1)%24){
+            closeHours.addElement((Integer)(i+1));
+            }
+            }
+
+    }//GEN-LAST:event_fromComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,7 +392,8 @@ public class BookingPage extends javax.swing.JFrame {
 
     DefaultListModel playGroundModel= new DefaultListModel();
     DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
-
+    DefaultComboBoxModel OpenHours=   new DefaultComboBoxModel<>(new Integer[] {});
+    DefaultComboBoxModel closeHours=   new DefaultComboBoxModel<>(new Integer[] {});
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressLabel;
     private javax.swing.JButton bookingButton;

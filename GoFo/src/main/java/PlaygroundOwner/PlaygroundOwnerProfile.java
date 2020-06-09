@@ -92,7 +92,9 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         
         for(int i=0;i<playgroundOwner.getPlaygroundsList().size();i++){
             playGroundModel.add(i,playgroundOwner.getPlaygroundsList().get(i));
+            
         }
+        
         
        setInfo();
  
@@ -228,6 +230,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         PriceLabel.setText("Price:");
 
         fromComboBox.setModel(time);
+        fromComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromComboBoxActionPerformed(evt);
+            }
+        });
 
         toComboBox.setModel(time);
 
@@ -738,11 +745,9 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_nameFieldActionPerformed
 
     private void addButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButton1ActionPerformed
-        System.out.println(toComboBox.getSelectedItem());
-        System.out.println(fromComboBox.getSelectedItem());
+        
         
         String playgroundName =nameField.getText();
-        System.out.println("addbutoon 11");;
         for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
             if(tmpPlayground.getName().equals(playgroundName)){
                 nameLabel1.setForeground(Color.red);
@@ -773,7 +778,11 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         }
         if(isAllright){
             Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
+            newPlayground.setOpeningHour((int) toComboBox.getSelectedItem());
+            newPlayground.setOpeningHour((int) fromComboBox.getSelectedItem());
+     
             PlaygroundOwnerManager.addPlayground(newPlayground, playgroundOwner);
+            
             if(playgroundPhoto.getIcon()!=null){
              playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
              Path source=Paths.get("playgroundPhotos/" +"dummy" + ".jpg");
@@ -818,6 +827,10 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_priceFieldActionPerformed
 
+    private void fromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fromComboBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -856,7 +869,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private boolean editMode = false;
     DefaultListModel playGroundModel= new DefaultListModel();
     private String pathPhoto="";
-    DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
+    DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressField;
     private javax.swing.JButton EditButton;
