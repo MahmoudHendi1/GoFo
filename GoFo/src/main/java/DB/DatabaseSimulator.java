@@ -32,11 +32,12 @@ import javax.swing.JOptionPane;
 public class DatabaseSimulator {
 /**
  * Arraylist of user and playground to store them
+ * is
  * 
  */
     private static ArrayList<User> usersList;
     private static ArrayList<Playground> playgroundsList;
-    private static boolean isInit = false;
+    private static boolean isInitialized = false;
     //private static ArrayList<PlayGround>;
 
     /**
@@ -54,8 +55,8 @@ public class DatabaseSimulator {
  * @return  user and null if the user is not found
  */
     public static User getUserbyPhone(String phone) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return null;
@@ -85,8 +86,10 @@ public class DatabaseSimulator {
         }*/
     }
 /**
- * This functions loads all the data (users, playgrounds) from the files and load so the data saved 
- * before becomes available, 
+ * This functions loads data from the file and load so the data saved 
+ * before becomes available, it used twice inside function initializeDatabase so 
+ * it loads the users and the playgrounds
+ * @see initializeDatabase
  * @param <T>
  * @param list
  * @param fileName
@@ -107,7 +110,13 @@ public class DatabaseSimulator {
         }
 
     }
-
+/**
+ * This function write on the file the new added users and playgrounds
+ * it is processed before the program terminates.
+ * @param list
+ * @param fileName
+ * @return  whether the writing process is succeeded or not
+ */
     public static boolean writeListToFile(ArrayList<?> list, String fileName) {
         try {
             FileOutputStream fout = new FileOutputStream(fileName);
@@ -121,17 +130,27 @@ public class DatabaseSimulator {
         }
 
     }
-
-    public static boolean init() {
+/**
+ * This function reads from the files and fills the list for both playgrounds
+ * and users
+ * @return whether the initialization process succeeded or not
+ */
+    public static boolean initializeDatabase() {
         usersList = fillListFromFile(usersList, "Users.txt");
         playgroundsList = fillListFromFile(playgroundsList, "Playgrounds.txt");
-        isInit = true;
+        isInitialized = true;
         return usersList != null || playgroundsList != null;
     }
-
+/**
+ * This function takes in username and password and returns the user of if the
+ * credentials given are correct. used in login
+ * @param username
+ * @param password
+ * @return  user
+ */
     public static User getUser(String username, String password) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return null;
@@ -144,10 +163,16 @@ public class DatabaseSimulator {
         return null;
 
     }
+    /**
+     * This function check if the user exists in the list by searching
+     * using the username
+     * @param username
+     * @return whether the user exists in the list or not
+     */
 
     public static boolean checkUserbyUserName(String username) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return false;
@@ -159,10 +184,15 @@ public class DatabaseSimulator {
         }
         return false;
     }
-
+/**
+ * This function check if the user exists in the list by searching
+ * using the email
+ * @param email
+ * @return whether the user exists in the list or not
+ */
     public static boolean checkUserbyEmail(String email) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return false;
@@ -174,10 +204,14 @@ public class DatabaseSimulator {
         }
         return false;
     }
+    /**
+     * This function adds the given user to the Arraylist
+     * @param user 
+     */
 
     public static void addUserToDB(User user) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             usersList = new ArrayList<User>();
@@ -186,7 +220,11 @@ public class DatabaseSimulator {
 
     }
 
-    ///used mainly for  testing
+    /**
+     * This function prints the Arraylist
+     * it is used mainly for testing
+     * @param popUp 
+     */
     public static void printArrayLists(int popUp) {
         System.out.println("called!");
         if (usersList != null) {
@@ -209,10 +247,15 @@ public class DatabaseSimulator {
         }
 
     }
-
+/**
+ * This function checks if the user is in list
+ * then deletes the user 
+ * @param username
+ * @return whether the user is deleted or not
+ */
     public static boolean deleteUserWithUsername(String username) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return false;
@@ -226,9 +269,14 @@ public class DatabaseSimulator {
         return false;
 
     }
+    /**
+     * This function adds a playground to the Arraylist of playgrounds
+     * @param playground
+     * @return whether the adding process succeeded or not
+     */
     public static boolean addplaygroundToDB(Playground playground){
-         if (!isInit) {
-            init();
+         if (!isInitialized) {
+            initializeDatabase();
         }
         if (playgroundsList == null) {
             return false;
@@ -236,6 +284,9 @@ public class DatabaseSimulator {
         playgroundsList.add(playground);
         return true;
     }
+    /**
+     * This functions resets the database
+     */
     public static void reset() {
         usersList.clear();
         playgroundsList.clear();
@@ -248,9 +299,14 @@ public class DatabaseSimulator {
         
 
     }
+    /**
+     * Gets the user from the list by his username
+     * @param username
+     * @return user if the user is found or NULL if not
+     */
     public static User getUserbyUsername(String username){
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return null;
@@ -262,8 +318,8 @@ public class DatabaseSimulator {
         
     }
     public static boolean checkUserbyUsername(String username) {
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (usersList == null) {
             return false;
@@ -275,7 +331,10 @@ public class DatabaseSimulator {
         }
         return false;
     }
-
+/**
+ * This function returns list of players
+ * @return 
+ */
     public static ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new  ArrayList<Player>();
         for( User user : usersList)
@@ -288,8 +347,8 @@ public class DatabaseSimulator {
         return playgroundsList;
     }
     public static ArrayList<Playground> getApprovedPlaygrounds(){
-        if (!isInit) {
-            init();
+        if (!isInitialized) {
+            initializeDatabase();
         }
         if (playgroundsList == null) {
             return null;
