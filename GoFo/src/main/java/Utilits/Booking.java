@@ -12,10 +12,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
+ *Booking is an entity that describes the details of the action that a player
+ * takes to book a playground
  * @author ShawkyDev
+ * @version 1.0
+ * @since 9/6/2020
+ * 
  */
 public class Booking implements Serializable{
+    
     private static final long serialVersionUID = 2L;
     private Date date;
     private Player booker;
@@ -33,7 +38,10 @@ public class Booking implements Serializable{
     }
     
     public boolean isPlayed(){
-        //comparing current dat to booking date+duration [end date].
+        /**comparing current date to booking date+duration [end date].
+         * 
+         * @return whether the booking has been played or not
+         */
         Date end_date  = new Date(date.getTime());
         end_date.setHours(end_date.getHours()+DuratoinInHours);
         return new Date().after(end_date);

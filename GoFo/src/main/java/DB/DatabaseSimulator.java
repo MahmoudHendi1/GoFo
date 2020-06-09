@@ -21,21 +21,38 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *The DatabaseSimulator simulates the database by having an array list
+ * of users and playground to be saved persistently, while in fact we write and read
+ * from files
+ * 
  * @author ShawkyDev
+ * @version 1.0
+ * @since 9/6/2020
  */
 public class DatabaseSimulator {
-
+/**
+ * Arraylist of user and playground to store them
+ * 
+ */
     private static ArrayList<User> usersList;
     private static ArrayList<Playground> playgroundsList;
     private static boolean isInit = false;
     //private static ArrayList<PlayGround>;
 
+    /**
+     * 
+     * @return whether the writing on the file process is succeeded 
+     */
     public static boolean save() {
         return writeListToFile(usersList, "Users.txt") && writeListToFile(playgroundsList, "Playgrounds.txt");
 
     }
-
+/**
+ * This function searches the user in the file by his phone number
+ * and returns the user if exists 
+ * @param phone
+ * @return  user and null if the user is not found
+ */
     public static User getUserbyPhone(String phone) {
         if (!isInit) {
             init();
@@ -48,6 +65,11 @@ public class DatabaseSimulator {
                 return user;
         return null;
     }
+    /**
+     * This function deletes playground from the file
+     * @param playground
+     * @return whether the deletion process succeeded or not 
+     */
 
     public static boolean deletePlayground(Playground playground) {
         return playgroundsList.remove(playground);
@@ -62,7 +84,14 @@ public class DatabaseSimulator {
             Logger.getLogger(DatabaseSimulator.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }
-
+/**
+ * This functions loads all the data (users, playgrounds) from the files and load so the data saved 
+ * before becomes available, 
+ * @param <T>
+ * @param list
+ * @param fileName
+ * @return users list and playgrounds list
+ */
     public static <T> ArrayList<T> fillListFromFile(ArrayList<T> list, String fileName) {
         try {
             FileInputStream fin = new FileInputStream(fileName);
