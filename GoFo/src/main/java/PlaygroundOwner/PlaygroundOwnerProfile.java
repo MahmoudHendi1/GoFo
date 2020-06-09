@@ -94,8 +94,10 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             playGroundModel.add(i,playgroundOwner.getPlaygroundsList().get(i));
             
         }
+
         
-        
+        fromComboBox.setSelectedIndex(-1);
+        toComboBox.setSelectedIndex(-1);
        setInfo();
  
     }
@@ -229,14 +231,14 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
 
         PriceLabel.setText("Price:");
 
-        fromComboBox.setModel(time);
+        fromComboBox.setModel(time1);
         fromComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fromComboBoxActionPerformed(evt);
             }
         });
 
-        toComboBox.setModel(time);
+        toComboBox.setModel(time2);
 
         timeLabel.setText("Available Time");
 
@@ -733,6 +735,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
             playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
             playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
+          
+
 
     }//GEN-LAST:event_playgroundListValueChanged
 
@@ -749,9 +753,12 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         
         String playgroundName =nameField.getText();
         for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
-            if(tmpPlayground.getName().equals(playgroundName)){
+            if(tmpPlayground.getName().equals(playgroundName)||playgroundName.equals("")){
                 nameLabel1.setForeground(Color.red);
                 return;
+            }else{
+                nameLabel1.setForeground(Color.green);
+
             }
         }
         
@@ -766,15 +773,31 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         Boolean isAllright=true;
         if(AddressField.getText().equals("")){
             isAllright=false;
-            addressLabel.setForeground(Color.red);
+            addressLabel1.setForeground(Color.red);
+        }else{
+            addressLabel1.setForeground(Color.green);
+
         }
         if(descriptionArea.getText().equals("")){
             isAllright=false;
             descriptionLabel1.setForeground(Color.red);
+        }else{
+            descriptionLabel1.setForeground(Color.green);
+
         }
         if(price <0){
             isAllright=false;
             PriceLabel.setForeground(Color.red);
+        }else{
+            timeLabel.setForeground(Color.green);
+
+        }
+        if(fromComboBox.getSelectedIndex() == -1 ||toComboBox.getSelectedIndex() == -1){
+            isAllright=false;
+            timeLabel.setForeground(Color.red);
+        }else{
+            timeLabel.setForeground(Color.green);
+
         }
         if(isAllright){
             Playground newPlayground =  new Playground(playgroundName, AddressField.getText(), descriptionArea.getText(), price);
@@ -857,7 +880,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -869,7 +892,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private boolean editMode = false;
     DefaultListModel playGroundModel= new DefaultListModel();
     private String pathPhoto="";
-    DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
+    DefaultComboBoxModel time1=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
+    DefaultComboBoxModel time2=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressField;
