@@ -245,12 +245,12 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="playerEmailLabel1" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="playerEmailField1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="usernamelField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="teamNameField" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -282,8 +282,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="playerEmailField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="playerEmailLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernamelField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="usernameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="addPlayerButton" min="-2" max="-2" attributes="0"/>
@@ -304,12 +304,15 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="playerEmailField1">
+            <Component class="javax.swing.JTextField" name="usernamelField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playerEmailField1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernamelFieldActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="playerEmailLabel1">
+            <Component class="javax.swing.JLabel" name="usernameLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usename"/>
               </Properties>
@@ -320,6 +323,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="teamNameField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teamNameFieldActionPerformed"/>
               </Events>
@@ -363,6 +369,7 @@
             <Component class="javax.swing.JButton" name="addPlayerButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPlayerButtonActionPerformed"/>
@@ -370,7 +377,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="creatTeamButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="creat Team"/>
+                <Property name="text" type="java.lang.String" value="new Team"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creatTeamButtonActionPerformed"/>

@@ -134,8 +134,8 @@ public class PlayerProfile extends javax.swing.JFrame {
         browsePlagroundButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         teamPane = new javax.swing.JPanel();
-        playerEmailField1 = new javax.swing.JTextField();
-        playerEmailLabel1 = new javax.swing.JLabel();
+        usernamelField = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
         inviteButton = new javax.swing.JButton();
         teamNameField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -279,16 +279,18 @@ public class PlayerProfile extends javax.swing.JFrame {
 
         mainPane.addTab("Profile", profilePane);
 
-        playerEmailField1.addActionListener(new java.awt.event.ActionListener() {
+        usernamelField.setEditable(false);
+        usernamelField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playerEmailField1ActionPerformed(evt);
+                usernamelFieldActionPerformed(evt);
             }
         });
 
-        playerEmailLabel1.setText("Usename");
+        usernameLabel.setText("Usename");
 
         inviteButton.setText("Send Email");
 
+        teamNameField.setEditable(false);
         teamNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 teamNameFieldActionPerformed(evt);
@@ -309,13 +311,14 @@ public class PlayerProfile extends javax.swing.JFrame {
         LeftPane.setViewportView(playersList);
 
         addPlayerButton.setText("Add");
+        addPlayerButton.setEnabled(false);
         addPlayerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPlayerButtonActionPerformed(evt);
             }
         });
 
-        creatTeamButton.setText("creat Team");
+        creatTeamButton.setText("new Team");
         creatTeamButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creatTeamButtonActionPerformed(evt);
@@ -331,11 +334,11 @@ public class PlayerProfile extends javax.swing.JFrame {
                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(playerEmailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(playerEmailField1)
+                            .addComponent(usernamelField)
                             .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -359,8 +362,8 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerEmailField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerEmailLabel1))
+                            .addComponent(usernamelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addPlayerButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -517,17 +520,21 @@ public class PlayerProfile extends javax.swing.JFrame {
 
     private void addPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerButtonActionPerformed
         // TODO add your handling code here:
-        String email= playerEmailField1.getText();
+        String playerUsername= usernamelField.getText();
 
         for(Player player : DB.DatabaseSimulator.getPlayers()){
-            if (player.getEmail().equals(email)) {
+            if (player.getUserName().equals(playerUsername)) {
                 for(int i=0 ;i < playersModel.getSize();i++){
                     if(player.equals(playersModel.getElementAt(i)))
+                    usernameLabel.setForeground(Color.red);
                     return;
                 }
+                usernameLabel.setForeground(Color.green);
                 playersModel.addElement(player);
+                return;
             }
         }
+        usernameLabel.setForeground(Color.red);
     }//GEN-LAST:event_addPlayerButtonActionPerformed
 
     private void playersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playersListValueChanged
@@ -539,15 +546,28 @@ public class PlayerProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_teamNameFieldActionPerformed
 
-    private void playerEmailField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerEmailField1ActionPerformed
+    private void usernamelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernamelFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_playerEmailField1ActionPerformed
-
+    }//GEN-LAST:event_usernamelFieldActionPerformed
+    private boolean isCreatingTeam = false;
     private void creatTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatTeamButtonActionPerformed
         // TODO add your handling code here:
+        isCreatingTeam = !isCreatingTeam;
+        if(isCreatingTeam){
+         creatTeamButton.setText("Create!");
+         teamNameField.setEditable(true);
+         usernamelField.setEditable(true);
+         addPlayerButton.setEnabled(true);
         Team team = new Team(teamNameField.getText());
         for(var obj : playersModel.toArray())
             team.addMember((Player)obj);
+        }else{
+         creatTeamButton.setText("new Team");
+         addPlayerButton.setEnabled(false);
+         teamNameField.setEditable(false);
+         usernamelField.setEditable(false);
+            
+        }
     }//GEN-LAST:event_creatTeamButtonActionPerformed
 
     /**
@@ -601,9 +621,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private javax.swing.JTextField playerAddressField;
     private javax.swing.JLabel playerAddressLabel;
     private javax.swing.JTextField playerEmailField;
-    private javax.swing.JTextField playerEmailField1;
     private javax.swing.JLabel playerEmailLabel;
-    private javax.swing.JLabel playerEmailLabel1;
     private javax.swing.JTextField playerNameField;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JTextField playerPhoneNumField;
@@ -613,5 +631,7 @@ public class PlayerProfile extends javax.swing.JFrame {
     private javax.swing.JPanel profilePane;
     private javax.swing.JTextField teamNameField;
     private javax.swing.JPanel teamPane;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JTextField usernamelField;
     // End of variables declaration//GEN-END:variables
 }
