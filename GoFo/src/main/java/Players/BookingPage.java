@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -121,6 +123,8 @@ public class BookingPage extends javax.swing.JFrame {
         DateChooser = new com.toedter.calendar.JDateChooser();
         nameField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        priceLabel1 = new javax.swing.JLabel();
+        playgroundPriceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,12 +132,23 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundList.setModel(playGroundModel);
         playgroundList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         playgroundList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        playgroundList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                playgroundListMouseClicked(evt);
+            }
+        });
         playgroundList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 playgroundListValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(playgroundList);
+
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         playgroundImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -210,6 +225,9 @@ public class BookingPage extends javax.swing.JFrame {
 
         jLabel3.setText("Addres:");
 
+        priceLabel1.setLabelFor(playgroundAddressLabel);
+        priceLabel1.setText("Price:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,11 +241,13 @@ public class BookingPage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(priceLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(playgroundNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(playgroundPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 57, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -284,11 +304,14 @@ public class BookingPage extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playgroundPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(descriptionLabel)
                         .addGap(1, 1, 1)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -374,7 +397,18 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         // TODO add your handling code here:
-
+        //var date = DateChooser.getDate();
+        int hour = (fromComboBox.getSelectedItem()!=null)?((Integer)fromComboBox.getSelectedItem()).intValue():-1;
+        int duration =(hour!=-1)? ((Integer)toComboBox.getSelectedItem()).intValue() - hour : -1;
+        Calendar calendar = null ;
+        if(DateChooser.getCalendar()!=null){
+        calendar = DateChooser.getCalendar() ;       
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        System.out.println("cal:" + calendar.getTime().toString());
+        }
+        
         double price = -1;
         try {
             price = Double.parseDouble(priceField.getText());
@@ -382,7 +416,7 @@ public class BookingPage extends javax.swing.JFrame {
             price = -1;
         }
 
-        var filteredPlaygrounds = GetFilteredPlayGrounds(addressField.getText(),nameField.getText(), price, null, 0);
+        var filteredPlaygrounds = GetFilteredPlaygrounds(addressField.getText(),nameField.getText(), price, (calendar!=null)?calendar.getTime():null, duration);
         playGroundModel.clear();
         System.out.println("here");
         for (var playground : filteredPlaygrounds) {
@@ -428,22 +462,36 @@ public class BookingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_addressFieldActionPerformed
 
     private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
-        PlayerProfile playerProfile = new PlayerProfile(this.player);
-        playerProfile.setVisible(true);
-        this.dispose();
+       
     }//GEN-LAST:event_bookingButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
-    private ArrayList<Playground> GetFilteredPlayGrounds(String location, String name, double price, Date available, int duration) {
+
+    private void playgroundListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playgroundListMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_playgroundListMouseClicked
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        playgroundList.clearSelection();
+        playgroundImage.setIcon(null);
+        playgroundNameLabel.setText("");
+        playgrounDescriptionTextArea.setText("");
+        playgroundAddressLabel.setText("");
+        playgroundPriceLabel.setText("");
+        
+        
+    }//GEN-LAST:event_jPanel1MouseClicked
+    private ArrayList<Playground> GetFilteredPlaygrounds(String location, String name, double price, Date available, int duration) {
         var playgrounds = DatabaseSimulator.getApprovedPlaygrounds();
         ArrayList<Playground> filtered = new ArrayList<Playground>();
         for (var playground : playgrounds) {
             if (name.isBlank() || playground.getName().toLowerCase().contains(name.toLowerCase())) {
                 if (location.isBlank() || playground.getAddress().toLowerCase().contains(location.toLowerCase())) {
                     if (price < 0 || playground.getDefaultPricePerHour() <= price) {
-                        if (available == null || playground.isAvailable(available, Math.max(1, duration))) {
+                        if (available == null || (playground.getOpeningHour()<=available.getHours()&&playground.isAvailable(available, Math.max(1, duration)) ) ) {
                             filtered.add(playground);
                         }
                     }
@@ -515,7 +563,9 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JLabel playgroundImage;
     private javax.swing.JList<Playground> playgroundList;
     private javax.swing.JLabel playgroundNameLabel;
+    private javax.swing.JLabel playgroundPriceLabel;
     private javax.swing.JTextField priceField;
+    private javax.swing.JLabel priceLabel1;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JComboBox<Integer> toComboBox;
     private javax.swing.JLabel toLabel;
