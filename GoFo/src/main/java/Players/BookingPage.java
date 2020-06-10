@@ -69,8 +69,10 @@ public class BookingPage extends javax.swing.JFrame {
         }
         OpenHours.removeAllElements();
         closeHours.removeAllElements();
+        if(DateChooser.getDate()==null)
+            DateChooser.setDate(new Date());
 
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 24; i++) {
             OpenHours.addElement((Integer) i);
             closeHours.addElement((Integer) (i));
         }
@@ -497,8 +499,10 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundPriceLabel.setText("");
         OpenHours.removeAllElements();
         closeHours.removeAllElements();
-
-        for (int i = 0; i < 25; i++) {
+        if(DateChooser.getDate()==null)
+            DateChooser.setDate(new Date());
+        
+        for (int i = 0; i < 24; i++) {
             OpenHours.addElement((Integer) i);
             closeHours.addElement((Integer) (i));
         }
