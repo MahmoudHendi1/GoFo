@@ -327,7 +327,7 @@ public class AdminProfile extends javax.swing.JFrame {
 
     private void approveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveButtonActionPerformed
         System.out.println(playgroundList.getSelectedValue());
-        playgroundList.getSelectedValue().setApproved(true);
+        AdministratorManager.approvePlayground(playgroundList.getSelectedValue());
         System.out.println(playgroundList.getSelectedValue());
 
     }//GEN-LAST:event_approveButtonActionPerformed

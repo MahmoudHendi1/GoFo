@@ -29,7 +29,9 @@ public class Player extends User{
     }
 
     public ArrayList<Booking> getBookings() {
-        return bookings;
+        if(bookings==null)
+            bookings = new ArrayList<Booking>();
+        return bookings ;
     }
 
     public void setBookings(ArrayList<Booking> bookings) {

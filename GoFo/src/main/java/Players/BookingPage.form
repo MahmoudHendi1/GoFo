@@ -183,8 +183,23 @@
                           <Component id="jScrollPane2" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="fromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="toLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="timeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="fromComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="toComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="DateChooser" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -199,21 +214,6 @@
                               <Component id="jLabel2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="priceField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="fromLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="toLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="timeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="fromComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="toComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="DateChooser" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>

@@ -6,6 +6,7 @@
 package Players;
 
 import DB.DatabaseSimulator;
+import Utilits.Booking;
 import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Component;
@@ -26,6 +27,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.xml.crypto.Data;
 
@@ -62,15 +64,16 @@ public class BookingPage extends javax.swing.JFrame {
         initComponents();
         jScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
-
+        bookingButton.setEnabled(false);
         var playgroundlist = DatabaseSimulator.getApprovedPlaygrounds();
         for (var playground : playgroundlist) {
             playGroundModel.addElement(playground);
         }
         OpenHours.removeAllElements();
         closeHours.removeAllElements();
-        if(DateChooser.getDate()==null)
+        if (DateChooser.getDate() == null) {
             DateChooser.setDate(new Date());
+        }
 
         for (int i = 0; i < 24; i++) {
             OpenHours.addElement((Integer) i);
@@ -78,7 +81,7 @@ public class BookingPage extends javax.swing.JFrame {
         }
         fromComboBox.setSelectedIndex(-1);
         toComboBox.setSelectedIndex(-1);
-        
+
     }
 
     public class PlaygroundListRenderer extends DefaultListCellRenderer {
@@ -323,7 +326,19 @@ public class BookingPage extends javax.swing.JFrame {
                         .addComponent(descriptionLabel)
                         .addGap(1, 1, 1)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fromLabel)
+                            .addComponent(toLabel)
+                            .addComponent(timeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,19 +350,7 @@ public class BookingPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fromLabel)
-                            .addComponent(toLabel)
-                            .addComponent(timeLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -377,6 +380,7 @@ public class BookingPage extends javax.swing.JFrame {
     private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
         // TODO add your handling code here:
+        bookingButton.setEnabled(true);
         if (playgroundList.getSelectedValue() == null) {
             return;
         }
@@ -387,7 +391,7 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundNameLabel.setText(playgroundList.getSelectedValue().getName());
         playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
         playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
-
+        playgroundPriceLabel.setText(playgroundList.getSelectedValue().getDefaultPricePerHour()+"");
         int OpeningHour = playgroundList.getSelectedValue().getOpeningHour();
         int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
         OpenHours.removeAllElements();
@@ -406,17 +410,17 @@ public class BookingPage extends javax.swing.JFrame {
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         // TODO add your handling code here:
         //var date = DateChooser.getDate();
-        int hour = (fromComboBox.getSelectedItem()!=null)?((Integer)fromComboBox.getSelectedItem()).intValue():-1;
-        int duration =(hour!=-1)? ((Integer)toComboBox.getSelectedItem()).intValue() - hour : -1;
-        Calendar calendar = null ;
-        if(DateChooser.getCalendar()!=null){
-        calendar = DateChooser.getCalendar() ;       
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        System.out.println("cal:" + calendar.getTime().toString());
+        int hour = (fromComboBox.getSelectedItem() != null) ? ((Integer) fromComboBox.getSelectedItem()).intValue() : -1;
+        int duration = (hour != -1) ? ((Integer) toComboBox.getSelectedItem()).intValue() - hour : -1;
+        Calendar calendar = null;
+        if (DateChooser.getCalendar() != null) {
+            calendar = DateChooser.getCalendar();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            System.out.println("cal:" + calendar.getTime().toString());
         }
-        
+
         double price = -1;
         try {
             price = Double.parseDouble(priceField.getText());
@@ -424,7 +428,7 @@ public class BookingPage extends javax.swing.JFrame {
             price = -1;
         }
 
-        var filteredPlaygrounds = GetFilteredPlaygrounds(addressField.getText(),nameField.getText(), price, (calendar!=null)?calendar.getTime():null, duration);
+        var filteredPlaygrounds = GetFilteredPlaygrounds(addressField.getText(), nameField.getText(), price, (calendar != null) ? calendar.getTime() : null, duration);
         playGroundModel.clear();
         System.out.println("here");
         for (var playground : filteredPlaygrounds) {
@@ -446,16 +450,16 @@ public class BookingPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (fromComboBox.getSelectedIndex() == -1) {
             toComboBox.setEnabled(false);
-        }else if(playgroundList.getSelectedIndex()==-1){ 
-                
-                int OpeningHour = (int) fromComboBox.getSelectedItem();
-                closeHours.removeAllElements();
-                for (int i = OpeningHour+1; i != OpeningHour; i = (i + 1) % 24) {
-                    closeHours.addElement((Integer) (i));
-                }
-                toComboBox.setEnabled(true);
+        } else if (playgroundList.getSelectedIndex() == -1) {
 
-        }else {
+            int OpeningHour = (int) fromComboBox.getSelectedItem();
+            closeHours.removeAllElements();
+            for (int i = OpeningHour + 1; i != OpeningHour; i = (i + 1) % 24) {
+                closeHours.addElement((Integer) (i));
+            }
+            toComboBox.setEnabled(true);
+
+        } else {
             if (OpenHours.getSize() > 1) {
                 int OpeningHour = (int) fromComboBox.getSelectedItem();
                 int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
@@ -478,7 +482,27 @@ public class BookingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_addressFieldActionPerformed
 
     private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
-       
+        if (toComboBox.getSelectedItem() == null || fromComboBox.getSelectedItem() == null || DateChooser.getDate() == null || playgroundList.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "missing Info!", "please specify start , end time", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            int hour = ((Integer) fromComboBox.getSelectedItem()).intValue() ;
+            int duration = ((Integer) toComboBox.getSelectedItem()).intValue() - hour ;
+            Calendar calendar = null;
+            if (DateChooser.getCalendar() != null) {
+                calendar = DateChooser.getCalendar();
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                Booking booking = PlayerManager.bookPlayground(playgroundList.getSelectedValue(), calendar.getTime(), duration, player);
+                if(booking == null){
+                     JOptionPane.showMessageDialog(null, "can't book this slot!", "error : couldn't book this slot!", JOptionPane.INFORMATION_MESSAGE);
+                     return ;
+                }
+                else{
+                     JOptionPane.showMessageDialog(null, "success", "Booked!", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_bookingButtonActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -487,11 +511,12 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void playgroundListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playgroundListMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_playgroundListMouseClicked
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         playgroundList.clearSelection();
+        bookingButton.setEnabled(false);
         playgroundImage.setIcon(null);
         playgroundNameLabel.setText("");
         playgrounDescriptionTextArea.setText("");
@@ -499,17 +524,18 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundPriceLabel.setText("");
         OpenHours.removeAllElements();
         closeHours.removeAllElements();
-        if(DateChooser.getDate()==null)
+        if (DateChooser.getDate() == null) {
             DateChooser.setDate(new Date());
-        
+        }
+
         for (int i = 0; i < 24; i++) {
             OpenHours.addElement((Integer) i);
             closeHours.addElement((Integer) (i));
         }
         fromComboBox.setSelectedIndex(-1);
         toComboBox.setSelectedIndex(-1);
-        
-        
+
+
     }//GEN-LAST:event_jPanel1MouseClicked
     private ArrayList<Playground> GetFilteredPlaygrounds(String location, String name, double price, Date available, int duration) {
         var playgrounds = DatabaseSimulator.getApprovedPlaygrounds();
@@ -518,7 +544,7 @@ public class BookingPage extends javax.swing.JFrame {
             if (name.isBlank() || playground.getName().toLowerCase().contains(name.toLowerCase())) {
                 if (location.isBlank() || playground.getAddress().toLowerCase().contains(location.toLowerCase())) {
                     if (price < 0 || playground.getDefaultPricePerHour() <= price) {
-                        if (available == null || (playground.getOpeningHour()<=available.getHours()&&playground.isAvailable(available, Math.max(1, duration)) ) ) {
+                        if (available == null || (playground.getOpeningHour() <= available.getHours() && playground.isAvailable(available, Math.max(1, duration)))) {
                             filtered.add(playground);
                         }
                     }

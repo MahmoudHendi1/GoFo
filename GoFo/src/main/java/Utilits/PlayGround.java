@@ -116,6 +116,8 @@ public class Playground implements Serializable{
     }
 
     public  ArrayList<Booking> getBookdeTimes() {
+        if(bookdesTimes==null)
+            bookdesTimes= new ArrayList<Booking>();
         return bookdesTimes;
     }
 
