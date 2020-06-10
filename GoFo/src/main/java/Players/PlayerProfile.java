@@ -470,7 +470,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
             if (isAllValid) {
                 //checking the uniquness of the  phoneNumber , Email 
-                if ((UserManger.getUserbyEmail(playerEmailField.getText()) != player ||  UserManger.getUserbyEmail(playerEmailField.getText()) != null) && (UserManger.getUserByPhone(playerPhoneNumField.getText())!=null || UserManger.getUserByPhone(playerPhoneNumField.getText())!=player)) {
+                if ((UserManger.getUserbyEmail(playerEmailField.getText()) != player &&  UserManger.getUserbyEmail(playerEmailField.getText()) != null) ){
                     JOptionPane.showMessageDialog(null, "This email is already in use", "Fail", JOptionPane.INFORMATION_MESSAGE);
                     playerEmailLabel.setForeground(Color.RED);
                 } else if (UserManger.getUserByPhone(playerPhoneNumField.getText()) != player && UserManger.getUserByPhone(playerPhoneNumField.getText()) != null) {
