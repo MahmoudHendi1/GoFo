@@ -391,7 +391,7 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundNameLabel.setText(playgroundList.getSelectedValue().getName());
         playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
         playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
-        playgroundPriceLabel.setText(playgroundList.getSelectedValue().getDefaultPricePerHour()+"");
+        playgroundPriceLabel.setText(playgroundList.getSelectedValue().getDefaultPricePerHour() + "");
         int OpeningHour = playgroundList.getSelectedValue().getOpeningHour();
         int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
         OpenHours.removeAllElements();
@@ -485,21 +485,26 @@ public class BookingPage extends javax.swing.JFrame {
         if (toComboBox.getSelectedItem() == null || fromComboBox.getSelectedItem() == null || DateChooser.getDate() == null || playgroundList.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "missing Info!", "please specify start , end time", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            int hour = ((Integer) fromComboBox.getSelectedItem()).intValue() ;
-            int duration = ((Integer) toComboBox.getSelectedItem()).intValue() - hour ;
+            int hour = ((Integer) fromComboBox.getSelectedItem()).intValue();
+            int duration = ((Integer) toComboBox.getSelectedItem()).intValue() - hour;
             Calendar calendar = null;
             if (DateChooser.getCalendar() != null) {
                 calendar = DateChooser.getCalendar();
                 calendar.set(Calendar.HOUR_OF_DAY, hour);
                 calendar.set(Calendar.MINUTE, 0);
                 calendar.set(Calendar.SECOND, 0);
-                Booking booking = PlayerManager.bookPlayground(playgroundList.getSelectedValue(), calendar.getTime(), duration, player);
-                if(booking == null){
-                     JOptionPane.showMessageDialog(null, "can't book this slot!", "error : couldn't book this slot!", JOptionPane.INFORMATION_MESSAGE);
-                     return ;
-                }
-                else{
-                     JOptionPane.showMessageDialog(null, "success", "Booked!", JOptionPane.INFORMATION_MESSAGE);
+                int responsecode = PlayerManager.isBookngPossible(playgroundList.getSelectedValue(), calendar.getTime(), duration, player);
+                if (responsecode == 1) {
+                    PlayerManager.bookPlayground(playgroundList.getSelectedValue(), calendar.getTime(), duration, player);
+                    JOptionPane.showMessageDialog(null, "success", "Booked!", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+
+                } else {
+                    if(responsecode == 10 )
+                    JOptionPane.showMessageDialog(null, "can't book a playground in the past \n try again after (or before :D) inventing the time machine  :D", "Did you invent the time machine ?", JOptionPane.INFORMATION_MESSAGE);
+                    if(responsecode == 15 )
+                    JOptionPane.showMessageDialog(null, "The playground is Booked at the smae date \ntry another date or playground :d ", "Already Booked slot!", JOptionPane.INFORMATION_MESSAGE);
+                    
                 }
             }
         }
