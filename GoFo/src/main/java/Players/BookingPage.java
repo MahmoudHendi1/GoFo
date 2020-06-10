@@ -67,7 +67,16 @@ public class BookingPage extends javax.swing.JFrame {
         for (var playground : playgroundlist) {
             playGroundModel.addElement(playground);
         }
+        OpenHours.removeAllElements();
+        closeHours.removeAllElements();
 
+        for (int i = 0; i < 25; i++) {
+            OpenHours.addElement((Integer) i);
+            closeHours.addElement((Integer) (i));
+        }
+        fromComboBox.setSelectedIndex(-1);
+        toComboBox.setSelectedIndex(-1);
+        
     }
 
     public class PlaygroundListRenderer extends DefaultListCellRenderer {
@@ -248,7 +257,7 @@ public class BookingPage extends javax.swing.JFrame {
                             .addComponent(playgroundAddressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(playgroundNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(playgroundPriceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addGap(0, 67, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -352,15 +361,12 @@ public class BookingPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -438,12 +444,20 @@ public class BookingPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (fromComboBox.getSelectedIndex() == -1) {
             toComboBox.setEnabled(false);
-        } else {
+        }else if(playgroundList.getSelectedIndex()==-1){ 
+                
+                int OpeningHour = (int) fromComboBox.getSelectedItem();
+                closeHours.removeAllElements();
+                for (int i = OpeningHour+1; i != OpeningHour; i = (i + 1) % 24) {
+                    closeHours.addElement((Integer) (i));
+                }
+                toComboBox.setEnabled(true);
+
+        }else {
             if (OpenHours.getSize() > 1) {
                 int OpeningHour = (int) fromComboBox.getSelectedItem();
                 int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
                 closeHours.removeAllElements();
-
                 for (int i = OpeningHour; i != ClosingHour; i = (i + 1) % 24) {
                     closeHours.addElement((Integer) (i + 1));
                 }
@@ -481,6 +495,15 @@ public class BookingPage extends javax.swing.JFrame {
         playgrounDescriptionTextArea.setText("");
         playgroundAddressLabel.setText("");
         playgroundPriceLabel.setText("");
+        OpenHours.removeAllElements();
+        closeHours.removeAllElements();
+
+        for (int i = 0; i < 25; i++) {
+            OpenHours.addElement((Integer) i);
+            closeHours.addElement((Integer) (i));
+        }
+        fromComboBox.setSelectedIndex(-1);
+        toComboBox.setSelectedIndex(-1);
         
         
     }//GEN-LAST:event_jPanel1MouseClicked
