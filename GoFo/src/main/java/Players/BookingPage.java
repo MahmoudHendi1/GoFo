@@ -321,6 +321,8 @@ public class BookingPage extends javax.swing.JFrame {
     private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
             // TODO add your handling code here:
+            if(playgroundList.getSelectedValue()==null)
+                return ;
             Image image = new ImageIcon("playgroundPhotos\\" +((Playground)playgroundList.getSelectedValue()).getName()+".jpg").getImage();
             Image newimg = image.getScaledInstance(playgroundImage.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
             playgroundImage.setIcon(new ImageIcon(newimg) );
@@ -402,6 +404,7 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
            // TODO add your handling code here:
+           
            double price =-1;
            try {
             price = Double.parseDouble(priceField.getText());
