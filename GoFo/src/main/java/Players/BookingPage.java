@@ -52,7 +52,7 @@ public class BookingPage extends javax.swing.JFrame {
         playGroundModel.add(1, p1);
         playGroundModel.add(2, p2);
         playGroundModel.add(3, p3);
-        */
+         */
     }
 
     BookingPage(Player player) {
@@ -62,13 +62,14 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
 
         var playgroundlist = DatabaseSimulator.getApprovedPlaygrounds();
-        for(var playground : playgroundlist)
+        for (var playground : playgroundlist) {
             playGroundModel.addElement(playground);
+        }
 
-        
     }
 
-     public class PlaygroundListRenderer extends DefaultListCellRenderer {
+    public class PlaygroundListRenderer extends DefaultListCellRenderer {
+
         @Override
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -76,15 +77,14 @@ public class BookingPage extends javax.swing.JFrame {
 
             JLabel label = (JLabel) super.getListCellRendererComponent(
                     list, value, index, isSelected, cellHasFocus);
-            Image image = new ImageIcon("playgroundPhotos\\" +((Playground)value).getName()+".jpg").getImage();
-            Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+            Image image = new ImageIcon("playgroundPhotos\\" + ((Playground) value).getName() + ".jpg").getImage();
+            Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             label.setIcon(new ImageIcon(newimg));
             label.setHorizontalTextPosition(JLabel.RIGHT);
-            setText(((Playground)value).getName());
+            setText(((Playground) value).getName());
             return label;
         }
     }
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +119,8 @@ public class BookingPage extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         filterButton = new javax.swing.JButton();
         DateChooser = new com.toedter.calendar.JDateChooser();
+        nameField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,7 +163,7 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Addres:");
+        jLabel1.setText("Name");
 
         jLabel2.setText("Price:");
 
@@ -200,6 +202,14 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
+        nameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Addres:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -221,37 +231,43 @@ public class BookingPage extends javax.swing.JFrame {
                 .addGap(0, 57, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94)
                         .addComponent(bookingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(40, 40, 40)
                         .addComponent(timeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(fromLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(fromComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(toComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(toLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(fromLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fromComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(toComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(toLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -275,6 +291,18 @@ public class BookingPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fromLabel)
@@ -283,23 +311,15 @@ public class BookingPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fromComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(toComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,7 +335,9 @@ public class BookingPage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -323,52 +345,79 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
-            // TODO add your handling code here:
-            if(playgroundList.getSelectedValue()==null)
-                return ;
-            Image image = new ImageIcon("playgroundPhotos\\" +((Playground)playgroundList.getSelectedValue()).getName()+".jpg").getImage();
-            Image newimg = image.getScaledInstance(playgroundImage.getWidth(),-1,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
-            playgroundImage.setIcon(new ImageIcon(newimg) );
-            
-            playgroundNameLabel.setText( playgroundList.getSelectedValue().getName());
-            playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
-            playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
+        // TODO add your handling code here:
+        if (playgroundList.getSelectedValue() == null) {
+            return;
+        }
+        Image image = new ImageIcon("playgroundPhotos\\" + ((Playground) playgroundList.getSelectedValue()).getName() + ".jpg").getImage();
+        Image newimg = image.getScaledInstance(playgroundImage.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
+        playgroundImage.setIcon(new ImageIcon(newimg));
 
-            int OpeningHour=playgroundList.getSelectedValue().getOpeningHour() ;
-            int ClosingHour= playgroundList.getSelectedValue().getClosingHour();
-            OpenHours.removeAllElements();
-            closeHours.removeAllElements();
-      
-            for(int i=OpeningHour;i!=ClosingHour;i=(i+1)%24){
-            OpenHours.addElement((Integer)i);
-            closeHours.addElement((Integer)(i+1));
-            }
-            fromComboBox.setSelectedIndex(-1);
-            toComboBox.setSelectedIndex(-1);
+        playgroundNameLabel.setText(playgroundList.getSelectedValue().getName());
+        playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
+        playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
 
-            
-        
+        int OpeningHour = playgroundList.getSelectedValue().getOpeningHour();
+        int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
+        OpenHours.removeAllElements();
+        closeHours.removeAllElements();
+
+        for (int i = OpeningHour; i != ClosingHour; i = (i + 1) % 24) {
+            OpenHours.addElement((Integer) i);
+            closeHours.addElement((Integer) (i + 1));
+        }
+        fromComboBox.setSelectedIndex(-1);
+        toComboBox.setSelectedIndex(-1);
+
 
     }//GEN-LAST:event_playgroundListValueChanged
-    private ArrayList<Playground> GetFilteredPlayGrounds(String location , double price , Date available , int duration){
-        var playgrounds = DatabaseSimulator.getApprovedPlaygrounds();
-        ArrayList<Playground> filtered = new ArrayList<Playground>();
-        for ( var playground : playgrounds){
-            if(location.isBlank()||playground.getAddress().toLowerCase().contains(location.toLowerCase())){
-                if(price<0||playground.getDefaultPricePerHour()<=price){
-                    if(available == null || playground.isAvailable(available , Math.max(1, duration))){
-                     filtered.add(playground);
-                    }
+
+    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
+        // TODO add your handling code here:
+
+        double price = -1;
+        try {
+            price = Double.parseDouble(priceField.getText());
+        } catch (NumberFormatException e) {
+            price = -1;
+        }
+
+        var filteredPlaygrounds = GetFilteredPlayGrounds(addressField.getText(),nameField.getText(), price, null, 0);
+        playGroundModel.clear();
+        System.out.println("here");
+        for (var playground : filteredPlaygrounds) {
+            playGroundModel.addElement(playground);
+        }
+
+        System.out.println("filtered");
+
+    }//GEN-LAST:event_filterButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        PlayerProfile playerProfile = new PlayerProfile(player);
+        playerProfile.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void fromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (fromComboBox.getSelectedIndex() == -1) {
+            toComboBox.setEnabled(false);
+        } else {
+            if (OpenHours.getSize() > 1) {
+                int OpeningHour = (int) fromComboBox.getSelectedItem();
+                int ClosingHour = playgroundList.getSelectedValue().getClosingHour();
+                closeHours.removeAllElements();
+
+                for (int i = OpeningHour; i != ClosingHour; i = (i + 1) % 24) {
+                    closeHours.addElement((Integer) (i + 1));
                 }
             }
+            toComboBox.setEnabled(true);
         }
-        return filtered;
-    }
-    private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
-        PlayerProfile playerProfile = new PlayerProfile(this.player);
-        playerProfile.setVisible(true);        
-        this.dispose();
-    }//GEN-LAST:event_bookingButtonActionPerformed
+
+    }//GEN-LAST:event_fromComboBoxActionPerformed
 
     private void priceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldActionPerformed
         // TODO add your handling code here:
@@ -378,52 +427,31 @@ public class BookingPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addressFieldActionPerformed
 
-    private void fromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromComboBoxActionPerformed
-        // TODO add your handling code here:
-        if(fromComboBox.getSelectedIndex()==-1){
-            toComboBox.setEnabled(false);
-        }else{
-            if(OpenHours.getSize()>1){
-            int OpeningHour= (int) fromComboBox.getSelectedItem();
-            int ClosingHour= playgroundList.getSelectedValue().getClosingHour();
-            closeHours.removeAllElements();
-
-            for(int i=OpeningHour;i!=ClosingHour;i=(i+1)%24){
-            closeHours.addElement((Integer)(i+1));
-            }
-            }
-            toComboBox.setEnabled(true);
-        }
-            
-
-    }//GEN-LAST:event_fromComboBoxActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        PlayerProfile playerProfile = new PlayerProfile(player);
+    private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
+        PlayerProfile playerProfile = new PlayerProfile(this.player);
         playerProfile.setVisible(true);
         this.dispose();
-                
-    }//GEN-LAST:event_backButtonActionPerformed
+    }//GEN-LAST:event_bookingButtonActionPerformed
 
-    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
-           // TODO add your handling code here:
-           
-           double price =-1;
-           try {
-            price = Double.parseDouble(priceField.getText());
-        } catch (NumberFormatException e) {
-           price = -1;
+    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameFieldActionPerformed
+    private ArrayList<Playground> GetFilteredPlayGrounds(String location, String name, double price, Date available, int duration) {
+        var playgrounds = DatabaseSimulator.getApprovedPlaygrounds();
+        ArrayList<Playground> filtered = new ArrayList<Playground>();
+        for (var playground : playgrounds) {
+            if (name.isBlank() || playground.getName().toLowerCase().contains(name.toLowerCase())) {
+                if (location.isBlank() || playground.getAddress().toLowerCase().contains(location.toLowerCase())) {
+                    if (price < 0 || playground.getDefaultPricePerHour() <= price) {
+                        if (available == null || playground.isAvailable(available, Math.max(1, duration))) {
+                            filtered.add(playground);
+                        }
+                    }
+                }
+            }
         }
-           
-           var filteredPlaygrounds = GetFilteredPlayGrounds(addressField.getText(), price, null, 0);
-           playGroundModel.clear();
-           System.out.println("here");
-           for(var playground : filteredPlaygrounds)
-               playGroundModel.addElement(playground);
-           
-        System.out.println("filtered");
-                
-    }//GEN-LAST:event_filterButtonActionPerformed
+        return filtered;
+    }
 
     /**
      * @param args the command line arguments
@@ -460,10 +488,10 @@ public class BookingPage extends javax.swing.JFrame {
         });
     }
 
-    DefaultListModel playGroundModel= new DefaultListModel();
-    DefaultComboBoxModel time=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
-    DefaultComboBoxModel OpenHours=   new DefaultComboBoxModel<>(new Integer[] {});
-    DefaultComboBoxModel closeHours=   new DefaultComboBoxModel<>(new Integer[] {});
+    DefaultListModel playGroundModel = new DefaultListModel();
+    DefaultComboBoxModel time = new javax.swing.DefaultComboBoxModel<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
+    DefaultComboBoxModel OpenHours = new DefaultComboBoxModel<>(new Integer[]{});
+    DefaultComboBoxModel closeHours = new DefaultComboBoxModel<>(new Integer[]{});
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JTextField addressField;
@@ -476,9 +504,11 @@ public class BookingPage extends javax.swing.JFrame {
     private javax.swing.JLabel fromLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextArea playgrounDescriptionTextArea;
     private javax.swing.JLabel playgroundAddressLabel;
