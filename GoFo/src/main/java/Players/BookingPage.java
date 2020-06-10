@@ -503,7 +503,7 @@ public class BookingPage extends javax.swing.JFrame {
                     if(responsecode == 10 )
                     JOptionPane.showMessageDialog(null, "can't book a playground in the past \n try again after (or before :D) inventing the time machine  :D", "Did you invent the time machine ?", JOptionPane.INFORMATION_MESSAGE);
                     if(responsecode == 15 )
-                    JOptionPane.showMessageDialog(null, "The playground is Booked at the same date \ntry another date or playground :d ", "Already Booked slot!", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "The playground is Booked at the smae date \ntry another date or playground :d ", "Already Booked slot!", JOptionPane.INFORMATION_MESSAGE);
                     
                 }
             }
