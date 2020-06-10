@@ -125,11 +125,15 @@ public class Playground implements Serializable{
         return name;
     }
 
- 
     @Override
     public String toString() {
-        return "\nPlayground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
+        if(bookdesTimes==null)
+            bookdesTimes = new ArrayList<Booking>();
+        return "Playground{" + "owner=" + owner + ", name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", imageLink=" + imageLink + ", locationOnMap=" + locationOnMap + ", openingHour=" + openingHour + ", closingHour=" + closingHour   + ", Booking =" +bookdesTimes.toString() +"}" ;
     }
+
+ 
+   
 
     
 

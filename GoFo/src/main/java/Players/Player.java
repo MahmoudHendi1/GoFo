@@ -42,6 +42,6 @@ public class Player extends User{
    @Override
    public String toString(){
        teams = new ArrayList<Team>();
-       return "\nPlayer:\n"+super.toString()+"\nTeams:"+teams.toString();
+       return "\nPlayer:\n"+super.toString()+"\nTeams:"+teams.toString() + "\n" + bookings.toString();
    }
 }
