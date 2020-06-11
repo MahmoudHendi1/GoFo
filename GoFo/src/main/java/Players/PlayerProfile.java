@@ -99,18 +99,31 @@ public class PlayerProfile extends javax.swing.JFrame {
             return label;
         }
     }
+      public class teamListRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(
+                JList list, Object value, int index,
+                boolean isSelected, boolean cellHasFocus) {
+
+            JLabel label = (JLabel) super.getListCellRendererComponent(
+                    list, value, index, isSelected, cellHasFocus);
+            label.setHorizontalTextPosition(JLabel.CENTER);
+            label.setText(((Team)value).getName());
+            return label;
+        }
+    }
     public PlayerProfile(Player player) {
         initComponents();
         this.player = player;
         playersScrollPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         playersList.setCellRenderer(new playersListRenderer());
+        teamsList.setCellRenderer(new teamListRenderer());
         teamPlayersScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        teamPlayersList.setCellRenderer(new playersListRenderer());
         if(player.getTeams()!=null)
-        for(Team t : player.getTeams()){
-            teams.addElement(t);
-        }
-        teamsComboBox.setSelectedIndex(-1);
+            for(Team t : player.getTeams()){
+                teams.addElement(t);
+            }
+        teamsList.setSelectedIndex(-1);
         setInfo();
 
     }
@@ -150,9 +163,8 @@ public class PlayerProfile extends javax.swing.JFrame {
         playersList = new javax.swing.JList<>();
         addPlayerButton = new javax.swing.JButton();
         creatTeamButton = new javax.swing.JButton();
-        teamsComboBox = new javax.swing.JComboBox<>();
         teamPlayersScrollPane1 = new javax.swing.JScrollPane();
-        teamPlayersList = new javax.swing.JList<>();
+        teamsList = new javax.swing.JList<>();
         teamLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -314,6 +326,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playersList.setModel(playersModel);
         playersList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         playersList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        playersList.setEnabled(false);
         playersList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 playersListValueChanged(evt);
@@ -329,23 +342,22 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         });
 
-        creatTeamButton.setText("new Team");
+        creatTeamButton.setText("New Team");
         creatTeamButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creatTeamButtonActionPerformed(evt);
             }
         });
 
-        teamsComboBox.setModel(teams);
-        teamsComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teamsComboBoxActionPerformed(evt);
+        teamsList.setModel(teams);
+        teamsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        teamsList.setEnabled(false);
+        teamsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                teamsListValueChanged(evt);
             }
         });
-
-        teamPlayersList.setModel(teamPlayersModel);
-        teamPlayersList.setEnabled(false);
-        teamPlayersScrollPane1.setViewportView(teamPlayersList);
+        teamPlayersScrollPane1.setViewportView(teamsList);
 
         teamLabel.setLabelFor(playersList);
         teamLabel.setText("Team Members");
@@ -368,11 +380,8 @@ public class PlayerProfile extends javax.swing.JFrame {
                                     .addComponent(usernamelField)
                                     .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addComponent(teamsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                    .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addComponent(creatTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,7 +389,7 @@ public class PlayerProfile extends javax.swing.JFrame {
                         .addComponent(inviteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(playersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(teamLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         teamPaneLayout.setVerticalGroup(
             teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,15 +406,15 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(usernamelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(usernameLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addPlayerButton)
-                        .addGap(18, 18, 18)
                         .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(teamPaneLayout.createSequentialGroup()
-                                .addComponent(teamsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(190, Short.MAX_VALUE))
-                            .addComponent(teamPlayersScrollPane1)))
+                                .addComponent(addPlayerButton)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 28, Short.MAX_VALUE)
                         .addComponent(playersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,34 +599,47 @@ public class PlayerProfile extends javax.swing.JFrame {
     private void creatTeamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatTeamButtonActionPerformed
         // TODO add your handling code here:
         isCreatingTeam = !isCreatingTeam;
+        
+        teamsList.setSelectedIndex(-1);
+        playersModel.removeAllElements();
+
         if(isCreatingTeam){
          creatTeamButton.setText("Create!");
          teamNameField.setEditable(true);
          usernamelField.setEditable(true);
          addPlayerButton.setEnabled(true);
-        Team team = new Team(teamNameField.getText());
-        for(var obj : playersModel.toArray())
-            team.addMember((Player)obj);
+         teamsList.enable(false);
+        
+        
         }else{
-         creatTeamButton.setText("new Team");
+         Team team = new Team(teamNameField.getText());
+         if(playersModel.size()>0)
+            for(var obj : playersModel.toArray())
+               team.addMember((Player)obj);
+         teams.addElement(team);
+         
+         teamNameField.setText("");
+         usernamelField.setText("");
+
+         creatTeamButton.setText("New Team");
          addPlayerButton.setEnabled(false);
          teamNameField.setEditable(false);
          usernamelField.setEditable(false);
+         teamsList.enable(true);
+
             
         }
     }//GEN-LAST:event_creatTeamButtonActionPerformed
 
-    private void teamsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamsComboBoxActionPerformed
+    private void teamsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_teamsListValueChanged
         // TODO add your handling code here:
-        if(teamsComboBox.getSelectedIndex()!=-1){
-            teamPlayersModel.removeAllElements();
-            Team t = (Team)(teamsComboBox.getSelectedItem());
-            
-        //you only need to get team member and add them to "teamPlayersModel"
-        }else{
-            teamPlayersModel.removeAllElements();
+        playersModel.removeAllElements();
+        if(teamsList.getSelectedIndex()!=-1){
+            for(Player p: teamsList.getSelectedValue().members){
+                playersModel.addElement(p);
+            }
         }
-    }//GEN-LAST:event_teamsComboBoxActionPerformed
+    }//GEN-LAST:event_teamsListValueChanged
 
     /**
      * @param args the command line arguments
@@ -656,7 +678,7 @@ public class PlayerProfile extends javax.swing.JFrame {
 
    DefaultListModel playersModel= new DefaultListModel();
    DefaultListModel teamPlayersModel= new DefaultListModel();
-   DefaultComboBoxModel teams = new DefaultComboBoxModel();
+   DefaultListModel teams = new DefaultListModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditButton;
@@ -683,9 +705,8 @@ public class PlayerProfile extends javax.swing.JFrame {
     private javax.swing.JLabel teamLabel;
     private javax.swing.JTextField teamNameField;
     private javax.swing.JPanel teamPane;
-    private javax.swing.JList<Player> teamPlayersList;
     private javax.swing.JScrollPane teamPlayersScrollPane1;
-    private javax.swing.JComboBox<Team> teamsComboBox;
+    private javax.swing.JList<Team> teamsList;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JTextField usernamelField;
     // End of variables declaration//GEN-END:variables
