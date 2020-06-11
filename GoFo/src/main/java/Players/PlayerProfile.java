@@ -351,7 +351,6 @@ public class PlayerProfile extends javax.swing.JFrame {
 
         teamsList.setModel(teams);
         teamsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        teamsList.setEnabled(false);
         teamsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 teamsListValueChanged(evt);

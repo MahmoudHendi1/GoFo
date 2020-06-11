@@ -411,7 +411,6 @@
                       <Connection code="teams" type="code"/>
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="teamsListValueChanged"/>
