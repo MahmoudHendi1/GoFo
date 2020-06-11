@@ -106,7 +106,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playersList.setCellRenderer(new playersListRenderer());
         teamPlayersScrollPane1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         teamPlayersList.setCellRenderer(new playersListRenderer());
-        
+        if(player.getTeams()!=null)
         for(Team t : player.getTeams()){
             teams.addElement(t);
         }

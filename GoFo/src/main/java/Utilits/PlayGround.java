@@ -126,7 +126,7 @@ public class Playground implements Serializable{
     }
 
  
-    @Override
+    
     public String toString() {
         return "\nPlayground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
     }
