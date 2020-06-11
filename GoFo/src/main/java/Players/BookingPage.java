@@ -66,6 +66,7 @@ public class BookingPage extends javax.swing.JFrame {
         playgroundList.setCellRenderer(new PlaygroundListRenderer());
         bookingButton.setEnabled(false);
         var playgroundlist = DatabaseSimulator.getApprovedPlaygrounds();
+        if(playgroundlist!=null)
         for (var playground : playgroundlist) {
             playGroundModel.addElement(playground);
         }

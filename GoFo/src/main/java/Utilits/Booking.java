@@ -23,19 +23,18 @@ public class Booking implements Serializable{
     
     private static final long serialVersionUID = 2L;
     private Date date;
-    private Player booker;
+    private String booker;
     private int DuratoinInHours;
-    Playground playground;
+    private Playground playground;
 
-    public Booking(Date timing, Player booker, int DuratoinInHours) {
+    public Booking(Date timing, Player booker, int DuratoinInHours , Playground playground) {
         this.date = timing;
-        this.booker = booker;
+        this.booker = booker.getUserName();
         this.DuratoinInHours = DuratoinInHours;
+        this.playground = playground;
     }
 
-    public Booking(Playground playground, Date bookingDate, int duration) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     public boolean isPlayed(){
         /**comparing current date to booking date+duration [end date].
@@ -56,6 +55,7 @@ public class Booking implements Serializable{
     public Date getEndDate(){
         Date end_date  = new Date(date.getTime());
         end_date.setHours(end_date.getHours()+DuratoinInHours);
+        end_date.setTime(end_date.getTime()-1000);
         return end_date;
     }
 
@@ -80,18 +80,23 @@ public class Booking implements Serializable{
     }
 
     public Player getBooker() {
+        return (Player) Users.UserManger.getUserbyUsername(booker);
+    }
+    public String getBookerUsername(){
         return booker;
     }
 
     public void setBooker(Player booker) {
-        this.booker = booker;
+        this.booker = booker.getUserName();
     }
-    
 
     @Override
     public String toString() {
-        return "Booking{" + "date=" + date + ", booker=" + booker + ", DuratoinInHours=" + DuratoinInHours + '}';
+        return "Booking{" + "date=" + date + ", booker=" + booker + ", DuratoinInHours=" + DuratoinInHours + ", playground=" + playground.getName() + '}';
     }
+    
+
+    
     
     
 }

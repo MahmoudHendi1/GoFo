@@ -886,8 +886,8 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private boolean editMode = false;
     DefaultListModel playGroundModel= new DefaultListModel();
     private String pathPhoto="";
-    DefaultComboBoxModel time1=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
-    DefaultComboBoxModel time2=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24  });
+    DefaultComboBoxModel time1=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 });
+    DefaultComboBoxModel time2=   new javax.swing.DefaultComboBoxModel<>(new Integer[] {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23  });
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressField;

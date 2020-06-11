@@ -6,6 +6,8 @@
 package Utilits;
 
 import DB.DatabaseSimulator;
+import Players.Player;
+import PlaygroundOwner.PlaygroundOwner;
 import Users.User;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +27,12 @@ import javax.swing.JOptionPane;
  */
 public class tst {
     public static void main(String[] args) {
-        JOptionPane.showMessageDialog(null, "Reistered", "InfoBox: " + "bar", JOptionPane.INFORMATION_MESSAGE);
+        DatabaseSimulator.initializeDatabase();
+        //((Player)DatabaseSimulator.getUserbyUsername("hendi")).setPassword(password);
+        
+       for(var x : ((PlaygroundOwner)DatabaseSimulator.getUserbyUsername("hendi")).getPlaygroundsList())
+            System.out.println( DatabaseSimulator.addplaygroundToDB(x));
+       
+           DatabaseSimulator.save();
     }
 }

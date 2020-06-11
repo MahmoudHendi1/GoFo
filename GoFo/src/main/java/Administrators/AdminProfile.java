@@ -77,6 +77,7 @@ public class AdminProfile extends javax.swing.JFrame {
         initComponents();
          LeftPane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
          playgroundList.setCellRenderer(new PlaygroundListRenderer());
+         if(AdministratorManager.getAllPlaygrounds()!=null)
         for(int i=0;i<AdministratorManager.getAllPlaygrounds().size();i++){
             playGroundModel.add(i,AdministratorManager.getAllPlaygrounds().get(i));
         }

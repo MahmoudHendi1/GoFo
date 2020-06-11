@@ -52,9 +52,10 @@ public class PlayerManager {
     public static Booking bookPlayground(Playground playground, Date bookingDate, int duration, Player player) {
         if(isBookngPossible(playground, bookingDate, duration, player)!=1) 
             return null;
-        Booking booking = new Booking(bookingDate, player, duration);
-        playground.getBookdeTimes().add(booking);
+        Booking booking = new Booking(bookingDate, player, duration ,playground);
+        playground.addBooking(booking);
         player.getBookings().add(booking);
+        System.out.println("done booking");
         return booking;
     }
     /**

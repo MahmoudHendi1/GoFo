@@ -100,9 +100,9 @@ public class DatabaseSimulator {
             FileInputStream fin = new FileInputStream(fileName);
             ObjectInputStream oin = new ObjectInputStream(fin);
             list = (ArrayList<T>) oin.readObject();
-            //System.out.println("a:"+list);
+            System.out.println("a:"+list); 
             return list;
-        } catch (Exception ex) {
+        } catch (IOException | ClassNotFoundException ex) {
 
             System.out.println("err in filllUserList() in DBsim :" + ex.toString());
             return new ArrayList<T>();
@@ -243,7 +243,7 @@ public class DatabaseSimulator {
                 JOptionPane.showMessageDialog(null, playgroundsList.toString(), "PlayGround Data", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            System.out.println("playGroundsList is null");
+            System.out.println("playgroundsList is null");
         }
 
     }
@@ -288,7 +288,9 @@ public class DatabaseSimulator {
      * This functions resets the database
      */
     public static void reset() {
+        if(usersList!=null)
         usersList.clear();
+        if(playgroundsList!=null)
         playgroundsList.clear();
         File folder = new File("playerPhotos");
         for(File file : folder.listFiles()){

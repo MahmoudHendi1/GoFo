@@ -21,13 +21,12 @@ public class Playground implements Serializable{
     private String address;
     private String description;
     private double defaultPricePerHour;
-    private BufferedImage image;
     private String imageLink;
     private URL locationOnMap;
     private int openingHour;
     private int closingHour;
 
-    private static ArrayList<Booking> bookdesTimes;
+    private  ArrayList<Booking> bookdesTimes;
 
     public Playground(String name, String addres, String description, double defaultPriceHour, URL url) {
         this.name = name;
@@ -73,9 +72,7 @@ public class Playground implements Serializable{
         this.defaultPricePerHour = defaultPricePerHour;
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
+   
 
     public void setDefaultPricePerHour(double defaultPricePerHour) {
         this.defaultPricePerHour = defaultPricePerHour;
@@ -116,8 +113,7 @@ public class Playground implements Serializable{
     }
 
     public  ArrayList<Booking> getBookdeTimes() {
-        if(bookdesTimes==null)
-            bookdesTimes= new ArrayList<Booking>();
+        
         return bookdesTimes;
     }
 
@@ -125,11 +121,16 @@ public class Playground implements Serializable{
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "Playground{" + "owner=" + owner.getUserName() + ", name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", imageLink=" + imageLink + ", locationOnMap=" + locationOnMap + ", openingHour=" + openingHour + ", closingHour=" + closingHour + ", bookdesTimes=" +((bookdesTimes==null)? "[]": bookdesTimes.toString()) + '}';
+    }
+
+   
+
  
     
-    public String toString() {
-        return "\nPlayground{" + "name=" + name + ", approved=" + approved + ", address=" + address + ", description=" + description + ", defaultPricePerHour=" + defaultPricePerHour + ", image=" + image + ", locationOnMap=" + locationOnMap + '}';
-    }
+    
 
     
 
@@ -156,6 +157,12 @@ public class Playground implements Serializable{
             }
         }
         return true;
+    }
+
+    public boolean addBooking(Booking booking) {
+        if(bookdesTimes==null)
+            bookdesTimes= new ArrayList<Booking>();
+        return bookdesTimes.add(booking);
     }
     
 
