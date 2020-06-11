@@ -17,6 +17,7 @@ import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -285,8 +286,13 @@ public class UserMainForm extends javax.swing.JFrame {
                 playerProfile = new PlayerProfile((Player)user);
                 playerProfile.setVisible(true);
              }else{
-                 playgroundOwnerProfile =new PlaygroundOwnerProfile((PlaygroundOwner)user);
-                 playgroundOwnerProfile.setVisible(true);
+                 try {
+                     playgroundOwnerProfile =new PlaygroundOwnerProfile((PlaygroundOwner)user);
+                     playgroundOwnerProfile.setVisible(true);
+
+                 } catch (IOException ex) {
+                     Logger.getLogger(UserMainForm.class.getName()).log(Level.SEVERE, null, ex);
+                 }
              }
              this.dispose();
              return ;
@@ -381,8 +387,12 @@ public class UserMainForm extends javax.swing.JFrame {
                    PlayerProfile playerProfile = new PlayerProfile((Player)tmpUser); 
                     playerProfile.setVisible(true);
                 }else{
-                   PlaygroundOwnerProfile playgroundOwnerProfile = new PlaygroundOwnerProfile((PlaygroundOwner)tmpUser); 
-                   playgroundOwnerProfile.setVisible(true);
+                   try {
+                       PlaygroundOwnerProfile playgroundOwnerProfile = new PlaygroundOwnerProfile((PlaygroundOwner)tmpUser);
+                       playgroundOwnerProfile.setVisible(true);
+                   } catch (IOException ex) {
+                       Logger.getLogger(UserMainForm.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                 }
                this.dispose();
            }
