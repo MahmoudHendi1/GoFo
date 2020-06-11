@@ -296,7 +296,11 @@ public class DatabaseSimulator {
             if(!file.getName().contains("default"))
                 file.delete();
         }
-        
+        folder = new File("playgroundPhotos");
+        for(File file : folder.listFiles()){
+            System.out.println("file :"+file.getName());
+                file.delete();
+        }
 
     }
     /**
