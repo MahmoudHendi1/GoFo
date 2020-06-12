@@ -138,10 +138,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
             label.setIcon(new ImageIcon(newimg));
             label.setHorizontalTextPosition(JLabel.RIGHT);
-            if(!((Player)value).hasTeam())
-                label.setBackground(Color.GREEN);
-            else
-                 label.setBackground(Color.RED);
+            label.setBackground(Color.RED);
             setText(((Player)value).getUserName());
             return label;
         }
@@ -655,7 +652,6 @@ public class PlayerProfile extends javax.swing.JFrame {
         isCreatingTeam = !isCreatingTeam;
         
         teamsList.setSelectedIndex(-1);
-        playersModel.removeAllElements();
 
         if(isCreatingTeam){
          creatTeamButton.setText("Create!");
@@ -684,6 +680,8 @@ public class PlayerProfile extends javax.swing.JFrame {
 
             
         }
+         playersModel.removeAllElements();
+
     }//GEN-LAST:event_creatTeamButtonActionPerformed
 
     private void teamsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_teamsListValueChanged
