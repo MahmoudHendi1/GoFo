@@ -39,8 +39,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- *
+ *PlayerProfile represents the profile of the player in addition to the teams he has
+ * and a button of browsing playgrounds
  * @author Lenovo
+ * @version  1.0
+ * @since 12/06/2020
  */
 public class PlayerProfile extends javax.swing.JFrame {
 
@@ -59,6 +62,12 @@ public class PlayerProfile extends javax.swing.JFrame {
         Image newimg = image.getScaledInstance(playerPhoto.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
+    /**
+     * This function resizes the Player's photo so it fits the best in the GUI.
+     * @param inputImagePath
+     * @param Photo
+     * @throws IOException 
+     */
     public void resizePlayerPhoto(String inputImagePath, JLabel Photo)
             throws IOException {
         // reads input image
@@ -86,6 +95,11 @@ public class PlayerProfile extends javax.swing.JFrame {
         playerPhoto.setIcon(scale(outputImagePath));
         player.setPhotoLink(outputImagePath);
     }
+    /**
+     * This function selects a photo from the device
+     * @param originalPath
+     * @throws IOException 
+     */
     public void selectPhoto(Path originalPath) throws IOException {
         Path copied = Paths.get("playerPhotos/" + player.getUserName() + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
@@ -93,7 +107,9 @@ public class PlayerProfile extends javax.swing.JFrame {
         player.setPhotoLink(copied.toString());
 
     }
-
+/**
+ * This function sets the info of the player entered
+ */
     public void setInfo() {
 
         playerNameField.setText(player.getName());
@@ -501,7 +517,11 @@ public class PlayerProfile extends javax.swing.JFrame {
     private void playerNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_playerNameFieldActionPerformed
-
+/**
+ * When the edit button is chosen, the fields becomes editable 
+ * for the user to edit his data
+ * @param evt 
+ */
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
         //flip the flag 
         editMode = !editMode;

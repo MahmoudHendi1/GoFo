@@ -37,8 +37,11 @@ import javax.swing.JOptionPane;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- *
+ *AdminProfile is a GUI-based class that interacts with the admin user 
+ * to approve or suspend playgrounds
  * @author Lenovo
+ * @version 1.0
+ * @since 9/6/2020
  */
 public class AdminProfile extends javax.swing.JFrame {
 
@@ -94,6 +97,9 @@ public class AdminProfile extends javax.swing.JFrame {
         }
       
     }
+    /**
+     * Renders J Components 
+     */
     public class PlaygroundListRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(
@@ -313,7 +319,10 @@ public class AdminProfile extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * This function brings out on the GUI the details of a selected playground in the list
+ * @param evt 
+ */
     private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
         // TODO add your handling code here:
@@ -325,14 +334,20 @@ public class AdminProfile extends javax.swing.JFrame {
             playgroundAddressLabel.setText(playgroundList.getSelectedValue().getAddress());
             playgrounDescriptionTextArea.setText(playgroundList.getSelectedValue().getDescription());
     }//GEN-LAST:event_playgroundListValueChanged
-
+/**
+ * This function approves the selected playground
+ * @param evt 
+ */
     private void approveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approveButtonActionPerformed
         System.out.println(playgroundList.getSelectedValue());
         AdministratorManager.approvePlayground(playgroundList.getSelectedValue());
         System.out.println(playgroundList.getSelectedValue());
 
     }//GEN-LAST:event_approveButtonActionPerformed
-
+/**
+ * This function logs out the admin from the program
+ * @param evt 
+ */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         UserMainForm loginFrom = new UserMainForm();
         loginFrom.setVisible(true);

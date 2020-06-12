@@ -6,8 +6,11 @@
 package Network;
 
 /**
- *
+ *MailingService does as its name implies, sends confirmation emails to newly registered 
+ * users to confirm their account
  * @author ShawkyDev
+ * @version 1.0
+ * @since 12/6/2020
  */
 import java.util.Properties;
 
@@ -20,6 +23,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailingService {
+    /**
+     * This function takes the email address and title and message
+     * and sends the email  
+     * @param Email
+     * @param title
+     * @param msg 
+     */
     public static void sendEmailTo(String Email, String title , String msg){
         
 

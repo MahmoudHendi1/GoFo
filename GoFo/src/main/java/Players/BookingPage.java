@@ -32,8 +32,11 @@ import javax.swing.ListModel;
 import javax.xml.crypto.Data;
 
 /**
- *
+ *BookingPage is a GUI-based class. This page pops up when the player
+ * chooses to browse playgrounds.
  * @author Lenovo
+ * @version 1.0
+ * @since 11/06/2020
  */
 public class BookingPage extends javax.swing.JFrame {
 
@@ -377,7 +380,11 @@ public class BookingPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * This functions shows the details of the playground selected and enables
+ * the buttons of picking a time according the playground's feasible time.
+ * @param evt 
+ */
     private void playgroundListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_playgroundListValueChanged
 
         // TODO add your handling code here:
@@ -407,7 +414,11 @@ public class BookingPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_playgroundListValueChanged
-
+/**
+ * This function applies the filtering process of playgrounds according
+ * to the criteria entered such as time, price, location,etc..
+ * @param evt 
+ */
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         // TODO add your handling code here:
         //var date = DateChooser.getDate();
@@ -439,14 +450,22 @@ public class BookingPage extends javax.swing.JFrame {
         System.out.println("filtered");
 
     }//GEN-LAST:event_filterButtonActionPerformed
-
+/**
+ * This function takes back the user to the previous page which is PlayerProfile
+ * @param evt 
+ */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         PlayerProfile playerProfile = new PlayerProfile(player);
         playerProfile.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_backButtonActionPerformed
-
+/**
+ * This function helps in filtering process by showing the available hours
+ * of a filtered playground starting from the time chosen till the closing hour
+ * of the playground
+ * @param evt 
+ */
     private void fromComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromComboBoxActionPerformed
         // TODO add your handling code here:
         if (fromComboBox.getSelectedIndex() == -1) {
@@ -481,7 +500,11 @@ public class BookingPage extends javax.swing.JFrame {
     private void addressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressFieldActionPerformed
-
+/**
+ * This function performs the booking process by validating the values entered in the
+ * required labels
+ * @param evt 
+ */
     private void bookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingButtonActionPerformed
         if (toComboBox.getSelectedItem() == null || fromComboBox.getSelectedItem() == null || DateChooser.getDate() == null || playgroundList.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "missing Info!", "please specify start , end time", JOptionPane.INFORMATION_MESSAGE);
@@ -543,6 +566,19 @@ public class BookingPage extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jPanel1MouseClicked
+    /**
+     * This function brings all the filtered playgrounds according to the criteria set
+     * by the user. This function receives from the filter button functions the credentials
+     * which upon it the playgrounds will be filtered. The filtering process works by
+     * first getting all the approved playground from the simulator then start checking each playground
+     * if it meets the conditions of the filtering 
+     * @param location
+     * @param name
+     * @param price
+     * @param available
+     * @param duration
+     * @return ArrayList of filtered playgrounds
+     */
     private ArrayList<Playground> GetFilteredPlaygrounds(String location, String name, double price, Date available, int duration) {
         var playgrounds = DatabaseSimulator.getApprovedPlaygrounds();
         ArrayList<Playground> filtered = new ArrayList<Playground>();
