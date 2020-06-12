@@ -12,7 +12,11 @@ package Network;
  * @version 1.0
  * @since 12/6/2020
  */
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,6 +27,24 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailingService {
+    public class MailSender extends Thread{
+        public String msg , title ;
+        public ArrayList<String> emails;
+        
+        @Override
+        public void run(){
+            try {
+            
+        for(String to :emails)    {
+            sendEmailTo(to, title, msg);
+                TimeUnit.SECONDS.sleep(1);
+        }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(MailingService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     /**
      * This function takes the email address and title and message
      * and sends the email  
