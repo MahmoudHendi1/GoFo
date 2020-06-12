@@ -78,7 +78,7 @@ public class PlayerManager {
         end_date.setHours(end_date.getHours() + duration);
         if (bookingDate.before(now)) {
             //can't Book a time in the past [at least not till they invent the time machine or have they ? ]
-            //you can edit this to return 1 (success code) if you're reading this while htey have invented the time machine 
+            //you can edit this to return 1 (success code) if you're reading this while they have invented the time machine 
             //[or just travel back to 2020/6/10 @ 10:34 and write this with me :D ]
             return 10;
         }
