@@ -39,11 +39,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
- *
+ *PlaygroundOwnerProfile is a GUI-based class that describes the profile page
+ * of the playground owner
  * @author Lenovo
+ * @version 1.0
+ * @since 3/6/2020
  */
 public class PlaygroundOwnerProfile extends javax.swing.JFrame {
-    
+    /**
+     * This function resizes the Playground's photo so it fits the best in the GUI.
+     * @param inputImagePath
+     * @param Photo
+     * @throws IOException 
+     */
     
     public void resizePlaygroundPhoto(String inputImagePath, JLabel Photo)
             throws IOException {
@@ -72,6 +80,12 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         playgroundPhoto.setIcon(scale(outputImagePath,playgroundPhoto));
         playgroundOwnerProfilePhoto.setIcon(scale(outputImagePath,playgroundOwnerProfilePhoto));
     }
+    /**
+     * This function resizes the Playground owner's photo so it fits the best in the GUI
+     * @param inputImagePath
+     * @param Photo
+     * @throws IOException 
+     */
     public void resizePlaygroundOwnerPhoto(String inputImagePath, JLabel Photo)
             throws IOException {
         // reads input image
@@ -104,6 +118,10 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         Image newimg = image.getScaledInstance(Photo.getWidth(),-1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
+    /**
+     * This function sets the information of the playground owner
+     * @throws IOException 
+     */
 
     public void setInfo() throws IOException {
 

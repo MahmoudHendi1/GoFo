@@ -33,8 +33,11 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.commons.validator.routines.LongValidator;
 
 /**
- *
+ *UserMainForm is the first page that pops up when the program begins.
+ * It describes the login and register pages.
  * @author Lenovo
+ * @version  1.0
+ *@since  7/6/2020
  */
 public class UserMainForm extends javax.swing.JFrame {
 
@@ -267,7 +270,11 @@ public class UserMainForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * This function describes the process of validating the credentials 
+ * when a user logins in into the program.
+ * @param evt 
+ */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         User user;
         loginUsernameLabel.setForeground(Color.green);
@@ -330,7 +337,10 @@ public class UserMainForm extends javax.swing.JFrame {
     private void loginButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginButtonKeyPressed
 
     }//GEN-LAST:event_loginButtonKeyPressed
-
+/**
+ * This function validates the credentials entered by a user when he presses "Register" button
+ * @param evt 
+ */
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
        
