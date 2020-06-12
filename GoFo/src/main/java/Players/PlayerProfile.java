@@ -12,7 +12,9 @@ import Utilits.Playground;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -31,6 +34,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -54,7 +59,33 @@ public class PlayerProfile extends javax.swing.JFrame {
         Image newimg = image.getScaledInstance(playerPhoto.getWidth(), -1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
         return new ImageIcon(newimg);
     }
-
+    public void resizePlayerPhoto(String inputImagePath, JLabel Photo)
+            throws IOException {
+        // reads input image
+        String outputImagePath="playerPhotos/" + player.getName() + ".jpg";
+        File inputFile = new File(inputImagePath);
+        BufferedImage inputImage = ImageIO.read(inputFile);
+ 
+        int scaledWidth= Photo.getWidth();
+        int scaledHeight=Photo.getHeight();
+        // creates output image
+        BufferedImage outputImage = new BufferedImage(scaledWidth,
+                scaledHeight, inputImage.getType());
+        
+        // scales the input image to the output image
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
+        g2d.dispose();
+ 
+        // extracts extension of output file
+        String formatName = outputImagePath.substring(outputImagePath
+                .lastIndexOf(".") + 1);
+ 
+        // writes to output file
+        ImageIO.write(outputImage, formatName, new File(outputImagePath));
+        playerPhoto.setIcon(scale(outputImagePath));
+        player.setPhotoLink(outputImagePath);
+    }
     public void selectPhoto(Path originalPath) throws IOException {
         Path copied = Paths.get("playerPhotos/" + player.getUserName() + ".jpg");
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
@@ -439,12 +470,16 @@ public class PlayerProfile extends javax.swing.JFrame {
 
     private void choosePhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePhotoButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter(
+        "Image files", ImageIO.getReaderFileSuffixes());
+        fileChooser.addChoosableFileFilter(imageFilter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                selectPhoto(Paths.get(selectedFile.getAbsolutePath()));
+                resizePlayerPhoto(selectedFile.getAbsolutePath(),playerPhoto);
             } catch (IOException ex) {
                 Logger.getLogger(PlayerProfile.class.getName()).log(Level.SEVERE, null, ex);
             }

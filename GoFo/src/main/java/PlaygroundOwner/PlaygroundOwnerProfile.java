@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dialog.ModalityType;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -33,6 +34,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -42,27 +45,64 @@ import org.apache.commons.validator.routines.EmailValidator;
 public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     
     
+    public void resizePlaygroundPhoto(String inputImagePath, JLabel Photo)
+            throws IOException {
+        // reads input image
+        String outputImagePath="playgroundPhotos/dummy.jpg";
+        File inputFile = new File(inputImagePath);
+        BufferedImage inputImage = ImageIO.read(inputFile);
+ 
+        int scaledWidth= Photo.getWidth();
+        int scaledHeight=Photo.getHeight();
+        // creates output image
+        BufferedImage outputImage = new BufferedImage(scaledWidth,
+                scaledHeight, inputImage.getType());
+        
+        // scales the input image to the output image
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
+        g2d.dispose();
+ 
+        // extracts extension of output file
+        String formatName = outputImagePath.substring(outputImagePath
+                .lastIndexOf(".") + 1);
+ 
+        // writes to output file
+        ImageIO.write(outputImage, formatName, new File(outputImagePath));
+        playgroundPhoto.setIcon(scale(outputImagePath,playgroundPhoto));
+        playgroundOwnerProfilePhoto.setIcon(scale(outputImagePath,playgroundOwnerProfilePhoto));
+    }
+    public void resizePlaygroundOwnerPhoto(String inputImagePath, JLabel Photo)
+            throws IOException {
+        // reads input image
+        String outputImagePath="playerPhotos/" + playgroundOwner.getName() + ".jpg";
+        File inputFile = new File(inputImagePath);
+        BufferedImage inputImage = ImageIO.read(inputFile);
+ 
+        int scaledWidth= Photo.getWidth();
+        int scaledHeight=Photo.getHeight();
+        // creates output image
+        BufferedImage outputImage = new BufferedImage(scaledWidth,
+                scaledHeight, inputImage.getType());
+        
+        // scales the input image to the output image
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(inputImage, 0, 0, scaledWidth, scaledHeight, null);
+        g2d.dispose();
+ 
+        // extracts extension of output file
+        String formatName = outputImagePath.substring(outputImagePath
+                .lastIndexOf(".") + 1);
+ 
+        // writes to output file
+        ImageIO.write(outputImage, formatName, new File(outputImagePath));
+        playgroundOwnerProfilePhoto.setIcon(scale(outputImagePath,playgroundOwnerProfilePhoto));
+        playgroundOwner.setPhotoLink(outputImagePath);
+    }
     private ImageIcon scale(String path, JLabel Photo) throws IOException {
         Image image = new ImageIcon(path).getImage();
-        System.out.println(playgroundPhoto.getWidth());
         Image newimg = image.getScaledInstance(Photo.getWidth(),-1, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
-
         return new ImageIcon(newimg);
-    }
-
-    public void selectPlayerPhoto(Path originalPath) throws IOException {
-        Path copied = Paths.get("playerPhotos/" + playgroundOwner.getName() + ".jpg");
-        Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-        playgroundOwnerProfilePhoto.setIcon(scale(copied.toString(),playgroundOwnerProfilePhoto));
-        playgroundOwner.setPhotoLink(copied.toString());
-
-    }
-    public void selectPlaygroundPhoto(Path originalPath,String name) throws IOException {
-        Path copied = Paths.get("playgroundPhotos/" + "dummy" + ".jpg");
-        Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-
-        playgroundPhoto.setIcon(scale(copied.toString(),playgroundPhoto));
-
     }
 
     public void setInfo() throws IOException {
@@ -431,7 +471,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
                         .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(EditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         profilePaneLayout.setVerticalGroup(
             profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,12 +604,12 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         PlaygroudsPaneLayout.setHorizontalGroup(
             PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlaygroudsPaneLayout.createSequentialGroup()
-                .addGap(0, 207, Short.MAX_VALUE)
+                .addGap(0, 1, Short.MAX_VALUE)
                 .addComponent(RightPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PlaygroudsPaneLayout.createSequentialGroup()
                     .addComponent(LeftPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 536, Short.MAX_VALUE)))
+                    .addGap(0, 330, Short.MAX_VALUE)))
         );
         PlaygroudsPaneLayout.setVerticalGroup(
             PlaygroudsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -584,9 +624,9 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+            .addGap(0, 517, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(MainPane))
+                .addComponent(MainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,12 +656,16 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
 
     private void choosePhotoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePhotoButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter(
+        "Image files", ImageIO.getReaderFileSuffixes());
+        fileChooser.addChoosableFileFilter(imageFilter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                selectPlayerPhoto(Paths.get(selectedFile.getAbsolutePath()));
+                resizePlaygroundOwnerPhoto(selectedFile.getAbsolutePath(),playgroundOwnerProfilePhoto);
             } catch (IOException ex) {
                 Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -742,14 +786,17 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private void choosePhotoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosePhotoButton1ActionPerformed
         
         JFileChooser fileChooser = new JFileChooser();
+        FileFilter imageFilter = new FileNameExtensionFilter(
+        "Image files", ImageIO.getReaderFileSuffixes());
+        fileChooser.addChoosableFileFilter(imageFilter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             pathPhoto =selectedFile.getAbsolutePath();
             try {
-                
-                selectPlaygroundPhoto(Paths.get(selectedFile.getAbsolutePath()), nameField.getText());
+                resizePlaygroundPhoto(selectedFile.getAbsolutePath(),playgroundPhoto);
             } catch (IOException ex) {
                 Logger.getLogger(PlaygroundOwnerProfile.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -767,8 +814,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
     private void addPlaygroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlaygroundButtonActionPerformed
         // TODO add your handling code here:
         
-                Boolean isAllright=true;
-
+        Boolean isAllright=true;
         String playgroundName =nameField.getText();
         for(Playground tmpPlayground: playgroundOwner.getPlaygroundsList()){
             if(tmpPlayground.getName().equals(playgroundName)||playgroundName.equals("")){
@@ -825,7 +871,7 @@ public class PlaygroundOwnerProfile extends javax.swing.JFrame {
             
             if(playgroundPhoto.getIcon()!=null){
              playgroundOwner.getPlaygroundsList().get(playgroundOwner.getPlaygroundsList().size()-1).setImageLink("playerPhotos/" + nameField.getText() + ".jpg");
-             Path source=Paths.get("playgroundPhotos/" +"dummy" + ".jpg");
+             Path source=Paths.get("playgroundPhotos/dummy.jpg");
 
 
                 try {
