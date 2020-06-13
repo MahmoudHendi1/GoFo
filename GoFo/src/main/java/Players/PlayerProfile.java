@@ -701,7 +701,15 @@ public class PlayerProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_teamsListValueChanged
 
     private void inviteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviteButtonActionPerformed
+        int sz = playersModel.getSize();
+        ArrayList<String> emails = new ArrayList<String>();
         
+        for(int i = 0 ; i < sz; ++i)
+            emails.add(((Player)playersModel.getElementAt(i)).getEmail());
+        System.out.println(emails.toString());
+        if(emails.size()>0){
+            MailingService.getInstance().SendMultipleMails("GoFo : you have been CHOOSEN!", "GoFo: you have joined \"" +teamsList.getSelectedValue().getName()+"\"" , emails);
+        }
     }//GEN-LAST:event_inviteButtonActionPerformed
 
     /**
