@@ -30,8 +30,11 @@ public class tst {
         DatabaseSimulator.initializeDatabase();
         //((Player)DatabaseSimulator.getUserbyUsername("hendi")).setPassword(password);
         
-       for(var x : ((PlaygroundOwner)DatabaseSimulator.getUserbyUsername("hendi")).getPlaygroundsList())
-            System.out.println( DatabaseSimulator.addplaygroundToDB(x));
+       for(var x : DatabaseSimulator.getPlayers())
+            x.getTeams().clear();
+       
+            
+       
        
            DatabaseSimulator.save();
     }

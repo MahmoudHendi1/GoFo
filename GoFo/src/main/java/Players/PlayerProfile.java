@@ -376,7 +376,6 @@ public class PlayerProfile extends javax.swing.JFrame {
         playersList.setModel(playersModel);
         playersList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         playersList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        playersList.setEnabled(false);
         playersList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 playersListValueChanged(evt);
@@ -418,9 +417,9 @@ public class PlayerProfile extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(teamPaneLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,9 +427,12 @@ public class PlayerProfile extends javax.swing.JFrame {
                                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(usernamelField)
                                     .addComponent(teamNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                            .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addPlayerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addComponent(creatTeamButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,7 +440,7 @@ public class PlayerProfile extends javax.swing.JFrame {
                         .addComponent(inviteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(playersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(teamLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         teamPaneLayout.setVerticalGroup(
             teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,13 +457,9 @@ public class PlayerProfile extends javax.swing.JFrame {
                             .addComponent(usernamelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(usernameLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(teamPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(teamPaneLayout.createSequentialGroup()
-                                .addComponent(addPlayerButton)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teamPaneLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(addPlayerButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(teamPlayersScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(teamPaneLayout.createSequentialGroup()
                         .addGap(0, 28, Short.MAX_VALUE)
                         .addComponent(playersScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -624,13 +622,18 @@ public class PlayerProfile extends javax.swing.JFrame {
     private void addPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerButtonActionPerformed
         // TODO add your handling code here:
         String playerUsername= usernamelField.getText();
-
+        if(playerUsername.equals(player.getUserName()))
+        {
+            usernameLabel.setForeground(Color.red);
+            return ;
+        }
         for(Player player : DB.DatabaseSimulator.getPlayers()){
             if (player.getUserName().equals(playerUsername)) {
                 for(int i=0 ;i < playersModel.getSize();i++){
-                    if(player.equals(playersModel.getElementAt(i)))
+                    if(player.equals(playersModel.getElementAt(i))){
                     usernameLabel.setForeground(Color.red);
                     return;
+                    }
                 }
                 usernameLabel.setForeground(Color.green);
                 playersModel.addElement(player);
@@ -664,11 +667,12 @@ public class PlayerProfile extends javax.swing.JFrame {
          teamNameField.setEditable(true);
          usernamelField.setEditable(true);
          addPlayerButton.setEnabled(true);
-         teamsList.enable(false);
+         //teamsList.enable(false);
         
         
         }else{
          Team team = new Team(teamNameField.getText());
+         team.addMember(player);
          if(playersModel.size()>0)
             for(var obj : playersModel.toArray())
                team.addMember((Player)obj);
@@ -695,7 +699,7 @@ public class PlayerProfile extends javax.swing.JFrame {
         playersModel.removeAllElements();
         if(teamsList.getSelectedIndex()!=-1){
             for(Player p: teamsList.getSelectedValue().members){
-                playersModel.addElement(p);
+                if(p != player)playersModel.addElement(p);
             }
         }
     }//GEN-LAST:event_teamsListValueChanged
