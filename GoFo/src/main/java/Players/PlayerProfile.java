@@ -5,6 +5,7 @@
  */
 package Players;
 
+import Network.MailingService;
 import Users.User;
 import Users.UserMainForm;
 import Users.UserManger;
@@ -356,6 +357,11 @@ public class PlayerProfile extends javax.swing.JFrame {
         usernameLabel.setText("Usename");
 
         inviteButton.setText("Send Email");
+        inviteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inviteButtonActionPerformed(evt);
+            }
+        });
 
         teamNameField.setEditable(false);
         teamNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -693,6 +699,10 @@ public class PlayerProfile extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_teamsListValueChanged
+
+    private void inviteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviteButtonActionPerformed
+        
+    }//GEN-LAST:event_inviteButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,12 +6,14 @@
 package Network;
 
 /**
- *MailingService does as its name implies, sends confirmation emails to newly registered 
- * users to confirm their account
+ * MailingService does as its name implies, sends confirmation emails to newly
+ * registered users to confirm their account
+ *
  * @author ShawkyDev
  * @version 1.0
  * @since 12/6/2020
  */
+import com.sun.tools.javac.Main;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -26,24 +28,41 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class MailingService {
-    public class MailSender extends Thread{
-        public String msg , title ;
-        public ArrayList<String> emails;
-        
-        @Override
-        public void run(){
-            try {
-            
-        for(String to :emails)    {
-            sendEmailTo(to, title, msg);
+public class MailingService extends Thread {
+
+    private String msg, title;
+    private ArrayList<String> emails;
+    
+    
+    ///the one and only instance :
+    private static MailingService mailingService = null;
+
+    @Override
+    public void run() {
+        try {
+
+            for (String to : emails) {
+                sendEmailTo(to, title, msg);
                 TimeUnit.SECONDS.sleep(1);
-        }
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MailingService.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MailingService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    public static MailingService getInstance(){
+        if(mailingService==null)
+            mailingService = new MailingService();
+        return mailingService;
+    }
+
+    public void SendMultipleMails(String title, String content, ArrayList<String> emails) {
+        this.msg = content;
+        this.title = title;
+        this.emails=emails;
+        run();
+    
+
+    
     }
     /**
      * This function takes the email address and title and message
@@ -52,8 +71,7 @@ public class MailingService {
      * @param title
      * @param msg 
      */
-    public static void sendEmailTo(String Email, String title , String msg){
-        
+    public static void sendEmailTo(String Email, String title, String msg) {
 
         // Sender's email ID needs to be mentioned
         String from = "gofomailservice@gmail.com";
@@ -95,7 +113,7 @@ public class MailingService {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(Email));
 
             // Set Subject: header field
-            message.setSubject("GoFo "+title);
+            message.setSubject("GoFo " + title);
 
             // Now set the actual message
             message.setText(msg);
@@ -108,13 +126,10 @@ public class MailingService {
             mex.printStackTrace();
         }
 
-
     }
+
     public static void main(String[] args) {
 
-            }
-
+    }
 
 }
-    
-
