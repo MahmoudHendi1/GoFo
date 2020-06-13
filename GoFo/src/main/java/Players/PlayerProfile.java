@@ -676,7 +676,7 @@ public class PlayerProfile extends javax.swing.JFrame {
          if(playersModel.size()>0)
             for(var obj : playersModel.toArray())
                team.addMember((Player)obj);
-         player.getTeams().add(team);
+        // player.getTeams().add(team);
          teams.addElement(team);
          
          teamNameField.setText("");
