@@ -6,9 +6,8 @@
 package Network;
 
 /**
- * MailingService does as its name implies, sends confirmation emails to newly
- * registered users to confirm their account
- *
+ * MailingService does as its name implies, sends invitation emails to players 
+ * to play in a match
  * @author ShawkyDev
  * @version 1.0
  * @since 12/6/2020
@@ -54,7 +53,12 @@ public class MailingService extends Thread {
             mailingService = new MailingService();
         return mailingService;
     }
-
+/**
+ * This function sends multiple emails to players at the same time
+ * @param title
+ * @param content
+ * @param emails 
+ */
     public void SendMultipleMails(String title, String content, ArrayList<String> emails) {
         this.msg = content;
         this.title = title;
@@ -90,7 +94,10 @@ public class MailingService extends Thread {
 
         // Get the Session object.// and pass username and password
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
+            /**
+             * This function authenticate a password
+             * @return PasswordAuthentication
+             */
             protected PasswordAuthentication getPasswordAuthentication() {
 
                 return new PasswordAuthentication("gofomailservice@gmail.com", "GoFo12345678");

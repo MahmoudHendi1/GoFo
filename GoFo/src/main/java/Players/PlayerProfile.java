@@ -708,7 +708,7 @@ public class PlayerProfile extends javax.swing.JFrame {
             emails.add(((Player)playersModel.getElementAt(i)).getEmail());
         System.out.println(emails.toString());
         if(emails.size()>0){
-            MailingService.getInstance().SendMultipleMails("GoFo : you have been CHOOSEN!", "GoFo: you have joined \"" +teamsList.getSelectedValue().getName()+"\"" , emails);
+            MailingService.getInstance().SendMultipleMails("GoFo : you have been CHOSEN!", "GoFo: you have joined \"" +teamsList.getSelectedValue().getName()+"\"" , emails);
         }
     }//GEN-LAST:event_inviteButtonActionPerformed
 
