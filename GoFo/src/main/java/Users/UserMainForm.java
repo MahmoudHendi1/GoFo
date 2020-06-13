@@ -477,7 +477,7 @@ public class UserMainForm extends javax.swing.JFrame {
          //DatabaseSimulator.reset();
          
          
-         DatabaseSimulator.printArrayLists(1);
+         DatabaseSimulator.printArrayLists(0);
         
          
         
