@@ -354,10 +354,13 @@ public class UserMainForm extends javax.swing.JFrame {
         if (!emailValidator.isValid(emailField.getText())) {
             emailLabel.setForeground(Color.red);
             isAllRight = false;
+            System.out.println(isAllRight);
         }
         if(nameField.getText().isBlank()){
             isAllRight = false;
             nameLabel.setForeground(Color.red);
+                        System.out.println(isAllRight);
+
         }
         else {
             for (int i = 0 ; i < nameField.getText().length();++i)
@@ -368,18 +371,26 @@ public class UserMainForm extends javax.swing.JFrame {
                     nameLabel.setForeground(Color.red);
                     break;
                 }
+                        System.out.println(isAllRight);
+
         }
         
         if(passwordField.getText().length()<8){
             isAllRight = false;
             passwordLabel1.setForeground(Color.red);
+                        System.out.println(isAllRight);
+
         }
         try {
             Double.parseDouble(phoneField.getText());
             isAllRight= isAllRight&&phoneField.getText().charAt(0)=='0'&&phoneField.getText().length()==11;
+                        System.out.println(isAllRight);
+
         } catch (NumberFormatException e) {
             isAllRight= false;
             phoneLabel.setForeground(Color.RED);
+                        System.out.println(isAllRight);
+
         }
         //User( String name, String password, String email, String phoneNumber, String address)
         User tmpUser;
@@ -390,8 +401,10 @@ public class UserMainForm extends javax.swing.JFrame {
              tmpUser =  new PlaygroundOwner(nameField.getText(), usernameField.getText(),passwordField.getText(),
             emailField.getText(),phoneField.getText(),addressField.getText());
          }
+                                 System.out.println(isAllRight);
+
            if(isAllRight && UserManger.registerUser(tmpUser)){
-               JOptionPane.showMessageDialog(null, "Reistered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
                tmpUser = UserManger.loginUser(tmpUser.getUserName(), tmpUser.getPassword());
                 if(UserType.getSelectedIndex()==0){
                    PlayerProfile playerProfile = new PlayerProfile((Player)tmpUser); 
@@ -407,7 +420,7 @@ public class UserMainForm extends javax.swing.JFrame {
                this.dispose();
            }
            else {
-               JOptionPane.showMessageDialog(null, "not Reistered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Not Registered!", "Faild", JOptionPane.INFORMATION_MESSAGE);
                System.out.println("bec"+isAllRight);
            }
                

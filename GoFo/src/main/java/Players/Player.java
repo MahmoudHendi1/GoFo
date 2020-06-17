@@ -25,6 +25,8 @@ public class Player extends User{
     }
 
     public ArrayList<Team> getTeams() {
+        if(teams==null)
+            teams = new ArrayList<Team>();
         return teams;      
     }
 
